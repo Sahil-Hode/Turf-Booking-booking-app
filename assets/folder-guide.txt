@@ -1,0 +1,4 @@
+- Purpose: Static visual and media assets used across the app.
+- What goes here: Store files here by asset type so imports stay predictable.
+- Structure rule: Use optimized assets and consistent naming for easier maintenance.
+- Working rule: Keep shared brand and UI resources centralized instead of duplicating them.

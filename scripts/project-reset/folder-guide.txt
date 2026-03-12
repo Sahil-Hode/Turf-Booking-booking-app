@@ -1,0 +1,4 @@
+- Purpose: Project helper scripts for setup, maintenance, and automation.
+- What goes here: Store repeatable developer workflows and utility tasks here.
+- Structure rule: Keep scripts safe, idempotent, and easy to run locally.
+- Working rule: Use scripts to reduce manual project operations and onboarding friction.

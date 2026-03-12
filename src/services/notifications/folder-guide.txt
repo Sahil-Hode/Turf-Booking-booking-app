@@ -1,0 +1,4 @@
+- Purpose: Service-layer logic for API calls and external integrations.
+- What goes here: Keep request handling, mapping, and service contracts in this area.
+- Structure rule: Separate network logic from UI and keep service boundaries clear.
+- Working rule: Share domain services across screens instead of duplicating API code.

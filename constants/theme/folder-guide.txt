@@ -1,0 +1,4 @@
+- Purpose: Centralized constant values and app configuration buckets.
+- What goes here: Place static keys, routes, tokens, and config groupings here.
+- Structure rule: Keep values typed and grouped by domain for clarity.
+- Working rule: Reference constants from here instead of scattering hardcoded values.

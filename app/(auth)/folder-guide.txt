@@ -1,0 +1,4 @@
+- Purpose: Authentication route group for sign-in and onboarding flows.
+- What goes here: Keep login, verification, social auth, and role entry points here.
+- Structure rule: Keep route names aligned with user journeys and access roles.
+- Working rule: Move reusable UI and business logic into components, hooks, or src modules.

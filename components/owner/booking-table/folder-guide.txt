@@ -1,0 +1,4 @@
+- Purpose: Reusable UI building blocks for shared app interfaces.
+- What goes here: Add presentational and composable pieces that can serve multiple screens.
+- Structure rule: Keep component APIs small, predictable, and easy to reuse.
+- Working rule: Push feature-specific logic out of shared components when possible.

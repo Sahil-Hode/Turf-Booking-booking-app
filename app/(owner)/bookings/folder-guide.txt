@@ -1,0 +1,4 @@
+- Purpose: Feature section for bookings within its role-based flow.
+- What goes here: Group related submodules here so the feature stays easy to navigate.
+- Structure rule: Keep route names aligned with user journeys and access roles.
+- Working rule: Move reusable UI and business logic into components, hooks, or src modules.

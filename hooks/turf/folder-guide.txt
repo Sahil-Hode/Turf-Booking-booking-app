@@ -1,0 +1,4 @@
+- Purpose: Custom hooks that package reusable stateful behavior.
+- What goes here: Add hooks here when logic is shared across screens or components.
+- Structure rule: Keep each hook focused on one concern and document side effects clearly.
+- Working rule: Prefer hooks for reusable UI state and request orchestration patterns.

@@ -1,0 +1,4 @@
+- Purpose: Admin route group for moderation, oversight, and platform analytics.
+- What goes here: Place operational dashboards and control panels for platform management here.
+- Structure rule: Keep route names aligned with user journeys and access roles.
+- Working rule: Move reusable UI and business logic into components, hooks, or src modules.

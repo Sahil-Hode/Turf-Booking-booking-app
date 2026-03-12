@@ -1,0 +1,4 @@
+- Purpose: Feature section for booking within its role-based flow.
+- What goes here: Group related submodules here so the feature stays easy to navigate.
+- Structure rule: Keep state normalized and avoid mixing UI concerns into stores.
+- Working rule: Use feature stores to isolate domain behavior and reduce coupling.

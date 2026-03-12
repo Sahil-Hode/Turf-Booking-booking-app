@@ -1,0 +1,4 @@
+- Purpose: State management modules for app and feature data.
+- What goes here: Add store slices, actions, selectors, and related state logic here.
+- Structure rule: Keep state normalized and avoid mixing UI concerns into stores.
+- Working rule: Use feature stores to isolate domain behavior and reduce coupling.

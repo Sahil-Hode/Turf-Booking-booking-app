@@ -1,0 +1,4 @@
+- Purpose: Pure utility helpers and cross-cutting support functions.
+- What goes here: Group domain-specific modules under this shared layer.
+- Structure rule: Keep utilities deterministic, small, and easy to test.
+- Working rule: Prefer utilities for repeated transformations used by multiple features.

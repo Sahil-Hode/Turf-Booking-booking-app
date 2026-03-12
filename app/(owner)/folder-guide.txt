@@ -1,0 +1,4 @@
+- Purpose: Owner-facing route group for turf operations and business management.
+- What goes here: Manage dashboards, turf setup, bookings, earnings, and owner profile flows here.
+- Structure rule: Keep route names aligned with user journeys and access roles.
+- Working rule: Move reusable UI and business logic into components, hooks, or src modules.

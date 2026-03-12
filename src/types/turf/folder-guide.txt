@@ -1,0 +1,4 @@
+- Purpose: Shared type definitions for domain models and contracts.
+- What goes here: Add interfaces, types, and model shapes that support the app.
+- Structure rule: Keep types close to the domain and avoid duplicate definitions.
+- Working rule: Reference shared types from here to keep contracts consistent.

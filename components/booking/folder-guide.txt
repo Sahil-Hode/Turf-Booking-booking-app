@@ -1,0 +1,4 @@
+- Purpose: Feature section for booking within its role-based flow.
+- What goes here: Group related submodules here so the feature stays easy to navigate.
+- Structure rule: Keep component APIs small, predictable, and easy to reuse.
+- Working rule: Push feature-specific logic out of shared components when possible.

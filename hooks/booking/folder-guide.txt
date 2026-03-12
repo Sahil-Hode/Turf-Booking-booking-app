@@ -1,0 +1,4 @@
+- Purpose: Feature section for booking within its role-based flow.
+- What goes here: Group related submodules here so the feature stays easy to navigate.
+- Structure rule: Keep each hook focused on one concern and document side effects clearly.
+- Working rule: Prefer hooks for reusable UI state and request orchestration patterns.

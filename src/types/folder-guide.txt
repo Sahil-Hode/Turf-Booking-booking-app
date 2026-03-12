@@ -1,0 +1,4 @@
+- Purpose: Shared type definitions for domain models and contracts.
+- What goes here: Group domain-specific modules under this shared layer.
+- Structure rule: Keep types close to the domain and avoid duplicate definitions.
+- Working rule: Reference shared types from here to keep contracts consistent.

@@ -1,0 +1,4 @@
+- Purpose: Editor workspace settings for this project.
+- What goes here: Keep IDE-specific configuration that helps the team work consistently.
+- Structure rule: Avoid machine-specific settings unless the whole team needs them.
+- Working rule: Use this folder to standardize formatting, linting, and path behavior.

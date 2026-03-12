@@ -1,0 +1,4 @@
+- Purpose: Core source modules grouped by services, store, utils, and types.
+- What goes here: Use this folder for reusable non-UI application logic.
+- Structure rule: Keep domain boundaries clear between state, services, helpers, and models.
+- Working rule: Move cross-feature logic here when it should not live inside routes.

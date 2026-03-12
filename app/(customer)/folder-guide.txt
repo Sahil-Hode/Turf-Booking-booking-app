@@ -1,0 +1,4 @@
+- Purpose: Customer-facing route group for discovery, booking, and profile flows.
+- What goes here: Organize user journey screens here from browse to booking history.
+- Structure rule: Keep route names aligned with user journeys and access roles.
+- Working rule: Move reusable UI and business logic into components, hooks, or src modules.
