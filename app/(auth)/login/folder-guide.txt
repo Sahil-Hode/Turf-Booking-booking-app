@@ -1,4 +1,0 @@
-- Purpose: Focused auth subflow for login.
-- What goes here: Keep only the route logic, UI pieces, and helpers needed for this auth step.
-- Structure rule: Keep route names aligned with user journeys and access roles.
-- Working rule: Move reusable UI and business logic into components, hooks, or src modules.
