@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TurfZy - Payment Methods</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#16c582",
+                        "background-light": "#f6f8f7",
+                        "background-dark": "#11211b",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen">
+<div class="max-w-md mx-auto min-h-screen flex flex-col bg-background-light dark:bg-background-dark">
+<!-- Top App Bar -->
+<header class="flex items-center p-4 sticky top-0 bg-background-light dark:bg-background-dark z-10">
+<button class="p-2 -ml-2 rounded-full hover:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined text-slate-900 dark:text-slate-100">arrow_back</span>
+</button>
+<h1 class="ml-2 text-xl font-bold tracking-tight">Payment Methods</h1>
+<div class="ml-auto">
+<span class="material-symbols-outlined text-primary">security</span>
+</div>
+</header>
+<main class="flex-1 px-4 py-2 space-y-6">
+<!-- Trust Badge -->
+<div class="bg-primary/10 border border-primary/20 rounded-lg p-3 flex items-start gap-3">
+<span class="material-symbols-outlined text-primary mt-0.5">verified_user</span>
+<div>
+<p class="text-xs font-semibold uppercase tracking-wider text-primary">Secure Checkout</p>
+<p class="text-sm text-slate-600 dark:text-slate-400">Your payment details are encrypted and stored securely.</p>
+</div>
+</div>
+<!-- Saved Cards Section -->
+<section class="space-y-4">
+<div class="flex items-center justify-between">
+<h2 class="text-lg font-bold">Saved Cards</h2>
+<button class="text-sm font-semibold text-primary flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">add</span> Add New
+                    </button>
+</div>
+<!-- Card 1 -->
+<div class="bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-lg p-4 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="w-12 h-8 bg-slate-200 dark:bg-slate-800 rounded flex items-center justify-center overflow-hidden">
+<img alt="Visa" class="w-10 h-auto" data-alt="Visa logo for credit card" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDOtz9IYLsxICHOVzWIicFETqtcBbf8ELV8SArxfXwlkTsoRMkMK1xV89A-rL2oWl_bdeTrnyuM2daH7X8POGAcCzP5Si9mfcsGtjMCMlYL7TBC0cG_Q4Y1JNS5BxAieYQdRMdDas7iOeoSHOVX4-Vw4VzG4tgBRPF5icNhvc02SIynVlhe7RcMcKZrK3sVry_YyuR4iQb5PN8y_Av8OOgb4r6jUvlQdT2O0lO9JKkSb09t6eIerQ9J_U3mkmG338LwGYg9JXUdtA"/>
+</div>
+<div>
+<p class="font-medium">•••• •••• •••• 4242</p>
+<p class="text-sm text-slate-500 dark:text-slate-400">Expires 12/26</p>
+</div>
+</div>
+<label class="relative flex h-[31px] w-[51px] cursor-pointer items-center rounded-full border-none bg-slate-300 dark:bg-slate-700 p-0.5 has-[:checked]:justify-end has-[:checked]:bg-primary transition-all">
+<div class="h-full w-[27px] rounded-full bg-white shadow-md"></div>
+<input checked="" class="invisible absolute" type="checkbox"/>
+</label>
+</div>
+<!-- Card 2 -->
+<div class="bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-lg p-4 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="w-12 h-8 bg-slate-200 dark:bg-slate-800 rounded flex items-center justify-center overflow-hidden">
+<img alt="Mastercard" class="w-8 h-auto" data-alt="Mastercard logo for debit card" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJV-d3rxFwdnjZHPDoXbxdFxxZ3SrBG4JzkLY5aakmsBo16Rr8xiTfo0U0GJeUqyMusQrUKdk1WD1R6vQ5l5gsdj6jhYT_z-ZscEMsSOkRCq40UN8mSWxhqhkd7CiohWmElJuWKtVy9qnT45Pj9OXNXDQXa3zbzrX03zgcFOC4hw8_JmzAk396PZvbHSe-9Qu5SukXFEL3ueM7mWoUAwIjQ7xNQoYA5ADVgZgmLr8aU63hi01xkO5Y4x8lkR3O4q4iwpur3CUgFA"/>
+</div>
+<div>
+<p class="font-medium">•••• •••• •••• 8899</p>
+<p class="text-sm text-slate-500 dark:text-slate-400">Expires 09/25</p>
+</div>
+</div>
+<div class="flex size-7 items-center justify-center">
+<input class="h-5 w-5 rounded-full border-slate-300 dark:border-slate-600 bg-transparent text-primary focus:ring-primary focus:ring-offset-background-dark" type="checkbox"/>
+</div>
+</div>
+</section>
+<!-- UPI Section -->
+<section class="space-y-4">
+<div class="flex items-center justify-between">
+<h2 class="text-lg font-bold">UPI IDs</h2>
+<button class="text-sm font-semibold text-primary flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">add</span> Add New
+                    </button>
+</div>
+<!-- UPI 1 -->
+<div class="bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-lg p-4 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">account_balance_wallet</span>
+</div>
+<div>
+<p class="font-medium">turfzy@okaxis</p>
+<p class="text-sm text-slate-500 dark:text-slate-400">Primary ID</p>
+</div>
+</div>
+<div class="flex size-7 items-center justify-center">
+<span class="material-symbols-outlined text-primary">check_circle</span>
+</div>
+</div>
+<!-- UPI 2 -->
+<div class="bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-lg p-4 flex items-center justify-between opacity-70">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center">
+<span class="material-symbols-outlined text-slate-500">account_balance_wallet</span>
+</div>
+<div>
+<p class="font-medium">9876543210@paytm</p>
+</div>
+</div>
+<div class="flex size-7 items-center justify-center">
+<input class="h-5 w-5 rounded-full border-slate-300 dark:border-slate-600 bg-transparent text-primary focus:ring-primary focus:ring-offset-background-dark" type="checkbox"/>
+</div>
+</div>
+</section>
+<!-- Other Options -->
+<section class="space-y-4 pt-2">
+<h2 class="text-lg font-bold">More Options</h2>
+<div class="space-y-2">
+<button class="w-full bg-slate-50 dark:bg-white/5 p-4 rounded-lg flex items-center gap-4 hover:bg-slate-100 dark:hover:bg-white/10 transition-colors">
+<span class="material-symbols-outlined text-slate-500">account_balance</span>
+<span class="font-medium flex-1 text-left">Net Banking</span>
+<span class="material-symbols-outlined text-slate-400">chevron_right</span>
+</button>
+<button class="w-full bg-slate-50 dark:bg-white/5 p-4 rounded-lg flex items-center gap-4 hover:bg-slate-100 dark:hover:bg-white/10 transition-colors">
+<span class="material-symbols-outlined text-slate-500">wallet</span>
+<span class="font-medium flex-1 text-left">Wallets</span>
+<span class="material-symbols-outlined text-slate-400">chevron_right</span>
+</button>
+</div>
+</section>
+</main>
+<!-- Fixed Footer -->
+<footer class="p-4 bg-background-light dark:bg-background-dark border-t border-slate-200 dark:border-white/10">
+<button class="w-full bg-primary hover:bg-primary/90 text-background-dark font-bold py-4 rounded-lg flex items-center justify-center gap-2 transition-transform active:scale-[0.98]">
+                Proceed to Pay ₹1,200
+            </button>
+<div class="flex items-center justify-center gap-2 mt-4 text-[10px] text-slate-400 uppercase tracking-[0.1em]">
+<span class="material-symbols-outlined text-xs">lock</span>
+                PCI-DSS Certified Secure
+            </div>
+</footer>
+</div>
+</body></html>

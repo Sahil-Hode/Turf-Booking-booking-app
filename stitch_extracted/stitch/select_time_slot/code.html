@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#16c582",
+                        "background-light": "#f6f8f7",
+                        "background-dark": "#11211b",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<title>TurfZy - Select Time Slot</title>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased min-h-screen">
+<!-- Header Section -->
+<div class="sticky top-0 z-10 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-primary/10">
+<div class="flex items-center p-4 justify-between max-w-xl mx-auto">
+<button class="flex size-10 items-center justify-center rounded-full hover:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined text-slate-900 dark:text-slate-100">arrow_back</span>
+</button>
+<div class="flex flex-col items-center">
+<h2 class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight">Select Time Slot</h2>
+<p class="text-xs text-primary font-medium">Champions Arena • Pitch A</p>
+</div>
+<button class="flex size-10 items-center justify-center rounded-full hover:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined text-slate-900 dark:text-slate-100">info</span>
+</button>
+</div>
+</div>
+<main class="max-w-xl mx-auto pb-32">
+<!-- Calendar Section -->
+<div class="p-4">
+<div class="bg-primary/5 dark:bg-primary/10 rounded-xl p-4 border border-primary/10">
+<div class="flex items-center justify-between mb-4">
+<button class="size-10 flex items-center justify-center rounded-full bg-background-light dark:bg-background-dark shadow-sm border border-primary/5">
+<span class="material-symbols-outlined text-sm">chevron_left</span>
+</button>
+<p class="text-slate-900 dark:text-slate-100 font-bold">October 2023</p>
+<button class="size-10 flex items-center justify-center rounded-full bg-background-light dark:bg-background-dark shadow-sm border border-primary/5">
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+</div>
+<div class="grid grid-cols-7 gap-1 text-center">
+<p class="text-slate-500 dark:text-slate-400 text-[11px] font-bold uppercase tracking-wider py-2">Sun</p>
+<p class="text-slate-500 dark:text-slate-400 text-[11px] font-bold uppercase tracking-wider py-2">Mon</p>
+<p class="text-slate-500 dark:text-slate-400 text-[11px] font-bold uppercase tracking-wider py-2">Tue</p>
+<p class="text-slate-500 dark:text-slate-400 text-[11px] font-bold uppercase tracking-wider py-2">Wed</p>
+<p class="text-slate-500 dark:text-slate-400 text-[11px] font-bold uppercase tracking-wider py-2">Thu</p>
+<p class="text-slate-500 dark:text-slate-400 text-[11px] font-bold uppercase tracking-wider py-2">Fri</p>
+<p class="text-slate-500 dark:text-slate-400 text-[11px] font-bold uppercase tracking-wider py-2">Sat</p>
+<!-- Days -->
+<button class="h-10 flex items-center justify-center rounded-full text-sm font-medium opacity-40">28</button>
+<button class="h-10 flex items-center justify-center rounded-full text-sm font-medium opacity-40">29</button>
+<button class="h-10 flex items-center justify-center rounded-full text-sm font-medium opacity-40">30</button>
+<button class="h-10 flex items-center justify-center rounded-full text-sm font-medium">1</button>
+<button class="h-10 flex items-center justify-center rounded-full text-sm font-medium">2</button>
+<button class="h-10 flex items-center justify-center rounded-full text-sm font-medium">3</button>
+<button class="h-10 flex items-center justify-center rounded-full text-sm font-medium">4</button>
+<button class="h-10 flex items-center justify-center rounded-full text-sm font-bold bg-primary text-background-dark shadow-lg shadow-primary/20">5</button>
+<button class="h-10 flex items-center justify-center rounded-full text-sm font-medium">6</button>
+<button class="h-10 flex items-center justify-center rounded-full text-sm font-medium">7</button>
+<button class="h-10 flex items-center justify-center rounded-full text-sm font-medium">8</button>
+<button class="h-10 flex items-center justify-center rounded-full text-sm font-medium">9</button>
+<button class="h-10 flex items-center justify-center rounded-full text-sm font-medium">10</button>
+<button class="h-10 flex items-center justify-center rounded-full text-sm font-medium">11</button>
+</div>
+</div>
+</div>
+<!-- Slot States Legend -->
+<div class="px-4 py-2 flex justify-center gap-6">
+<div class="flex items-center gap-2">
+<div class="size-3 rounded-full border border-primary/20 bg-background-light dark:bg-background-dark"></div>
+<span class="text-xs text-slate-500">Available</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="size-3 rounded-full bg-primary"></div>
+<span class="text-xs text-slate-500">Selected</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="size-3 rounded-full bg-slate-200 dark:bg-slate-800"></div>
+<span class="text-xs text-slate-500">Booked</span>
+</div>
+</div>
+<!-- Time Slots Grid -->
+<div class="px-4 mt-6">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-primary">light_mode</span>
+<h3 class="text-slate-900 dark:text-slate-100 text-lg font-bold">Morning Slots</h3>
+</div>
+<div class="grid grid-cols-3 gap-3">
+<!-- Booked Slot -->
+<div class="flex flex-col items-center justify-center p-3 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 opacity-60">
+<p class="text-xs font-bold text-slate-400 dark:text-slate-500">06:00 AM</p>
+<p class="text-[10px] text-slate-400 dark:text-slate-500">Booked</p>
+</div>
+<!-- Available Slot -->
+<button class="flex flex-col items-center justify-center p-3 rounded-xl bg-background-light dark:bg-background-dark border border-primary/20 hover:border-primary transition-all active:scale-95 shadow-sm">
+<p class="text-xs font-bold text-slate-900 dark:text-slate-100">07:00 AM</p>
+<p class="text-[10px] text-primary">₹1,200</p>
+</button>
+<!-- Available Slot -->
+<button class="flex flex-col items-center justify-center p-3 rounded-xl bg-background-light dark:bg-background-dark border border-primary/20 hover:border-primary transition-all active:scale-95 shadow-sm">
+<p class="text-xs font-bold text-slate-900 dark:text-slate-100">08:00 AM</p>
+<p class="text-[10px] text-primary">₹1,200</p>
+</button>
+<button class="flex flex-col items-center justify-center p-3 rounded-xl bg-background-light dark:bg-background-dark border border-primary/20 hover:border-primary transition-all active:scale-95 shadow-sm">
+<p class="text-xs font-bold text-slate-900 dark:text-slate-100">09:00 AM</p>
+<p class="text-[10px] text-primary">₹1,200</p>
+</button>
+<button class="flex flex-col items-center justify-center p-3 rounded-xl bg-background-light dark:bg-background-dark border border-primary/20 hover:border-primary transition-all active:scale-95 shadow-sm">
+<p class="text-xs font-bold text-slate-900 dark:text-slate-100">10:00 AM</p>
+<p class="text-[10px] text-primary">₹1,200</p>
+</button>
+<button class="flex flex-col items-center justify-center p-3 rounded-xl bg-background-light dark:bg-background-dark border border-primary/20 hover:border-primary transition-all active:scale-95 shadow-sm">
+<p class="text-xs font-bold text-slate-900 dark:text-slate-100">11:00 AM</p>
+<p class="text-[10px] text-primary">₹1,200</p>
+</button>
+</div>
+</div>
+<div class="px-4 mt-8">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-orange-400">wb_twilight</span>
+<h3 class="text-slate-900 dark:text-slate-100 text-lg font-bold">Evening Slots</h3>
+</div>
+<div class="grid grid-cols-3 gap-3">
+<button class="flex flex-col items-center justify-center p-3 rounded-xl bg-background-light dark:bg-background-dark border border-primary/20 hover:border-primary transition-all shadow-sm">
+<p class="text-xs font-bold text-slate-900 dark:text-slate-100">04:00 PM</p>
+<p class="text-[10px] text-primary">₹1,500</p>
+</button>
+<button class="flex flex-col items-center justify-center p-3 rounded-xl bg-background-light dark:bg-background-dark border border-primary/20 hover:border-primary transition-all shadow-sm">
+<p class="text-xs font-bold text-slate-900 dark:text-slate-100">05:00 PM</p>
+<p class="text-[10px] text-primary">₹1,500</p>
+</button>
+<!-- Selected Slot -->
+<button class="flex flex-col items-center justify-center p-3 rounded-xl bg-primary border border-primary shadow-lg shadow-primary/30 active:scale-95">
+<p class="text-xs font-bold text-background-dark">06:00 PM</p>
+<p class="text-[10px] text-background-dark font-medium">Selected</p>
+</button>
+<button class="flex flex-col items-center justify-center p-3 rounded-xl bg-background-light dark:bg-background-dark border border-primary/20 hover:border-primary transition-all shadow-sm">
+<p class="text-xs font-bold text-slate-900 dark:text-slate-100">07:00 PM</p>
+<p class="text-[10px] text-primary">₹1,800</p>
+</button>
+<button class="flex flex-col items-center justify-center p-3 rounded-xl bg-background-light dark:bg-background-dark border border-primary/20 hover:border-primary transition-all shadow-sm">
+<p class="text-xs font-bold text-slate-900 dark:text-slate-100">08:00 PM</p>
+<p class="text-[10px] text-primary">₹1,800</p>
+</button>
+<button class="flex flex-col items-center justify-center p-3 rounded-xl bg-background-light dark:bg-background-dark border border-primary/20 hover:border-primary transition-all shadow-sm">
+<p class="text-xs font-bold text-slate-900 dark:text-slate-100">09:00 PM</p>
+<p class="text-[10px] text-primary">₹1,800</p>
+</button>
+</div>
+</div>
+</main>
+<!-- Bottom Action Bar -->
+<div class="fixed bottom-0 left-0 right-0 bg-background-light/90 dark:bg-background-dark/90 backdrop-blur-xl border-t border-primary/10 p-4">
+<div class="max-w-xl mx-auto flex items-center justify-between gap-4">
+<div class="flex flex-col">
+<p class="text-[10px] text-slate-500 uppercase tracking-widest font-bold">Total Amount</p>
+<div class="flex items-baseline gap-1">
+<span class="text-2xl font-bold text-slate-900 dark:text-slate-100">₹1,500</span>
+<span class="text-xs text-slate-500">/ 1 Slot</span>
+</div>
+</div>
+<button class="bg-primary hover:bg-primary/90 text-background-dark px-8 py-4 rounded-xl font-bold flex items-center gap-2 transition-all active:scale-95 shadow-lg shadow-primary/25">
+<span>Book Now</span>
+<span class="material-symbols-outlined text-xl">arrow_forward</span>
+</button>
+</div>
+</div>
+</body></html>

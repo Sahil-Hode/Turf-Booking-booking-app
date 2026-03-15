@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TurfZy - Payment Method</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#16c582",
+                        "background-light": "#f6f8f7",
+                        "background-dark": "#11211b",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .custom-checkbox:checked {
+            background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z'/%3e%3c/svg%3e");
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen">
+<div class="max-w-md mx-auto min-h-screen flex flex-col bg-background-light dark:bg-background-dark">
+<!-- Top App Bar -->
+<header class="sticky top-0 z-10 bg-background-light dark:bg-background-dark/80 backdrop-blur-md px-4 py-4 flex items-center gap-4">
+<button class="flex items-center justify-center size-10 rounded-full hover:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined text-slate-900 dark:text-slate-100">arrow_back</span>
+</button>
+<h1 class="text-xl font-bold tracking-tight text-slate-900 dark:text-slate-100">Payment Method</h1>
+</header>
+<main class="flex-1 px-4 pb-24">
+<!-- Order Summary Preview (Context for payment) -->
+<div class="mb-8 p-4 rounded-xl bg-primary/5 border border-primary/10">
+<div class="flex justify-between items-center mb-1">
+<span class="text-sm font-medium text-slate-500 dark:text-slate-400">Total Amount</span>
+<span class="text-2xl font-bold text-primary">₹1,200.00</span>
+</div>
+<p class="text-xs text-slate-500 dark:text-slate-400">Booking at Wembley Turf • 8:00 PM Today</p>
+</div>
+<!-- Saved Cards Section -->
+<section class="mb-8">
+<h2 class="text-sm font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-4 px-1">Saved Cards</h2>
+<div class="space-y-3">
+<!-- Card Item -->
+<label class="flex items-center gap-4 p-4 rounded-xl border border-primary/10 bg-primary/5 cursor-pointer group hover:border-primary/30 transition-all">
+<div class="w-12 h-8 rounded bg-slate-800 flex items-center justify-center shrink-0">
+<img alt="Visa Logo" class="w-8" data-alt="Visa credit card logo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDYtC6cUvEq2AKL1gNiR7KSWrsGHVEL5XMLXffT0JynoRi4HKZ-x-DoayqDKtd8klzpQKqbIDZJtWRTH4aUAmM-FLFHHfzoNMj3HzamuVj1CLS1mB3FjS9HgXhbr-4Jh1FT9f_fDNNRGsJCkE_AcBQ77tntoXp3GMdhvxEEw9UJJYz1JEbhcUIn6u1NfnADybJOfylzWZxLDLpdRFQMF3SjBO21lBtJi1-NQQT6pCFATeMkSPf3QVKXqApuU01qHvyfP3Hgur95Jg"/>
+</div>
+<div class="flex-1">
+<p class="font-semibold text-slate-900 dark:text-slate-100">•••• 8842</p>
+<p class="text-xs text-slate-500 dark:text-slate-400">Expires 12/26</p>
+</div>
+<input checked="" class="w-5 h-5 text-primary bg-transparent border-primary/30 focus:ring-primary rounded-full custom-checkbox" name="payment_method" type="radio"/>
+</label>
+<!-- Add New Card Button -->
+<button class="w-full flex items-center gap-4 p-4 rounded-xl border-2 border-dashed border-primary/20 hover:border-primary/40 transition-all group">
+<div class="size-10 flex items-center justify-center rounded-full bg-primary/10 text-primary">
+<span class="material-symbols-outlined">add</span>
+</div>
+<span class="font-medium text-primary">Add New Card</span>
+</button>
+</div>
+</section>
+<!-- UPI Apps Section -->
+<section class="mb-8">
+<h2 class="text-sm font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-4 px-1">UPI Apps</h2>
+<div class="grid grid-cols-2 gap-3">
+<!-- Google Pay -->
+<label class="flex flex-col items-center justify-center gap-3 p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/50 cursor-pointer hover:border-primary transition-all relative">
+<input class="absolute top-3 right-3 w-4 h-4 text-primary bg-transparent border-primary/30 focus:ring-primary rounded-full custom-checkbox" name="payment_method" type="radio"/>
+<div class="size-12 flex items-center justify-center rounded-full bg-white shadow-sm p-2">
+<span class="material-symbols-outlined text-blue-500 scale-125">gpay</span>
+</div>
+<span class="text-sm font-medium">Google Pay</span>
+</label>
+<!-- PhonePe Placeholder (Visual) -->
+<label class="flex flex-col items-center justify-center gap-3 p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/50 cursor-pointer hover:border-primary transition-all relative">
+<input class="absolute top-3 right-3 w-4 h-4 text-primary bg-transparent border-primary/30 focus:ring-primary rounded-full custom-checkbox" name="payment_method" type="radio"/>
+<div class="size-12 flex items-center justify-center rounded-full bg-purple-100 shadow-sm">
+<span class="material-symbols-outlined text-purple-600">account_balance_wallet</span>
+</div>
+<span class="text-sm font-medium">PhonePe</span>
+</label>
+</div>
+</section>
+<!-- Other Methods -->
+<section class="mb-8">
+<h2 class="text-sm font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-4 px-1">Other Methods</h2>
+<div class="divide-y divide-slate-100 dark:divide-slate-800">
+<label class="flex items-center gap-4 py-4 cursor-pointer">
+<div class="size-10 flex items-center justify-center rounded-lg bg-orange-100 dark:bg-orange-900/30 text-orange-600">
+<span class="material-symbols-outlined">account_balance</span>
+</div>
+<div class="flex-1">
+<p class="font-medium">Net Banking</p>
+<p class="text-xs text-slate-500 dark:text-slate-400">Connect to your bank directly</p>
+</div>
+<span class="material-symbols-outlined text-slate-400">chevron_right</span>
+</label>
+<label class="flex items-center gap-4 py-4 cursor-pointer">
+<div class="size-10 flex items-center justify-center rounded-lg bg-blue-100 dark:bg-blue-900/30 text-blue-600">
+<span class="material-symbols-outlined">wallet</span>
+</div>
+<div class="flex-1">
+<p class="font-medium">Wallets</p>
+<p class="text-xs text-slate-500 dark:text-slate-400">Paytm, Amazon Pay, Mobikwik</p>
+</div>
+<span class="material-symbols-outlined text-slate-400">chevron_right</span>
+</label>
+<label class="flex items-center gap-4 py-4 cursor-pointer">
+<div class="size-10 flex items-center justify-center rounded-lg bg-green-100 dark:bg-green-900/30 text-green-600">
+<span class="material-symbols-outlined">payments</span>
+</div>
+<div class="flex-1">
+<p class="font-medium">Pay at Turf</p>
+<p class="text-xs text-slate-500 dark:text-slate-400">Pay directly when you arrive</p>
+</div>
+<input class="w-5 h-5 text-primary bg-transparent border-primary/30 focus:ring-primary rounded-full custom-checkbox" name="payment_method" type="radio"/>
+</label>
+</div>
+</section>
+</main>
+<!-- Bottom Action Bar -->
+<footer class="fixed bottom-0 left-0 right-0 max-w-md mx-auto bg-background-light dark:bg-background-dark border-t border-slate-100 dark:border-slate-800 p-4 pb-8 flex flex-col gap-3">
+<div class="flex items-center justify-between px-2">
+<div>
+<p class="text-xs text-slate-500 dark:text-slate-400">Total payable</p>
+<p class="text-lg font-bold">₹1,200.00</p>
+</div>
+<div class="flex items-center gap-1 text-primary">
+<span class="material-symbols-outlined text-sm">verified_user</span>
+<span class="text-xs font-semibold">100% Secure</span>
+</div>
+</div>
+<button class="w-full bg-primary hover:bg-primary/90 text-white font-bold py-4 rounded-xl shadow-lg shadow-primary/20 transition-all flex items-center justify-center gap-2">
+<span>Proceed to Pay</span>
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</footer>
+</div>
+</body></html>

@@ -1,13 +1,12 @@
-import { AppColors } from '@/constants/colors';
-import { BorderRadius, Shadows, Spacing, Typography } from '@/constants/typography';
-import { Ionicons } from '@expo/vector-icons';
+import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
-import React from 'react';
+import { ArrowRight, Phone } from 'lucide-react-native';
+import React, { useState } from 'react';
 import {
     Dimensions,
+    Image,
     KeyboardAvoidingView,
     Platform,
-    SafeAreaView,
     ScrollView,
     StyleSheet,
     Text,
@@ -15,289 +14,226 @@ import {
     TouchableOpacity,
     View,
 } from 'react-native';
+import { Colors } from '../../src/theme/colors';
 
-const { width } = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 
 export default function LoginScreen() {
     const router = useRouter();
-    const [email, setEmail] = React.useState('');
-    const [isSignUp, setIsSignUp] = React.useState(false);
+    const [phone, setPhone] = useState('');
 
-    const handleGoogleSignIn = () => {
-        router.replace('/(customer)' as any);
-    };
-
-    const handleEmailSignIn = () => {
-        router.push('/(auth)/otp-verification');
+    const handleSendOTP = () => {
+        if (phone.length >= 10) {
+            router.push('/(auth)/otp-verification');
+        }
     };
 
     return (
-        <SafeAreaView style={styles.safeArea}>
+        <View style={styles.container}>
+            {/* Background */}
+            <Image
+                source={{ uri: 'https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=800' }}
+                style={styles.bgImage}
+                resizeMode="cover"
+            />
+            <LinearGradient
+                colors={['#000000CC', '#000000F2', '#000000']}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 0, y: 1 }}
+                style={StyleSheet.absoluteFillObject}
+            />
+
             <KeyboardAvoidingView
                 style={styles.flex}
                 behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
             >
                 <ScrollView
-                    contentContainerStyle={styles.scroll}
-                    showsVerticalScrollIndicator={false}
+                    contentContainerStyle={styles.scrollContent}
                     keyboardShouldPersistTaps="handled"
+                    showsVerticalScrollIndicator={false}
                 >
-                    {/* Header */}
-                    <View style={styles.header}>
-                        <View style={styles.logoContainer}>
-                            <View style={styles.logoIcon}>
-                                <Ionicons name="football" size={28} color={AppColors.white} />
-                            </View>
-                        </View>
-                        <Text style={styles.appName}>BookMyTurf</Text>
-                        <Text style={styles.tagline}>Your Game, Your Slot, Your Rules</Text>
-                    </View>
-
-                    {/* Card */}
-                    <View style={styles.card}>
-                        <Text style={styles.welcomeTitle}>
-                            {isSignUp ? 'Create Account' : 'Welcome Back! 👋'}
-                        </Text>
-                        <Text style={styles.welcomeSubtitle}>
-                            {isSignUp
-                                ? 'Sign up to start booking turfs near you'
-                                : 'Sign in to continue booking amazing turfs'}
-                        </Text>
-
-                        {/* Google Sign In */}
-                        <TouchableOpacity style={styles.googleBtn} onPress={handleGoogleSignIn} activeOpacity={0.85}>
-                            <Text style={styles.googleIcon}>G</Text>
-                            <Text style={styles.googleText}>Continue with Google</Text>
-                        </TouchableOpacity>
-
-                        {/* Divider */}
-                        <View style={styles.dividerRow}>
-                            <View style={styles.dividerLine} />
-                            <Text style={styles.dividerText}>or</Text>
-                            <View style={styles.dividerLine} />
-                        </View>
-
-                        {/* Email Input */}
-                        <View style={styles.inputGroup}>
-                            <Text style={styles.label}>Email Address</Text>
-                            <View style={styles.inputWrapper}>
-                                <Ionicons name="mail-outline" size={18} color={AppColors.textMuted} style={styles.inputIcon} />
-                                <TextInput
-                                    style={styles.input}
-                                    placeholder="Enter your email"
-                                    placeholderTextColor={AppColors.textMuted}
-                                    value={email}
-                                    onChangeText={setEmail}
-                                    keyboardType="email-address"
-                                    autoCapitalize="none"
+                    <View style={styles.content}>
+                        {/* Logo */}
+                        <View style={styles.logoSection}>
+                            <View style={styles.logoCircle}>
+                                <Image
+                                    source={require('../../assets/images/logo.png')}
+                                    style={styles.logoImg}
+                                    resizeMode="contain"
                                 />
                             </View>
+                            <Text style={styles.welcomeTitle}>ENTER YOUR PHONE NUMBER</Text>
+                            <Text style={styles.welcomeSub}>We'll send you a secure OTP to sign in or create an account.</Text>
                         </View>
 
-                        {/* Sign In Button */}
-                        <TouchableOpacity style={styles.signInBtn} onPress={handleEmailSignIn} activeOpacity={0.88}>
-                            <Text style={styles.signInText}>
-                                {isSignUp ? 'Create Account' : 'Send OTP'}
-                            </Text>
-                        </TouchableOpacity>
+                        {/* Form */}
+                        <View style={styles.form}>
+                            <View style={styles.inputWrapper}>
+                                <Text style={styles.countryCode}>+91</Text>
+                                <View style={styles.divider} />
+                                <Phone size={20} color={Colors.textSecondary} style={styles.inputIcon} />
+                                <TextInput
+                                    style={styles.input}
+                                    placeholder="000 000 0000"
+                                    placeholderTextColor={Colors.borderLight}
+                                    value={phone}
+                                    onChangeText={setPhone}
+                                    keyboardType="phone-pad"
+                                    maxLength={10}
+                                    selectionColor={Colors.highlight}
+                                />
+                            </View>
 
-                        {/* Toggle */}
-                        <View style={styles.toggleRow}>
-                            <Text style={styles.toggleLabel}>
-                                {isSignUp ? 'Already have an account? ' : "Don't have an account? "}
-                            </Text>
-                            <TouchableOpacity onPress={() => setIsSignUp(!isSignUp)}>
-                                <Text style={styles.toggleAction}>
-                                    {isSignUp ? 'Sign In' : 'Sign Up'}
-                                </Text>
+                            {/* Sign In Button */}
+                            <TouchableOpacity
+                                style={[styles.signInBtn, phone.length < 10 && styles.signInBtnDisabled]}
+                                onPress={handleSendOTP}
+                                activeOpacity={0.85}
+                                disabled={phone.length < 10}
+                            >
+                                <Text style={styles.signInText}>CONTINUE</Text>
+                                <ArrowRight size={20} color={Colors.backgroundDark} />
                             </TouchableOpacity>
                         </View>
-                    </View>
 
-                    {/* Terms */}
-                    <Text style={styles.terms}>
-                        By continuing, you agree to our{' '}
-                        <Text style={styles.termsLink}>Terms of Service</Text>
-                        {' '}and{' '}
-                        <Text style={styles.termsLink}>Privacy Policy</Text>
-                    </Text>
+                        {/* Footer */}
+                        <View style={styles.bottomLinks}>
+                            <Text style={styles.bottomText}>By continuing, you agree to TurfZy's</Text>
+                            <View style={styles.linksRow}>
+                                <Text style={styles.bottomLink}>Terms of Use</Text>
+                                <Text style={styles.bottomDot}>•</Text>
+                                <Text style={styles.bottomLink}>Privacy Policy</Text>
+                            </View>
+                        </View>
+                    </View>
                 </ScrollView>
             </KeyboardAvoidingView>
-        </SafeAreaView>
+        </View>
     );
 }
 
 const styles = StyleSheet.create({
-    safeArea: {
-        flex: 1,
-        backgroundColor: AppColors.background,
+    container: { flex: 1, backgroundColor: Colors.backgroundDark },
+    flex: { flex: 1 },
+    bgImage: {
+        ...StyleSheet.absoluteFillObject,
+        width,
+        height,
     },
-    flex: {
-        flex: 1,
-    },
-    scroll: {
+    scrollContent: {
         flexGrow: 1,
-        paddingHorizontal: Spacing.lg,
-        paddingTop: Spacing['3xl'],
-        paddingBottom: Spacing.xl,
-        alignItems: 'center',
+        justifyContent: 'flex-end',
+        paddingBottom: 40,
     },
-    header: {
-        alignItems: 'center',
-        marginBottom: Spacing['2xl'],
+    content: {
+        paddingHorizontal: 24,
     },
-    logoContainer: {
-        marginBottom: Spacing.md,
+    logoSection: {
+        alignItems: 'flex-start',
+        marginBottom: 40,
     },
-    logoIcon: {
-        width: 72,
-        height: 72,
-        borderRadius: 20,
-        backgroundColor: AppColors.primary,
+    logoCircle: {
+        width: 56,
+        height: 56,
+        borderRadius: 28,
+        backgroundColor: Colors.surface3,
         alignItems: 'center',
         justifyContent: 'center',
-        shadowColor: AppColors.primary,
-        shadowOffset: { width: 0, height: 6 },
-        shadowOpacity: 0.35,
-        shadowRadius: 12,
-        elevation: 8,
+        marginBottom: 24,
     },
-    appName: {
-        fontSize: Typography.fontSize['3xl'],
-        fontWeight: Typography.fontWeight.extrabold,
-        color: AppColors.textPrimary,
-        marginBottom: 4,
-    },
-    tagline: {
-        fontSize: Typography.fontSize.sm,
-        color: AppColors.textMuted,
-        textAlign: 'center',
-    },
-    card: {
-        width: '100%',
-        backgroundColor: AppColors.white,
-        borderRadius: BorderRadius['2xl'],
-        padding: Spacing.xl,
-        ...Shadows.lg,
-        marginBottom: Spacing.xl,
+    logoImg: {
+        width: 36,
+        height: 36,
     },
     welcomeTitle: {
-        fontSize: Typography.fontSize.xl,
-        fontWeight: Typography.fontWeight.bold,
-        color: AppColors.textPrimary,
-        marginBottom: 4,
+        color: Colors.textPrimary,
+        fontSize: 32,
+        fontWeight: '900',
+        fontFamily: 'Inter-Black',
+        letterSpacing: -1,
+        marginBottom: 12,
+        textTransform: 'uppercase',
     },
-    welcomeSubtitle: {
-        fontSize: Typography.fontSize.sm,
-        color: AppColors.textSecondary,
-        marginBottom: Spacing.xl,
-        lineHeight: 20,
+    welcomeSub: {
+        color: Colors.textSecondary,
+        fontSize: 15,
+        lineHeight: 22,
     },
-    googleBtn: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderWidth: 1.5,
-        borderColor: AppColors.border,
-        borderRadius: BorderRadius.xl,
-        paddingVertical: 13,
-        paddingHorizontal: Spacing.lg,
-        gap: Spacing.sm,
-        backgroundColor: AppColors.white,
-        ...Shadows.sm,
-    },
-    googleIcon: {
-        fontSize: 18,
-        fontWeight: Typography.fontWeight.bold,
-        color: '#4285F4',
-    },
-    googleText: {
-        fontSize: Typography.fontSize.base,
-        fontWeight: Typography.fontWeight.semibold,
-        color: AppColors.textPrimary,
-    },
-    dividerRow: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        gap: Spacing.md,
-        marginVertical: Spacing.xl,
-    },
-    dividerLine: {
-        flex: 1,
-        height: 1,
-        backgroundColor: AppColors.border,
-    },
-    dividerText: {
-        color: AppColors.textMuted,
-        fontSize: Typography.fontSize.sm,
-    },
-    inputGroup: {
-        marginBottom: Spacing.lg,
-    },
-    label: {
-        fontSize: Typography.fontSize.sm,
-        fontWeight: Typography.fontWeight.medium,
-        color: AppColors.textPrimary,
-        marginBottom: Spacing.xs,
+    form: {
+        gap: 24,
+        marginBottom: 40,
     },
     inputWrapper: {
         flexDirection: 'row',
         alignItems: 'center',
-        borderWidth: 1.5,
-        borderColor: AppColors.border,
-        borderRadius: BorderRadius.xl,
-        paddingHorizontal: Spacing.base,
-        paddingVertical: 12,
-        backgroundColor: AppColors.background,
+        backgroundColor: Colors.surface2,
+        borderWidth: 1,
+        borderColor: Colors.borderMedium,
+        borderRadius: 8,
+        paddingHorizontal: 16,
+        height: 60,
+    },
+    countryCode: {
+        color: Colors.textPrimary,
+        fontSize: 16,
+        fontWeight: '700',
+    },
+    divider: {
+        width: 1,
+        height: 24,
+        backgroundColor: Colors.borderLight,
+        marginHorizontal: 12,
     },
     inputIcon: {
-        marginRight: Spacing.sm,
+        marginRight: 10,
     },
     input: {
         flex: 1,
-        fontSize: Typography.fontSize.base,
-        color: AppColors.textPrimary,
-        padding: 0,
+        color: Colors.textPrimary,
+        fontSize: 18,
+        fontWeight: '600',
+        letterSpacing: 1,
     },
     signInBtn: {
-        backgroundColor: AppColors.primary,
-        borderRadius: BorderRadius.xl,
-        paddingVertical: 14,
-        alignItems: 'center',
-        marginTop: Spacing.xs,
-        shadowColor: AppColors.primary,
-        shadowOffset: { width: 0, height: 4 },
-        shadowOpacity: 0.3,
-        shadowRadius: 8,
-        elevation: 6,
-    },
-    signInText: {
-        color: AppColors.white,
-        fontSize: Typography.fontSize.base,
-        fontWeight: Typography.fontWeight.bold,
-    },
-    toggleRow: {
         flexDirection: 'row',
         justifyContent: 'center',
-        marginTop: Spacing.lg,
+        backgroundColor: Colors.textPrimary,
+        paddingVertical: 18,
+        borderRadius: 8,
+        alignItems: 'center',
+        gap: 8,
     },
-    toggleLabel: {
-        color: AppColors.textMuted,
-        fontSize: Typography.fontSize.sm,
+    signInBtnDisabled: {
+        backgroundColor: Colors.borderLight,
+        opacity: 0.5,
     },
-    toggleAction: {
-        color: AppColors.primary,
-        fontSize: Typography.fontSize.sm,
-        fontWeight: Typography.fontWeight.semibold,
+    signInText: {
+        color: Colors.backgroundDark,
+        fontSize: 16,
+        fontWeight: '800',
+        letterSpacing: 1,
     },
-    terms: {
-        fontSize: Typography.fontSize.xs,
-        color: AppColors.textMuted,
-        textAlign: 'center',
-        lineHeight: 18,
+    bottomLinks: {
+        alignItems: 'center',
+        gap: 6,
     },
-    termsLink: {
-        color: AppColors.primary,
-        fontWeight: Typography.fontWeight.medium,
+    bottomText: {
+        color: Colors.textMuted,
+        fontSize: 13,
+    },
+    linksRow: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 8,
+    },
+    bottomLink: {
+        color: Colors.textSecondary,
+        fontSize: 13,
+        fontWeight: '600',
+        textDecorationLine: 'underline',
+    },
+    bottomDot: {
+        color: Colors.textMuted,
+        fontSize: 12,
     },
 });

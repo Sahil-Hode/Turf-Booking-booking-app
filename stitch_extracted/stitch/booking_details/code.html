@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#16c582",
+                        "background-light": "#f6f8f7",
+                        "background-dark": "#11211b",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .qr-gradient {
+            background: linear-gradient(135deg, rgba(22, 197, 130, 0.1) 0%, rgba(17, 33, 27, 1) 100%);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display">
+<div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
+<!-- Header -->
+<header class="flex items-center justify-between p-4 sticky top-0 z-10 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-primary/10">
+<button class="flex size-10 items-center justify-center rounded-full bg-primary/10 text-primary">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="text-lg font-bold leading-tight tracking-[-0.015em]">Booking Details</h1>
+<div class="flex gap-2">
+<button class="flex size-10 items-center justify-center rounded-full bg-primary/10 text-primary">
+<span class="material-symbols-outlined">share</span>
+</button>
+</div>
+</header>
+<main class="flex-1 px-4 py-6 space-y-6">
+<!-- QR Code Section -->
+<section class="flex flex-col items-center justify-center p-6 rounded-xl bg-white dark:bg-slate-900/40 border border-primary/10 shadow-xl">
+<h2 class="text-primary font-bold text-sm uppercase tracking-wider mb-4">Entry QR Code</h2>
+<div class="relative p-4 bg-white rounded-lg shadow-inner mb-4">
+<img alt="Entry QR Code for Turf access" class="w-48 h-48" data-alt="Black and white QR code for digital entry" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC8JAsKCEAD2rwsaMzLDRfZ9kxgAD3X7_bczdXUAPVUnkedob8i4uosq5ZDHdPr7GVy_nW_W8CxaepIUix5C6lIdLDB_TMb15hbYOEkmExCCt1zUX5_5ymnjuz18LXrxdxkIajsYVRIjGN4GY2nsJ0Fy7qEIecnOX3v0x4wFkY4QzLxBuiZnuXVCQkYW9KB5RnA0_meyAxQON5BUWfmmPU5wRpe99xclpaLevh9nsFOVX18p3SQz0wqh5_s3gqMNp3PjC5nNwuF8w"/>
+<div class="absolute inset-0 border-2 border-primary/20 rounded-lg pointer-events-none"></div>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-sm text-center">
+                    Scan this at the turf entrance to start your session.
+                </p>
+<div class="mt-4 px-4 py-2 bg-primary/10 rounded-full">
+<span class="text-primary text-xs font-bold">BOOKING ID: #TRFZ-88291</span>
+</div>
+</section>
+<!-- Turf Info Card -->
+<section class="space-y-4">
+<div class="flex items-start gap-4 p-4 rounded-xl bg-white dark:bg-slate-900/40 border border-primary/5">
+<div class="h-20 w-20 rounded-lg overflow-hidden shrink-0">
+<img alt="Professional Football Turf Greenery" class="h-full w-full object-cover" data-alt="Vibrant green indoor soccer turf field with white lines" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBHmyV1PiVvtIRwlQj-sSCLPLH3_LWL3Zzg2SmCQxgSbSKI2ZWa3yIZuOlPKgEI7M9_h5T_Z7uA_q78n16BFcHP6WWFaNl4qSTAMR9xZKqWpGC8yiBrV1ohSGcfR-HXpZ4Fkdrpb0VdtuWzI6FmBxPRTgw4hMkxoyc0xBLxeAoY0kAUtarChsGWgMS6wTaRqdbOp8IOG7cjSQMbOSfoVGPZY0uikSRDCLbNzmolQVfcH7Q17-mYBEGPxbu6Svte3w2cRdZFkB0TJA"/>
+</div>
+<div class="flex flex-col">
+<h3 class="font-bold text-lg">Elite Arena South</h3>
+<p class="text-slate-500 dark:text-slate-400 text-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">location_on</span>
+                            Downtown District, Sector 4
+                        </p>
+<div class="flex gap-2 mt-2">
+<span class="bg-primary/20 text-primary text-[10px] font-bold px-2 py-0.5 rounded uppercase">5-a-side</span>
+<span class="bg-primary/20 text-primary text-[10px] font-bold px-2 py-0.5 rounded uppercase">Indoor</span>
+</div>
+</div>
+</div>
+<!-- Timing and Date Details -->
+<div class="grid grid-cols-2 gap-3">
+<div class="p-4 rounded-xl bg-white dark:bg-slate-900/40 border border-primary/5">
+<span class="text-slate-500 dark:text-slate-400 text-xs font-medium uppercase">Date</span>
+<p class="font-bold text-base mt-1">Sat, Oct 14</p>
+</div>
+<div class="p-4 rounded-xl bg-white dark:bg-slate-900/40 border border-primary/5">
+<span class="text-slate-500 dark:text-slate-400 text-xs font-medium uppercase">Time</span>
+<p class="font-bold text-base mt-1">19:00 - 20:30</p>
+</div>
+</div>
+<!-- Map Integration -->
+<div class="rounded-xl overflow-hidden border border-primary/5 h-40 relative">
+<img alt="Map location of the turf arena" class="w-full h-full object-cover grayscale opacity-50 dark:opacity-30" data-alt="Stylized map showing turf location pins" data-location="Downtown Sector 4" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD8CD2mkbJ0s_U-_8YvasB-Un8sgoAWVhBZQbHJe1GqYMwetAqUjHimC8ehlhRR0Y-LJ-NI0pV7vx4I5GdIPulQP9tZjNd35gFqeIcprK1OBdgQwDmO9SSpW1UWjx81Y-_jQSytKuCUDpQF0VwwS6-bKJdcuP7NFKpka_NQLPl0pJUHbyFC94mqjS9fH4GNjXxbCrCWHeAtzFI1D9VTKi5RguSPBzTQI-etvJX0Ii9pjfzZBLXCOOQeZRdUihP6hwIMNybROq51yA"/>
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="bg-primary text-white p-2 rounded-full shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined">my_location</span>
+</div>
+</div>
+<div class="absolute bottom-3 right-3">
+<button class="bg-primary text-white px-4 py-2 rounded-full text-xs font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">directions</span>
+                            Get Directions
+                        </button>
+</div>
+</div>
+</section>
+<!-- Support & Actions -->
+<section class="space-y-3">
+<h4 class="text-sm font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest px-1">Quick Actions</h4>
+<button class="flex w-full items-center justify-between p-4 rounded-xl bg-white dark:bg-slate-900/40 border border-primary/5 hover:border-primary/30 transition-colors">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">headset_mic</span>
+</div>
+<div class="text-left">
+<p class="font-bold text-sm">Contact Support</p>
+<p class="text-xs text-slate-500 dark:text-slate-400">Get help with your booking</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-slate-400">chevron_right</span>
+</button>
+<button class="flex w-full items-center justify-between p-4 rounded-xl bg-white dark:bg-slate-900/40 border border-primary/5 hover:border-primary/30 transition-colors">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-500">
+<span class="material-symbols-outlined">receipt_long</span>
+</div>
+<div class="text-left">
+<p class="font-bold text-sm">Download Receipt</p>
+<p class="text-xs text-slate-500 dark:text-slate-400">PDF copy for your records</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-slate-400">download</span>
+</button>
+<button class="flex w-full items-center justify-between p-4 rounded-xl bg-red-500/5 border border-red-500/10 hover:bg-red-500/10 transition-colors">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-full bg-red-500/10 flex items-center justify-center text-red-500">
+<span class="material-symbols-outlined">cancel</span>
+</div>
+<div class="text-left">
+<p class="font-bold text-sm text-red-500">Cancel Booking</p>
+<p class="text-xs text-red-500/60">Refundable until 24h before</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-red-500">chevron_right</span>
+</button>
+</section>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="sticky bottom-0 z-10 flex gap-2 border-t border-primary/10 bg-background-light dark:bg-background-dark px-4 pb-6 pt-3">
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined">home</span>
+<p class="text-[10px] font-medium leading-normal tracking-[0.015em]">Home</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined">search</span>
+<p class="text-[10px] font-medium leading-normal tracking-[0.015em]">Explore</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-primary" href="#">
+<span class="material-symbols-outlined font-fill-1">calendar_month</span>
+<p class="text-[10px] font-medium leading-normal tracking-[0.015em]">Bookings</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined">person</span>
+<p class="text-[10px] font-medium leading-normal tracking-[0.015em]">Profile</p>
+</a>
+</nav>
+</div>
+</body></html>

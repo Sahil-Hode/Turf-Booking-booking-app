@@ -17,6 +17,8 @@ interface SearchInputProps {
     placeholder?: string;
     onFilterPress?: () => void;
     style?: ViewStyle;
+    onFocus?: () => void;
+    onBlur?: () => void;
 }
 
 export default function SearchInput({
@@ -25,6 +27,8 @@ export default function SearchInput({
     placeholder = 'Search turfs, locations...',
     onFilterPress,
     style,
+    onFocus,
+    onBlur,
 }: SearchInputProps) {
     return (
         <View style={[styles.container, style]}>
@@ -44,6 +48,8 @@ export default function SearchInput({
                     returnKeyType="search"
                     selectionColor={colors.primary}
                     autoCorrect={false}
+                    onFocus={onFocus}
+                    onBlur={onBlur}
                 />
                 {value.length > 0 && (
                     <TouchableOpacity onPress={() => onChangeText('')} style={styles.clearBtn} activeOpacity={0.6}>

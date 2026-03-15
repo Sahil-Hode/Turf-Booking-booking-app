@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#16c582",
+                        "background-light": "#f6f8f7",
+                        "background-dark": "#11211b",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<title>TurfZy - Filters</title>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100">
+<div class="relative flex h-auto min-h-screen w-full flex-col bg-background-light dark:bg-background-dark overflow-x-hidden max-w-md mx-auto border-x border-primary/10">
+<!-- Header -->
+<header class="flex items-center bg-background-light dark:bg-background-dark p-4 pb-2 justify-between sticky top-0 z-10 border-b border-primary/10">
+<div class="text-slate-900 dark:text-slate-100 flex size-12 shrink-0 items-center cursor-pointer">
+<span class="material-symbols-outlined">close</span>
+</div>
+<h2 class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight tracking-[-0.015em] flex-1 text-center">Filters</h2>
+<div class="flex w-12 items-center justify-end">
+<p class="text-primary text-base font-bold leading-normal tracking-[0.015em] shrink-0 cursor-pointer">Reset</p>
+</div>
+</header>
+<div class="flex-1 overflow-y-auto pb-24">
+<!-- Price Range -->
+<section class="border-b border-primary/10 pb-6">
+<h3 class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-6">Price Range</h3>
+<div class="@container">
+<div class="relative flex w-full flex-col items-start justify-between gap-3 p-4 @[480px]:flex-row">
+<p class="text-slate-600 dark:text-slate-400 text-sm font-medium leading-normal w-full shrink-[3]">Price per hour (USD)</p>
+<div class="flex h-[48px] w-full pt-4">
+<div class="flex h-1.5 w-full rounded-full bg-primary/20 relative">
+<!-- Track highlight -->
+<div class="absolute h-full left-[20%] right-[15%] bg-primary rounded-full"></div>
+<!-- Left Knob -->
+<div class="absolute left-[20%] -top-2 flex flex-col items-center gap-1">
+<div class="size-5 rounded-full bg-primary border-4 border-background-light dark:border-background-dark shadow-lg"></div>
+<p class="text-slate-900 dark:text-slate-100 text-xs font-bold mt-2">$20</p>
+</div>
+<!-- Right Knob -->
+<div class="absolute right-[15%] -top-2 flex flex-col items-center gap-1">
+<div class="size-5 rounded-full bg-primary border-4 border-background-light dark:border-background-dark shadow-lg"></div>
+<p class="text-slate-900 dark:text-slate-100 text-xs font-bold mt-2">$150</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Distance -->
+<section class="border-b border-primary/10 pb-6">
+<h3 class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-6">Distance</h3>
+<div class="@container">
+<div class="relative flex w-full flex-col items-start justify-between gap-3 p-4 @[480px]:flex-row @[480px]:items-center">
+<div class="flex w-full shrink-[3] items-center justify-between">
+<p class="text-slate-600 dark:text-slate-400 text-sm font-medium leading-normal">Radius (km)</p>
+<p class="text-primary text-sm font-bold leading-normal @[480px]:hidden">15km</p>
+</div>
+<div class="flex h-6 w-full items-center gap-4">
+<div class="flex h-1.5 flex-1 rounded-full bg-primary/20 relative">
+<div class="h-full w-[32%] rounded-full bg-primary"></div>
+<div class="relative">
+<div class="absolute -left-2 -top-2 size-5 rounded-full bg-primary border-4 border-background-light dark:border-background-dark shadow-lg"></div>
+</div>
+</div>
+<p class="text-primary text-sm font-bold leading-normal hidden @[480px]:block">15km</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Turf Type -->
+<section class="border-b border-primary/10 pb-6">
+<h3 class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-6">Turf Type</h3>
+<div class="grid grid-cols-2 gap-3 p-4">
+<div class="flex items-center justify-center gap-2 p-3 rounded bg-primary text-background-light font-semibold border-2 border-primary">
+<span class="material-symbols-outlined text-xl">grass</span>
+<span>Natural</span>
+</div>
+<div class="flex items-center justify-center gap-2 p-3 rounded bg-primary/10 text-slate-900 dark:text-slate-100 border-2 border-transparent">
+<span class="material-symbols-outlined text-xl text-primary">layers</span>
+<span>Artificial</span>
+</div>
+<div class="flex items-center justify-center gap-2 p-3 rounded bg-primary/10 text-slate-900 dark:text-slate-100 border-2 border-transparent">
+<span class="material-symbols-outlined text-xl text-primary">sports_soccer</span>
+<span>Hybrid</span>
+</div>
+<div class="flex items-center justify-center gap-2 p-3 rounded bg-primary/10 text-slate-900 dark:text-slate-100 border-2 border-transparent">
+<span class="material-symbols-outlined text-xl text-primary">apartment</span>
+<span>Indoor</span>
+</div>
+</div>
+</section>
+<!-- Amenities -->
+<section class="pb-6">
+<h3 class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-6">Amenities</h3>
+<div class="flex flex-wrap gap-3 p-4">
+<div class="flex items-center gap-2 px-4 py-2 rounded-full bg-primary text-background-light font-medium">
+<span class="material-symbols-outlined text-sm">lightbulb</span>
+<span>Night Lights</span>
+</div>
+<div class="flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-slate-900 dark:text-slate-100">
+<span class="material-symbols-outlined text-sm text-primary">local_parking</span>
+<span>Parking</span>
+</div>
+<div class="flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-slate-900 dark:text-slate-100">
+<span class="material-symbols-outlined text-sm text-primary">shower</span>
+<span>Showers</span>
+</div>
+<div class="flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-slate-900 dark:text-slate-100">
+<span class="material-symbols-outlined text-sm text-primary">chair</span>
+<span>Seating</span>
+</div>
+<div class="flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-slate-900 dark:text-slate-100">
+<span class="material-symbols-outlined text-sm text-primary">coffee</span>
+<span>Cafeteria</span>
+</div>
+<div class="flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-slate-900 dark:text-slate-100">
+<span class="material-symbols-outlined text-sm text-primary">medical_services</span>
+<span>First Aid</span>
+</div>
+</div>
+</section>
+</div>
+<!-- Sticky Footer Action -->
+<footer class="fixed bottom-0 left-0 right-0 p-4 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md border-t border-primary/10 max-w-md mx-auto">
+<button class="w-full bg-primary text-background-light py-4 rounded-xl font-bold text-lg shadow-lg shadow-primary/20 flex items-center justify-center gap-2">
+                Show 42 Results
+            </button>
+</footer>
+</div>
+</body></html>

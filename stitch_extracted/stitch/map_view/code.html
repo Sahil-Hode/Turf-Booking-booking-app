@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                "primary": "#16c582",
+                "background-light": "#f6f8f7",
+                "background-dark": "#11211b",
+              },
+              fontFamily: {
+                "display": ["Inter"]
+              },
+              borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+            },
+          },
+        }
+    </script>
+<style>
+        .glass-morphism {
+            background: rgba(26, 50, 41, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 overflow-hidden">
+<div class="relative flex h-screen w-full flex-col overflow-hidden">
+<!-- Header Section -->
+<div class="absolute top-0 left-0 right-0 z-20 p-4">
+<div class="flex items-center justify-between gap-4">
+<div class="flex items-center gap-3 glass-morphism p-2 pr-6 rounded-full shadow-lg">
+<button class="flex size-10 items-center justify-center rounded-full bg-primary text-background-dark">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<div>
+<h1 class="text-sm font-bold leading-none">Find Turfs</h1>
+<p class="text-[10px] text-primary">Downtown Manhattan</p>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="flex size-12 items-center justify-center rounded-full glass-morphism shadow-lg">
+<span class="material-symbols-outlined">tune</span>
+</button>
+<button class="flex size-12 items-center justify-center rounded-full glass-morphism shadow-lg">
+<span class="material-symbols-outlined">search</span>
+</button>
+</div>
+</div>
+<!-- Quick Filters -->
+<div class="flex gap-2 mt-4 overflow-x-auto no-scrollbar">
+<button class="flex h-9 shrink-0 items-center justify-center gap-2 rounded-full bg-primary px-4 text-background-dark text-sm font-semibold">
+<span class="material-symbols-outlined text-[18px]">calendar_today</span>
+                    Today
+                </button>
+<button class="flex h-9 shrink-0 items-center justify-center gap-2 rounded-full glass-morphism px-4 text-slate-100 text-sm font-medium">
+<span class="material-symbols-outlined text-[18px]">sports_soccer</span>
+                    5-a-side
+                </button>
+<button class="flex h-9 shrink-0 items-center justify-center gap-2 rounded-full glass-morphism px-4 text-slate-100 text-sm font-medium">
+<span class="material-symbols-outlined text-[18px]">star</span>
+                    Top Rated
+                </button>
+</div>
+</div>
+<!-- Map View (Background) -->
+<div class="absolute inset-0 z-0">
+<div class="h-full w-full bg-slate-800" data-alt="Stylized dark mode urban map with street details" data-location="New York City" style="">
+<!-- Custom Price Pins -->
+<div class="absolute top-1/4 left-1/3 z-10">
+<div class="flex flex-col items-center">
+<div class="bg-primary text-background-dark font-bold px-3 py-1 rounded-full text-sm shadow-xl animate-bounce">
+                            $45
+                        </div>
+<div class="w-1 h-3 bg-primary rounded-full -mt-1 shadow-lg"></div>
+</div>
+</div>
+<div class="absolute top-1/2 left-2/3 z-10">
+<div class="flex flex-col items-center">
+<div class="glass-morphism text-slate-100 font-bold px-3 py-1 rounded-full text-sm shadow-xl">
+                            $60
+                        </div>
+<div class="w-1 h-3 bg-slate-400 rounded-full -mt-1 shadow-lg opacity-50"></div>
+</div>
+</div>
+<div class="absolute bottom-1/3 left-1/4 z-10">
+<div class="flex flex-col items-center">
+<div class="glass-morphism text-slate-100 font-bold px-3 py-1 rounded-full text-sm shadow-xl">
+                            $35
+                        </div>
+<div class="w-1 h-3 bg-slate-400 rounded-full -mt-1 shadow-lg opacity-50"></div>
+</div>
+</div>
+<!-- Dark Map Placeholder Style -->
+<div class="w-full h-full bg-[#0b1411] flex items-center justify-center opacity-40">
+<div class="w-full h-full grid grid-cols-8 grid-rows-8 opacity-20">
+<div class="border-r border-b border-primary/20"></div><div class="border-r border-b border-primary/20"></div><div class="border-r border-b border-primary/20"></div><div class="border-r border-b border-primary/20"></div>
+<div class="border-r border-b border-primary/20"></div><div class="border-r border-b border-primary/20"></div><div class="border-r border-b border-primary/20"></div><div class="border-r border-b border-primary/20"></div>
+<div class="border-r border-b border-primary/20"></div><div class="border-r border-b border-primary/20"></div><div class="border-r border-b border-primary/20"></div><div class="border-r border-b border-primary/20"></div>
+<div class="border-r border-b border-primary/20"></div><div class="border-r border-b border-primary/20"></div><div class="border-r border-b border-primary/20"></div><div class="border-r border-b border-primary/20"></div>
+<div class="border-r border-b border-primary/20"></div><div class="border-r border-b border-primary/20"></div><div class="border-r border-b border-primary/20"></div><div class="border-r border-b border-primary/20"></div>
+<div class="border-r border-b border-primary/20"></div><div class="border-r border-b border-primary/20"></div><div class="border-r border-b border-primary/20"></div><div class="border-r border-b border-primary/20"></div>
+<div class="border-r border-b border-primary/20"></div><div class="border-r border-b border-primary/20"></div><div class="border-r border-b border-primary/20"></div><div class="border-r border-b border-primary/20"></div>
+<div class="border-r border-b border-primary/20"></div><div class="border-r border-b border-primary/20"></div><div class="border-r border-b border-primary/20"></div><div class="border-r border-b border-primary/20"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Floating Action Controls (Above Card) -->
+<div class="absolute right-4 bottom-44 z-20 flex flex-col gap-3">
+<button class="flex size-12 items-center justify-center rounded-full glass-morphism shadow-xl text-slate-100">
+<span class="material-symbols-outlined">my_location</span>
+</button>
+<button class="flex size-12 items-center justify-center rounded-full glass-morphism shadow-xl text-slate-100">
+<span class="material-symbols-outlined">layers</span>
+</button>
+</div>
+<!-- Bottom Preview Card -->
+<div class="absolute bottom-20 left-4 right-4 z-20">
+<div class="glass-morphism rounded-xl overflow-hidden shadow-2xl flex p-3 gap-4">
+<div class="relative w-28 h-28 shrink-0 rounded-lg overflow-hidden bg-cover bg-center" data-alt="High-end artificial turf football field at night" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCIfuW6_FDgp8lKIBoxDfTSd0pyOuysLFZtBPMsSfe1h2ZhejIQ0gEd8rA44KMAF9Lr866D6DGcv1Jdj_kVIJ3UaQ3-sojpFepWAMKfow03sZtB_aYPhtDR7ItljzZcckD_SlTf7KQh1fzwhzJE-RlcAtd9wjr-ROwBeMZ6E6QFGKIBaPjkMj0sSutg8Iy8v-qys_qYVD6HjLq4fHUym7CuYENbVTJ0SliRqlZdTGKyvODL1mwCZPFgCCWrHQ323EG75HByY-YEnA");'>
+<div class="absolute top-1 left-1 bg-primary/90 text-[10px] font-bold px-2 py-0.5 rounded-full text-background-dark">
+                        PREMIUM
+                    </div>
+</div>
+<div class="flex flex-col justify-between flex-1 py-1">
+<div>
+<div class="flex justify-between items-start">
+<h3 class="text-base font-bold leading-tight">Elite Sports Arena</h3>
+<div class="flex items-center gap-1 text-primary">
+<span class="material-symbols-outlined text-[16px] fill-current">star</span>
+<span class="text-xs font-bold">4.9</span>
+</div>
+</div>
+<p class="text-xs text-slate-300 mt-1 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">location_on</span>
+                            0.8 miles away • West Village
+                        </p>
+<div class="flex gap-2 mt-2">
+<span class="text-[10px] px-2 py-0.5 rounded-full bg-slate-100/10 text-slate-300">Shower</span>
+<span class="text-[10px] px-2 py-0.5 rounded-full bg-slate-100/10 text-slate-300">Parking</span>
+</div>
+</div>
+<div class="flex items-center justify-between mt-2">
+<p class="text-primary font-bold text-lg leading-none">$45<span class="text-[10px] text-slate-400 font-normal ml-1">/ hr</span></p>
+<button class="bg-primary text-background-dark px-4 py-2 rounded-full text-xs font-bold shadow-lg shadow-primary/20">
+                            Book Now
+                        </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Navigation Bar -->
+<div class="absolute bottom-0 left-0 right-0 z-30 bg-background-dark/95 backdrop-blur-md border-t border-primary/10">
+<div class="flex justify-around items-center px-4 py-3">
+<a class="flex flex-col items-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined fill-current">map</span>
+<span class="text-[10px] font-bold">Explore</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-500" href="#">
+<span class="material-symbols-outlined">favorite</span>
+<span class="text-[10px] font-medium">Saved</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-500" href="#">
+<span class="material-symbols-outlined">confirmation_number</span>
+<span class="text-[10px] font-medium">Bookings</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-500" href="#">
+<span class="material-symbols-outlined">person_pin</span>
+<span class="text-[10px] font-medium">Profile</span>
+</a>
+</div>
+</div>
+</div>
+</body></html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TurfZy - Booking Summary</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                "primary": "#16c582",
+                "background-light": "#f6f8f7",
+                "background-dark": "#11211b",
+              },
+              fontFamily: {
+                "display": ["Inter"]
+              },
+              borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+            },
+          },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased">
+<div class="relative flex min-h-screen w-full flex-col max-w-md mx-auto bg-background-light dark:bg-background-dark overflow-x-hidden">
+<!-- Top Bar -->
+<div class="flex items-center bg-background-light dark:bg-background-dark p-4 sticky top-0 z-10 border-b border-primary/10">
+<div class="text-slate-900 dark:text-slate-100 flex size-10 shrink-0 items-center justify-center cursor-pointer">
+<span class="material-symbols-outlined">arrow_back</span>
+</div>
+<h2 class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight tracking-tight flex-1 ml-2">Booking Summary</h2>
+</div>
+<!-- Turf Hero Card -->
+<div class="p-4">
+<div class="flex flex-col items-stretch justify-start rounded-xl shadow-lg bg-white dark:bg-primary/5 border border-primary/10 overflow-hidden">
+<div class="w-full bg-center bg-no-repeat aspect-video bg-cover" data-alt="Professional green outdoor football turf at night" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAB0YHRA9l6pwmr8-3kUJe0o4tkFI0ywY67RVuhlRWcJyQQfEc_kwY8zdu2YSNwcu9JQuamIulyil3XErqnYwWzyPZwPuB0ip-dY4nbp_A-jnToJWjv0r8KvYB0k6dV_Cl9BKCmkXbsiVp9vjrDK-0foYkxXt7tvxzqnpUPiMnH7SNMQTAVYQkCVL3DZwiUEL65xoaSOdBK7-cfLwtWG5ZU2Chld7weuKVw---fCcFZ5r9_BcEG3_RvPcK6DJn4IbRxWgo7jeWDIg");'>
+</div>
+<div class="flex w-full min-w-72 grow flex-col items-stretch justify-center gap-1 p-4">
+<p class="text-primary text-sm font-semibold uppercase tracking-wider">Football &amp; Cricket</p>
+<p class="text-slate-900 dark:text-white text-xl font-bold">Turf Paradise Arena</p>
+<div class="flex items-center gap-1 text-slate-500 dark:text-primary/70">
+<span class="material-symbols-outlined text-sm">location_on</span>
+<p class="text-sm font-medium">Sector 62, Noida, UP</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Booking Details Section -->
+<div class="px-4 py-2">
+<h3 class="text-slate-900 dark:text-white text-lg font-bold mb-3">Schedule Details</h3>
+<div class="space-y-3">
+<div class="flex items-center gap-4 bg-white dark:bg-primary/10 p-4 rounded-xl border border-primary/5">
+<div class="text-primary flex items-center justify-center rounded-lg bg-primary/20 shrink-0 size-12">
+<span class="material-symbols-outlined">calendar_today</span>
+</div>
+<div class="flex flex-col justify-center flex-1">
+<p class="text-slate-900 dark:text-white text-sm font-semibold">Date &amp; Time</p>
+<p class="text-slate-500 dark:text-primary/70 text-sm">Sat, 24 Oct | 06:00 PM - 07:00 PM</p>
+</div>
+<button class="text-primary text-sm font-bold">Edit</button>
+</div>
+<div class="flex items-center gap-4 bg-white dark:bg-primary/10 p-4 rounded-xl border border-primary/5">
+<div class="text-primary flex items-center justify-center rounded-lg bg-primary/20 shrink-0 size-12">
+<span class="material-symbols-outlined">timer</span>
+</div>
+<div class="flex flex-col justify-center">
+<p class="text-slate-900 dark:text-white text-sm font-semibold">Duration</p>
+<p class="text-slate-500 dark:text-primary/70 text-sm">60 Minutes</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Promo Code Section -->
+<div class="px-4 py-6">
+<div class="flex flex-col gap-3">
+<label class="text-slate-900 dark:text-white text-sm font-bold ml-1">Have a promo code?</label>
+<div class="flex gap-2">
+<div class="relative flex-1">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-primary/60">sell</span>
+<input class="w-full bg-white dark:bg-primary/5 border border-primary/20 rounded-xl py-3 pl-10 pr-4 text-sm focus:ring-primary focus:border-primary dark:text-white placeholder:text-slate-400" placeholder="Enter code" type="text"/>
+</div>
+<button class="bg-primary/20 text-primary px-6 py-3 rounded-xl font-bold text-sm hover:bg-primary hover:text-white transition-colors">Apply</button>
+</div>
+</div>
+</div>
+<!-- Price Breakdown Section -->
+<div class="px-4 pb-32">
+<div class="bg-white dark:bg-primary/5 rounded-xl border border-primary/10 p-5 space-y-4">
+<h3 class="text-slate-900 dark:text-white font-bold border-b border-primary/10 pb-2">Payment Summary</h3>
+<div class="space-y-3">
+<div class="flex justify-between text-sm">
+<span class="text-slate-500 dark:text-primary/70">Court Rent (1hr)</span>
+<span class="text-slate-900 dark:text-white font-medium">₹1,200.00</span>
+</div>
+<div class="flex justify-between text-sm">
+<span class="text-slate-500 dark:text-primary/70">Taxes &amp; Fees</span>
+<span class="text-slate-900 dark:text-white font-medium">₹54.00</span>
+</div>
+<div class="flex justify-between text-sm text-primary">
+<span class="font-medium">Discount (TURF20)</span>
+<span class="font-bold">- ₹240.00</span>
+</div>
+</div>
+<div class="pt-3 border-t border-dashed border-primary/20 flex justify-between items-center">
+<span class="text-slate-900 dark:text-white font-bold text-lg">Total Amount</span>
+<span class="text-primary font-extrabold text-xl">₹1,014.00</span>
+</div>
+</div>
+</div>
+<!-- Sticky Footer CTA -->
+<div class="fixed bottom-0 left-0 right-0 max-w-md mx-auto p-4 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md border-t border-primary/10">
+<div class="flex items-center justify-between gap-4">
+<div class="flex flex-col">
+<span class="text-slate-500 dark:text-primary/60 text-xs font-semibold uppercase tracking-tight">To Pay</span>
+<span class="text-slate-900 dark:text-white font-extrabold text-2xl tracking-tighter">₹1,014</span>
+</div>
+<button class="flex-1 bg-primary hover:bg-primary/90 text-white font-bold py-4 px-6 rounded-xl flex items-center justify-center gap-2 shadow-lg shadow-primary/20 active:scale-95 transition-transform">
+<span>Proceed to Pay</span>
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</body></html>

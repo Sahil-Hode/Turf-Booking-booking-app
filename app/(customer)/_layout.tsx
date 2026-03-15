@@ -6,31 +6,35 @@ export default function CustomerLayout() {
             <Stack.Screen name="(tabs)" />
             <Stack.Screen
                 name="turf-details/[id]"
-                options={{
-                    headerShown: false,
-                    animation: 'slide_from_right',
-                }}
+                options={{ headerShown: false, animation: 'slide_from_right' }}
             />
             <Stack.Screen
                 name="booking/slot-selection/[turfId]"
-                options={{
-                    headerShown: false,
-                    animation: 'slide_from_right',
-                }}
+                options={{ headerShown: false, animation: 'slide_from_right' }}
+            />
+            <Stack.Screen
+                name="booking/summary/[turfId]"
+                options={{ headerShown: false, animation: 'slide_from_right' }}
             />
             <Stack.Screen
                 name="booking/payment/[turfId]"
-                options={{
-                    headerShown: false,
-                    animation: 'slide_from_right',
-                }}
+                options={{ headerShown: false, animation: 'slide_from_right' }}
             />
             <Stack.Screen
                 name="booking/confirmation/[bookingId]"
-                options={{
-                    headerShown: false,
-                    animation: 'fade',
-                }}
+                options={{ headerShown: false, animation: 'fade' }}
+            />
+            <Stack.Screen
+                name="search"
+                options={{ headerShown: false, animation: 'slide_from_right' }}
+            />
+            <Stack.Screen
+                name="filters"
+                options={{ headerShown: false, animation: 'slide_from_bottom' }}
+            />
+            <Stack.Screen
+                name="notifications"
+                options={{ headerShown: false, animation: 'slide_from_right' }}
             />
         </Stack>
     );

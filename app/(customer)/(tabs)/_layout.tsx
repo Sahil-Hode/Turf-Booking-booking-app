@@ -1,37 +1,56 @@
-import { colors } from '@/theme/colors';
-import { shadows } from '@/theme/shadows';
-import { typography } from '@/theme/typography';
 import { Tabs } from 'expo-router';
-import { Calendar, Home, Search, User } from 'lucide-react-native';
-import { StyleSheet } from 'react-native';
+import { CalendarDays, Compass, Heart, Home, User } from 'lucide-react-native';
+import React from 'react';
+import { Platform, StyleSheet, View } from 'react-native';
+import { Colors } from '../../../src/theme/colors';
 
-export default function CustomerTabsLayout() {
+interface TabIconProps {
+    icon: React.ReactNode;
+    focused: boolean;
+}
+
+function TabIcon({ icon, focused }: TabIconProps) {
+    return (
+        <View style={[styles.iconWrap, focused && styles.iconWrapActive]}>
+            {icon}
+        </View>
+    );
+}
+
+export default function TabLayout() {
     return (
         <Tabs
             screenOptions={{
                 headerShown: false,
-                tabBarActiveTintColor: colors.primary, // Black/Accent
-                tabBarInactiveTintColor: colors.textTertiary,
                 tabBarStyle: styles.tabBar,
-                tabBarLabelStyle: styles.tabBarLabel,
-                tabBarIconStyle: styles.tabBarIcon,
+                tabBarActiveTintColor: Colors.primary,
+                tabBarInactiveTintColor: '#475569',
+                tabBarLabelStyle: styles.tabLabel,
+                tabBarShowLabel: true,
+                tabBarItemStyle: { paddingVertical: 4 },
             }}
         >
             <Tabs.Screen
                 name="index"
                 options={{
                     title: 'Home',
-                    tabBarIcon: ({ color, focused }) => (
-                        <Home size={22} color={color} strokeWidth={focused ? 2.5 : 2} />
+                    tabBarIcon: ({ focused }) => (
+                        <TabIcon
+                            focused={focused}
+                            icon={<Home size={22} color={focused ? Colors.primary : '#475569'} fill={focused ? Colors.primary : 'transparent'} />}
+                        />
                     ),
                 }}
             />
             <Tabs.Screen
                 name="search"
                 options={{
-                    title: 'Search',
-                    tabBarIcon: ({ color, focused }) => (
-                        <Search size={22} color={color} strokeWidth={focused ? 2.5 : 2} />
+                    title: 'Explore',
+                    tabBarIcon: ({ focused }) => (
+                        <TabIcon
+                            focused={focused}
+                            icon={<Compass size={22} color={focused ? Colors.primary : '#475569'} />}
+                        />
                     ),
                 }}
             />
@@ -39,8 +58,23 @@ export default function CustomerTabsLayout() {
                 name="my-bookings"
                 options={{
                     title: 'Bookings',
-                    tabBarIcon: ({ color, focused }) => (
-                        <Calendar size={22} color={color} strokeWidth={focused ? 2.5 : 2} />
+                    tabBarIcon: ({ focused }) => (
+                        <TabIcon
+                            focused={focused}
+                            icon={<CalendarDays size={22} color={focused ? Colors.primary : '#475569'} />}
+                        />
+                    ),
+                }}
+            />
+            <Tabs.Screen
+                name="favorites"
+                options={{
+                    title: 'Favorites',
+                    tabBarIcon: ({ focused }) => (
+                        <TabIcon
+                            focused={focused}
+                            icon={<Heart size={22} color={focused ? Colors.primary : '#475569'} fill={focused ? Colors.primary : 'transparent'} />}
+                        />
                     ),
                 }}
             />
@@ -48,8 +82,11 @@ export default function CustomerTabsLayout() {
                 name="profile"
                 options={{
                     title: 'Profile',
-                    tabBarIcon: ({ color, focused }) => (
-                        <User size={22} color={color} strokeWidth={focused ? 2.5 : 2} />
+                    tabBarIcon: ({ focused }) => (
+                        <TabIcon
+                            focused={focused}
+                            icon={<User size={22} color={focused ? Colors.primary : '#475569'} />}
+                        />
                     ),
                 }}
             />
@@ -59,20 +96,33 @@ export default function CustomerTabsLayout() {
 
 const styles = StyleSheet.create({
     tabBar: {
-        backgroundColor: colors.background, // crisp white
+        backgroundColor: 'rgba(17,33,27,0.95)',
         borderTopWidth: 1,
-        borderTopColor: colors.borderLight,
-        height: 70, // Slightly taller for modern reachability
-        paddingBottom: 15, // extra padding for bottom safe area
+        borderTopColor: Colors.borderDark,
+        height: Platform.OS === 'ios' ? 84 : 64,
+        paddingBottom: Platform.OS === 'ios' ? 24 : 8,
         paddingTop: 8,
-        ...shadows.md, // Apple-style light bleed
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: -4 },
+        shadowOpacity: 0.2,
+        shadowRadius: 12,
+        elevation: 12,
     },
-    tabBarLabel: {
-        fontSize: typography.sizes.xs,
-        fontWeight: typography.weights.semibold,
-        marginTop: 4,
+    tabLabel: {
+        fontSize: 10,
+        fontWeight: '700',
+        letterSpacing: 0.5,
+        textTransform: 'uppercase',
+        marginTop: 2,
     },
-    tabBarIcon: {
-        marginBottom: -2,
+    iconWrap: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: 40,
+        height: 32,
+        borderRadius: 12,
+    },
+    iconWrapActive: {
+        backgroundColor: Colors.primaryMuted,
     },
 });

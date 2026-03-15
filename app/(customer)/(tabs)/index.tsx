@@ -1,293 +1,440 @@
-import TurfCardHorizontal from '@/components/turf/turf-card/TurfCardHorizontal';
-import TurfCardVertical from '@/components/turf/turf-card/TurfCardVertical';
-import { MOCK_TURFS } from '@/constants/mockData';
-import { colors } from '@/theme/colors';
-import { shadows } from '@/theme/shadows';
-import { layout, spacing } from '@/theme/spacing';
-import { typography } from '@/theme/typography';
 import { useRouter } from 'expo-router';
-import { Activity, ChevronDown, Dribbble, Search, User } from 'lucide-react-native';
-import React from 'react';
 import {
-    FlatList,
-    SafeAreaView,
+    Bell,
+    ChevronDown,
+    MapPin,
+    Plus,
+    Search
+} from 'lucide-react-native';
+import React, { useState } from 'react';
+import {
+    Dimensions,
+    Image,
     ScrollView,
-    StatusBar,
     StyleSheet,
     Text,
     TouchableOpacity,
     View
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { TurfCard } from '../../../components/cards/TurfCard';
+import { mockTurfs, sportCategories, tonightSlots } from '../../../src/data/mockData';
+import { useAppStore } from '../../../src/store/useAppStore';
+import { Colors } from '../../../src/theme/colors';
 
-// Grab / Uber uses distinct large grid buttons for primary services Instead of tiny chips
-const MAIN_SERVICES = [
-    { id: 'football', label: 'Football', icon: Dribbble },
-    { id: 'cricket', label: 'Cricket', icon: Activity },
-    { id: 'tennis', label: 'Tennis', icon: Activity },
-    { id: 'badminton', label: 'Badminton', icon: Activity },
-];
+const { width } = Dimensions.get('window');
+
+const SPORT_ICONS: Record<string, string> = {
+    football: '⚽',
+    cricket: '🏏',
+    tennis: '🎾',
+    basketball: '🏀',
+    badminton: '🏸',
+    kabaddi: '🤸',
+};
 
 export default function HomeScreen() {
     const router = useRouter();
-    const [turfs, setTurfs] = React.useState(MOCK_TURFS);
+    const { favorites, toggleFavorite, currentLocation } = useAppStore();
+    const [selectedSport, setSelectedSport] = useState('football');
 
-    const topRated = MOCK_TURFS.filter(t => t.rating >= 4.7).slice(0, 4);
+    const popularTurfs = mockTurfs.filter((t) => t.featured);
+    const nearbyTurfs = mockTurfs.slice(3, 6);
 
-    const handleTurfPress = (id: string) => {
+    const navigateToTurf = (id: string) => {
         router.push(`/(customer)/turf-details/${id}`);
     };
 
-    const handleFavoriteToggle = (id: string) => {
-        setTurfs(prev =>
-            prev.map(t => t.id === id ? { ...t, isFavorite: !t.isFavorite } : t)
-        );
+    const navigateToSearch = () => {
+        router.push('/(customer)/(tabs)/search');
+    };
+
+    const navigateToNotifications = () => {
+        router.push('/(customer)/notifications');
     };
 
     return (
-        <SafeAreaView style={styles.safeArea}>
-            <StatusBar barStyle="dark-content" backgroundColor={colors.background} />
-
-            {/* Fixed Header - Uber/Grab Style */}
-            <View style={styles.fixedHeader}>
-                <View style={styles.addressBar}>
-                    <View>
-                        <Text style={styles.addressLabel}>Current Location</Text>
-                        <TouchableOpacity style={styles.addressSelector} activeOpacity={0.7}>
-                            <Text style={styles.addressText} numberOfLines={1}>Indiranagar, Bangalore</Text>
-                            <ChevronDown size={18} color={colors.textPrimary} strokeWidth={2.5} />
-                        </TouchableOpacity>
-                    </View>
-                    <TouchableOpacity style={styles.profileBtn} onPress={() => router.push('/(customer)/(tabs)/profile')} activeOpacity={0.8}>
-                        <User size={22} color={colors.textPrimary} strokeWidth={2} />
-                    </TouchableOpacity>
-                </View>
-
-                {/* Uber-like Search Bar attached to header */}
-                <TouchableOpacity
-                    style={styles.searchBox}
-                    activeOpacity={0.9}
-                    onPress={() => router.push('/(customer)/(tabs)/search')}
-                >
-                    <Search size={22} color={colors.textPrimary} strokeWidth={2.5} />
-                    <Text style={styles.searchText}>Find turfs, sports, or formats...</Text>
-                </TouchableOpacity>
-            </View>
-
+        <SafeAreaView style={styles.container} edges={['top']}>
             <ScrollView
-                style={styles.scroll}
                 showsVerticalScrollIndicator={false}
                 contentContainerStyle={styles.scrollContent}
             >
-                {/* Quick Actions Grid (Grab Style) */}
-                <View style={styles.quickActionsContainer}>
-                    <View style={styles.gridRow}>
-                        {MAIN_SERVICES.slice(0, 2).map((service) => {
-                            const Icon = service.icon;
-                            return (
-                                <TouchableOpacity key={service.id} style={styles.actionCard} activeOpacity={0.8}>
-                                    <Icon size={32} color={colors.primary} strokeWidth={1.5} style={styles.actionIcon} />
-                                    <Text style={styles.actionLabel}>{service.label}</Text>
-                                </TouchableOpacity>
-                            );
-                        })}
+                {/* Header */}
+                <View style={styles.header}>
+                    <View style={styles.headerLeft}>
+                        <Image
+                            source={require('../../../assets/images/logo.png')}
+                            style={styles.headerLogo}
+                            resizeMode="contain"
+                        />
+                        <Text style={styles.headerTitle}>
+                            Turf<Text style={{ color: Colors.primary }}>Zy</Text>
+                        </Text>
                     </View>
-                    <View style={styles.gridRow}>
-                        {MAIN_SERVICES.slice(2, 4).map((service) => {
-                            const Icon = service.icon;
-                            return (
-                                <TouchableOpacity key={service.id} style={styles.actionCardSmall} activeOpacity={0.8}>
-                                    <Text style={styles.actionLabelSmall}>{service.label}</Text>
-                                </TouchableOpacity>
-                            );
-                        })}
+                    <View style={styles.headerRight}>
+                        <TouchableOpacity style={styles.locationChip}>
+                            <MapPin size={13} color={Colors.primary} />
+                            <Text style={styles.locationText} numberOfLines={1}>
+                                {currentLocation}
+                            </Text>
+                            <ChevronDown size={13} color={Colors.primary} />
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            style={styles.bellBtn}
+                            onPress={navigateToNotifications}
+                        >
+                            <Bell size={20} color={Colors.textPrimary} />
+                            <View style={styles.bellDot} />
+                        </TouchableOpacity>
                     </View>
                 </View>
 
-                {/* Thick Divider typical of Grab/Uber to separate sections */}
-                <View style={styles.sectionDivider} />
+                {/* Search Bar */}
+                <TouchableOpacity
+                    style={styles.searchBar}
+                    onPress={navigateToSearch}
+                    activeOpacity={0.85}
+                >
+                    <Search size={18} color="#64748b" />
+                    <Text style={styles.searchPlaceholder}>Search turfs, sports or venues</Text>
+                </TouchableOpacity>
 
-                {/* Horizontal Scroll (Top Rated) */}
+                {/* Sports Categories */}
+                <ScrollView
+                    horizontal
+                    showsHorizontalScrollIndicator={false}
+                    contentContainerStyle={styles.categoriesScroll}
+                    style={styles.categoriesContainer}
+                >
+                    {sportCategories.map((cat) => (
+                        <TouchableOpacity
+                            key={cat.id}
+                            style={styles.categoryItem}
+                            onPress={() => setSelectedSport(cat.id)}
+                            activeOpacity={0.8}
+                        >
+                            <View
+                                style={[
+                                    styles.categoryCircle,
+                                    selectedSport === cat.id && styles.categoryCircleActive,
+                                ]}
+                            >
+                                <Text style={styles.categoryEmoji}>
+                                    {SPORT_ICONS[cat.id] || '🏅'}
+                                </Text>
+                            </View>
+                            <Text
+                                style={[
+                                    styles.categoryName,
+                                    selectedSport === cat.id && styles.categoryNameActive,
+                                ]}
+                            >
+                                {cat.name}
+                            </Text>
+                        </TouchableOpacity>
+                    ))}
+                </ScrollView>
+
+                {/* Play Tonight */}
                 <View style={styles.section}>
                     <View style={styles.sectionHeader}>
-                        <Text style={styles.sectionTitle}>Top Rated Around You</Text>
+                        <View>
+                            <Text style={styles.sectionTitle}>PLAY TONIGHT</Text>
+                            <Text style={styles.sectionSub}>Available slots for today</Text>
+                        </View>
+                        <TouchableOpacity>
+                            <Text style={styles.viewAll}>View All</Text>
+                        </TouchableOpacity>
                     </View>
-                    <FlatList
-                        data={topRated}
+                    <ScrollView
                         horizontal
                         showsHorizontalScrollIndicator={false}
-                        keyExtractor={(item) => item.id}
-                        contentContainerStyle={styles.horizontalList}
-                        renderItem={({ item }) => (
-                            <TurfCardHorizontal
-                                turf={item}
-                                onPress={() => handleTurfPress(item.id)}
-                                onFavoriteToggle={() => handleFavoriteToggle(item.id)}
-                            />
-                        )}
-                    />
+                        contentContainerStyle={styles.slotScroll}
+                    >
+                        {tonightSlots.map((slot, i) => (
+                            <TouchableOpacity
+                                key={i}
+                                style={styles.slotCard}
+                                activeOpacity={0.85}
+                                onPress={() => navigateToTurf(mockTurfs[i]?.id || 't1')}
+                            >
+                                <Text style={styles.slotTime}>{slot.time}</Text>
+                                <Text style={styles.slotTurf} numberOfLines={1}>{slot.turfName}</Text>
+                                <View style={styles.slotBottom}>
+                                    <Text style={styles.slotPrice}>{slot.price}</Text>
+                                    <View style={styles.addBtn}>
+                                        <Plus size={14} color={Colors.backgroundDark} />
+                                    </View>
+                                </View>
+                            </TouchableOpacity>
+                        ))}
+                    </ScrollView>
                 </View>
 
-                <View style={styles.sectionDivider} />
-
-                {/* Recommended Vertical Scroll */}
-                <View style={[styles.section, { marginBottom: spacing.xl }]}>
+                {/* Popular Turfs */}
+                <View style={styles.section}>
                     <View style={styles.sectionHeader}>
-                        <Text style={styles.sectionTitle}>Recommended Turfs</Text>
+                        <View>
+                            <Text style={styles.sectionTitle}>Popular Turfs</Text>
+                            <Text style={styles.sectionSub}>Top rated venues in your city</Text>
+                        </View>
+                        <TouchableOpacity onPress={navigateToSearch}>
+                            <Text style={styles.viewAll}>Explore</Text>
+                        </TouchableOpacity>
                     </View>
-                    <View style={styles.verticalList}>
-                        {turfs.map((turf) => (
-                            <TurfCardVertical
+                    <ScrollView
+                        horizontal
+                        showsHorizontalScrollIndicator={false}
+                        contentContainerStyle={{ paddingLeft: 16, paddingRight: 4 }}
+                    >
+                        {popularTurfs.map((turf) => (
+                            <TurfCard
                                 key={turf.id}
                                 turf={turf}
-                                onPress={() => handleTurfPress(turf.id)}
-                                onFavoriteToggle={() => handleFavoriteToggle(turf.id)}
+                                onPress={() => navigateToTurf(turf.id)}
+                                isFavorite={favorites.includes(turf.id)}
+                                onToggleFavorite={() => toggleFavorite(turf.id)}
                             />
                         ))}
-                    </View>
+                    </ScrollView>
                 </View>
 
+                {/* Nearby Turfs */}
+                <View style={[styles.section, { paddingHorizontal: 16 }]}>
+                    <View style={styles.sectionHeader}>
+                        <View>
+                            <Text style={styles.sectionTitle}>Nearby Turfs</Text>
+                            <Text style={styles.sectionSub}>Walking distance from you</Text>
+                        </View>
+                    </View>
+                    {nearbyTurfs.map((turf) => (
+                        <TurfCard
+                            key={turf.id}
+                            turf={turf}
+                            onPress={() => navigateToTurf(turf.id)}
+                            isFavorite={favorites.includes(turf.id)}
+                            onToggleFavorite={() => toggleFavorite(turf.id)}
+                            variant="list"
+                        />
+                    ))}
+                </View>
             </ScrollView>
         </SafeAreaView>
     );
 }
 
 const styles = StyleSheet.create({
-    safeArea: {
+    container: {
         flex: 1,
-        backgroundColor: colors.background, // Pure White
+        backgroundColor: Colors.backgroundDark,
     },
-    fixedHeader: {
-        backgroundColor: colors.background,
-        paddingHorizontal: spacing.lg,
-        paddingTop: spacing.lg,
-        paddingBottom: spacing.lg,
-        // Bottom border is heavily used in Uber
-        borderBottomWidth: 1,
-        borderBottomColor: colors.borderLight,
+    scrollContent: {
+        paddingBottom: 20,
     },
-    addressBar: {
+    // Header
+    header: {
         flexDirection: 'row',
-        justifyContent: 'space-between',
         alignItems: 'center',
-        marginBottom: spacing.lg,
+        justifyContent: 'space-between',
+        paddingHorizontal: 16,
+        paddingVertical: 12,
+        gap: 12,
     },
-    addressLabel: {
-        fontSize: typography.sizes.xs,
-        color: colors.textSecondary,
-        fontWeight: typography.weights.bold,
-        textTransform: 'uppercase',
-        letterSpacing: typography.letterSpacing.wider,
-        marginBottom: 4,
+    headerLeft: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 8,
     },
-    addressSelector: {
+    headerLogo: {
+        width: 28,
+        height: 28,
+        borderRadius: 6,
+    },
+    headerTitle: {
+        color: Colors.textPrimary,
+        fontSize: 22,
+        fontWeight: '800',
+        letterSpacing: -0.5,
+    },
+    headerRight: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 8,
+        flex: 1,
+        justifyContent: 'flex-end',
+    },
+    locationChip: {
         flexDirection: 'row',
         alignItems: 'center',
         gap: 4,
+        backgroundColor: Colors.primaryMuted,
+        borderWidth: 1,
+        borderColor: Colors.primaryBorder,
+        paddingHorizontal: 10,
+        paddingVertical: 6,
+        borderRadius: 999,
+        maxWidth: 140,
     },
-    addressText: {
-        fontSize: typography.sizes.lg,
-        fontWeight: typography.weights.bold,
-        color: colors.textPrimary,
-        letterSpacing: typography.letterSpacing.tighter,
+    locationText: {
+        color: Colors.primary,
+        fontSize: 11,
+        fontWeight: '600',
+        flex: 1,
     },
-    profileBtn: {
-        width: 44,
-        height: 44,
-        borderRadius: layout.borderRadius.full,
-        backgroundColor: colors.backgroundSecondary, // Gray offset
+    bellBtn: {
+        width: 38,
+        height: 38,
+        borderRadius: 19,
+        backgroundColor: Colors.surface1,
         alignItems: 'center',
         justifyContent: 'center',
-        borderWidth: 1,
-        borderColor: colors.borderLight,
+        position: 'relative',
     },
-    searchBox: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        backgroundColor: colors.backgroundSecondary, // #F5F5F5 classic gray box
-        borderRadius: layout.borderRadius.lg, // 16px soft bounding box
-        paddingHorizontal: spacing.md, // 16
-        paddingVertical: 14,
-        gap: spacing.md,
-    },
-    searchText: {
-        flex: 1,
-        fontSize: typography.sizes.base,
-        color: colors.textSecondary,
-        fontWeight: typography.weights.medium,
-    },
-    scroll: {
-        flex: 1,
-    },
-    scrollContent: {
-        paddingBottom: spacing['4xl'],
-    },
-    quickActionsContainer: {
-        paddingHorizontal: spacing.lg,
-        paddingVertical: spacing.xl, // Generous whitespace 
-        gap: spacing.sm, // 12
-    },
-    gridRow: {
-        flexDirection: 'row',
-        gap: spacing.sm, // 12px between columns
-    },
-    actionCard: {
-        flex: 1,
-        backgroundColor: colors.surface,
-        borderRadius: layout.borderRadius.lg, // 16
-        padding: spacing.md,
-        alignItems: 'flex-start',
-        borderWidth: 1,
-        borderColor: colors.borderLight, // Soft boundary
-        ...shadows.sm, // Apple/Stripe soft lift
-        height: 104, // Large tap target height matching Uber
-    },
-    actionCardSmall: {
-        flex: 1,
-        backgroundColor: colors.backgroundSecondary, // Non-primary actions get gray background
-        borderRadius: layout.borderRadius.md, // 12
-        padding: spacing.sm,
-        alignItems: 'center',
-        justifyContent: 'center',
-        height: 48, // Button-like
-    },
-    actionIcon: {
-        marginBottom: 'auto', // Pushes text to bottom
-    },
-    actionLabel: {
-        fontSize: typography.sizes.base,
-        fontWeight: typography.weights.bold,
-        color: colors.textPrimary,
-    },
-    actionLabelSmall: {
-        fontSize: typography.sizes.sm,
-        fontWeight: typography.weights.bold,
-        color: colors.textPrimary,
-    },
-    sectionDivider: {
+    bellDot: {
+        width: 8,
         height: 8,
-        backgroundColor: colors.backgroundSecondary, // Thick separation bar like super-apps
-        width: '100%',
+        borderRadius: 4,
+        backgroundColor: '#ef4444',
+        position: 'absolute',
+        top: 8,
+        right: 8,
+        borderWidth: 1.5,
+        borderColor: Colors.backgroundDark,
     },
+    // Search
+    searchBar: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 10,
+        backgroundColor: Colors.surface1,
+        borderRadius: 14,
+        marginHorizontal: 16,
+        marginBottom: 8,
+        paddingHorizontal: 14,
+        paddingVertical: 14,
+        borderWidth: 1,
+        borderColor: Colors.borderDark,
+    },
+    searchPlaceholder: {
+        color: '#475569',
+        fontSize: 14,
+        flex: 1,
+    },
+    // Categories
+    categoriesContainer: {
+        marginTop: 8,
+    },
+    categoriesScroll: {
+        paddingHorizontal: 12,
+        paddingBottom: 8,
+        gap: 8,
+    },
+    categoryItem: {
+        alignItems: 'center',
+        gap: 6,
+        paddingHorizontal: 4,
+        width: 70,
+    },
+    categoryCircle: {
+        width: 52,
+        height: 52,
+        borderRadius: 26,
+        backgroundColor: Colors.surface1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderWidth: 1,
+        borderColor: Colors.borderDark,
+    },
+    categoryCircleActive: {
+        backgroundColor: Colors.primary,
+        borderColor: Colors.primary,
+        shadowColor: Colors.primary,
+        shadowOffset: { width: 0, height: 4 },
+        shadowOpacity: 0.3,
+        shadowRadius: 8,
+        elevation: 6,
+    },
+    categoryEmoji: {
+        fontSize: 22,
+    },
+    categoryName: {
+        fontSize: 10,
+        fontWeight: '700',
+        textTransform: 'uppercase',
+        letterSpacing: 0.5,
+        color: '#475569',
+        textAlign: 'center',
+    },
+    categoryNameActive: {
+        color: Colors.primary,
+    },
+    // Sections
     section: {
-        paddingVertical: spacing.xl,
+        marginTop: 28,
     },
     sectionHeader: {
         flexDirection: 'row',
-        alignItems: 'center',
-        paddingHorizontal: spacing.lg,
-        marginBottom: spacing.md,
+        justifyContent: 'space-between',
+        alignItems: 'flex-end',
+        paddingHorizontal: 16,
+        marginBottom: 14,
     },
     sectionTitle: {
-        fontSize: typography.sizes.lg,
-        fontWeight: typography.weights.bold, // Pro weights
-        color: colors.textPrimary,
-        letterSpacing: typography.letterSpacing.tight,
+        color: Colors.textPrimary,
+        fontSize: 18,
+        fontWeight: '800',
+        letterSpacing: -0.3,
     },
-    horizontalList: {
-        paddingHorizontal: spacing.lg,
-        paddingBottom: spacing.sm, // Bleed
+    sectionSub: {
+        color: Colors.textSecondary,
+        fontSize: 12,
+        marginTop: 2,
     },
-    verticalList: {
-        paddingHorizontal: spacing.lg,
+    viewAll: {
+        color: Colors.primary,
+        fontSize: 13,
+        fontWeight: '600',
+    },
+    // Tonight slots
+    slotScroll: {
+        paddingHorizontal: 16,
+        gap: 12,
+    },
+    slotCard: {
+        width: 150,
+        backgroundColor: Colors.surface1,
+        borderRadius: 16,
+        borderWidth: 1,
+        borderColor: Colors.borderDark,
+        padding: 14,
+    },
+    slotTime: {
+        color: Colors.primary,
+        fontSize: 17,
+        fontWeight: '700',
+    },
+    slotTurf: {
+        color: Colors.textSecondary,
+        fontSize: 11,
+        marginTop: 4,
+    },
+    slotBottom: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        marginTop: 12,
+    },
+    slotPrice: {
+        color: Colors.textPrimary,
+        fontSize: 14,
+        fontWeight: '700',
+    },
+    addBtn: {
+        width: 28,
+        height: 28,
+        borderRadius: 14,
+        backgroundColor: Colors.primary,
+        alignItems: 'center',
+        justifyContent: 'center',
     },
 });

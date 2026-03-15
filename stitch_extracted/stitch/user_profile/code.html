@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#16c582",
+                        "background-light": "#f6f8f7",
+                        "background-dark": "#11211b",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .filled-icon {
+            font-variation-settings: 'FILL' 1;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen flex flex-col font-display">
+<!-- Header -->
+<header class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-primary/10 px-4 py-4">
+<div class="max-w-xl mx-auto flex items-center justify-between">
+<button class="flex items-center justify-center size-10 rounded-full hover:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="text-lg font-bold">Profile</h1>
+<button class="flex items-center justify-center size-10 rounded-full hover:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</div>
+</header>
+<main class="flex-1 max-w-xl mx-auto w-full pb-24">
+<!-- Profile Section -->
+<section class="p-6 flex flex-col items-center">
+<div class="relative mb-4">
+<div class="size-28 rounded-full border-4 border-primary/20 p-1">
+<div class="size-full rounded-full bg-cover bg-center" data-alt="Close up portrait of a smiling athletic man" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDEsXb6cPClFVnxCkN3CDTbzffi1wkSXC9g4HFM1mwg612p1ENK78pOroBXg1n8vcz1CAe57hviCbk_FcUQRkC6rRMIgJaBfsUremZV6wI7lC9CgKPHWHPEwkgRejnLf8b7B0N3rMu41SA-TlvEt1lMinhi18nSWN4CjJWx7bsNTZn0DW9AsOD6p2MhrIriLwk3d1AEdY0TbUTe9LvTkx6a_C1-VU52eCjoMAOMMARNa1nlk6VsdKpFWSdQOmYS0cEDfwoRbM8mPw')"></div>
+</div>
+<div class="absolute bottom-1 right-1 bg-primary text-background-dark size-7 rounded-full flex items-center justify-center border-2 border-background-dark">
+<span class="material-symbols-outlined text-sm font-bold">edit</span>
+</div>
+</div>
+<h2 class="text-2xl font-bold mb-1">Marcus Sterling</h2>
+<p class="text-slate-500 dark:text-slate-400 text-sm mb-4">Premium Member • Joined May 2023</p>
+<button class="w-full bg-primary text-background-dark font-bold py-3 rounded-xl hover:opacity-90 transition-opacity">
+                Edit Personal Info
+            </button>
+</section>
+<!-- Stats Grid -->
+<section class="px-6 mb-8">
+<div class="grid grid-cols-3 gap-3">
+<div class="bg-primary/5 dark:bg-primary/10 border border-primary/10 rounded-2xl p-4 flex flex-col items-center text-center">
+<span class="text-2xl font-bold text-primary">48</span>
+<span class="text-[10px] uppercase tracking-wider font-semibold text-slate-500 dark:text-slate-400">Matches</span>
+</div>
+<div class="bg-primary/5 dark:bg-primary/10 border border-primary/10 rounded-2xl p-4 flex flex-col items-center text-center">
+<span class="material-symbols-outlined text-primary mb-1">sports_soccer</span>
+<span class="text-[10px] uppercase tracking-wider font-semibold text-slate-500 dark:text-slate-400">Football</span>
+</div>
+<div class="bg-primary/5 dark:bg-primary/10 border border-primary/10 rounded-2xl p-4 flex flex-col items-center text-center">
+<span class="text-2xl font-bold text-primary">15</span>
+<span class="text-[10px] uppercase tracking-wider font-semibold text-slate-500 dark:text-slate-400">Level</span>
+</div>
+</div>
+</section>
+<!-- Menu Groups -->
+<section class="px-6 space-y-6">
+<!-- Account Section -->
+<div>
+<h3 class="text-xs font-bold uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400 mb-3 px-1">My Dashboard</h3>
+<div class="bg-white dark:bg-slate-900/40 rounded-2xl border border-primary/5 overflow-hidden">
+<a class="flex items-center gap-4 p-4 border-b border-primary/5 hover:bg-primary/5 transition-colors" href="#">
+<div class="size-10 bg-primary/10 rounded-xl flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">calendar_month</span>
+</div>
+<div class="flex-1">
+<p class="font-semibold">My Bookings</p>
+<p class="text-xs text-slate-500">2 Upcoming sessions</p>
+</div>
+<span class="material-symbols-outlined text-slate-400">chevron_right</span>
+</a>
+<a class="flex items-center gap-4 p-4 border-b border-primary/5 hover:bg-primary/5 transition-colors" href="#">
+<div class="size-10 bg-primary/10 rounded-xl flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">payments</span>
+</div>
+<div class="flex-1">
+<p class="font-semibold">Payments</p>
+<p class="text-xs text-slate-500">Manage cards &amp; history</p>
+</div>
+<span class="material-symbols-outlined text-slate-400">chevron_right</span>
+</a>
+<a class="flex items-center gap-4 p-4 hover:bg-primary/5 transition-colors" href="#">
+<div class="size-10 bg-primary/10 rounded-xl flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">emoji_events</span>
+</div>
+<div class="flex-1">
+<p class="font-semibold">Achievements</p>
+<p class="text-xs text-slate-500">View 12 unlocked badges</p>
+</div>
+<span class="material-symbols-outlined text-slate-400">chevron_right</span>
+</a>
+</div>
+</div>
+<!-- Preferences Section -->
+<div>
+<h3 class="text-xs font-bold uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400 mb-3 px-1">Preferences</h3>
+<div class="bg-white dark:bg-slate-900/40 rounded-2xl border border-primary/5 overflow-hidden">
+<a class="flex items-center gap-4 p-4 border-b border-primary/5 hover:bg-primary/5 transition-colors" href="#">
+<div class="size-10 bg-primary/10 rounded-xl flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">notifications</span>
+</div>
+<div class="flex-1">
+<p class="font-semibold">Notifications</p>
+</div>
+<span class="material-symbols-outlined text-slate-400">chevron_right</span>
+</a>
+<a class="flex items-center gap-4 p-4 hover:bg-primary/5 transition-colors" href="#">
+<div class="size-10 bg-primary/10 rounded-xl flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">security</span>
+</div>
+<div class="flex-1">
+<p class="font-semibold">Security</p>
+</div>
+<span class="material-symbols-outlined text-slate-400">chevron_right</span>
+</a>
+</div>
+</div>
+<button class="w-full text-red-500 font-semibold p-4 rounded-2xl hover:bg-red-500/10 transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">logout</span>
+                Sign Out
+            </button>
+</section>
+</main>
+<!-- Bottom Nav Bar -->
+<nav class="fixed bottom-0 left-0 right-0 bg-background-light dark:bg-background-dark border-t border-primary/10 px-6 pb-6 pt-3 flex justify-between items-center z-50">
+<a class="flex flex-col items-center gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined">house</span>
+<span class="text-[10px] font-medium">Home</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined text-2xl">search</span>
+<span class="text-[10px] font-medium">Explore</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined">calendar_today</span>
+<span class="text-[10px] font-medium">Bookings</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined filled-icon">person</span>
+<span class="text-[10px] font-bold">Profile</span>
+</a>
+</nav>
+</body></html>

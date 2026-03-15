@@ -1,109 +1,161 @@
-import { AppColors } from '@/constants/colors';
-import { BorderRadius, Spacing, Typography } from '@/constants/typography';
-import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
-import React from 'react';
+import { ArrowLeft, ArrowRight } from 'lucide-react-native';
+import React, { useRef, useState } from 'react';
 import {
     Dimensions,
+    FlatList,
     Image,
-    SafeAreaView,
     StyleSheet,
     Text,
     TouchableOpacity,
-    View,
+    View
 } from 'react-native';
+import { Colors } from '../../src/theme/colors';
 
 const { width, height } = Dimensions.get('window');
 
-const ONBOARDING_SLIDES = [
+const slides = [
     {
-        id: 1,
-        title: 'Find Nearby\nTurfs',
-        subtitle: 'Discover the best sports turfs near you with real-time availability.',
-        image: 'https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=800&q=80',
-        icon: 'location',
+        id: '1',
+        title: 'Discover',
+        titleAccent: 'Nearby',
+        titleEnd: 'Turfs',
+        subtitle: 'Explore and book the finest sports turfs in your city with just a few taps.',
+        image: 'https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=800',
     },
     {
-        id: 2,
-        title: 'Play With\nYour Squad',
-        subtitle: 'Gather your friends and book a turf for the perfect game session.',
-        image: 'https://images.unsplash.com/photo-1529900748604-07564a03e7a6?w=800&q=80',
-        icon: 'people',
+        id: '2',
+        title: 'Book',
+        titleAccent: 'Instantly',
+        titleEnd: '',
+        subtitle: 'Choose your slot, confirm your booking, and get on the field in minutes.',
+        image: 'https://images.unsplash.com/photo-1459865264687-595d652de67e?w=800',
     },
     {
-        id: 3,
-        title: 'Book Your\nSlot Instantly',
-        subtitle: 'Quick and easy slot booking at your fingertips. Pay securely and play!',
-        image: 'https://images.unsplash.com/photo-1546519638405-a2b5e4f3a2b1?w=800&q=80',
-        icon: 'calendar',
+        id: '3',
+        title: 'Play',
+        titleAccent: 'Like a',
+        titleEnd: 'Pro',
+        subtitle: 'Premium turfs with world-class amenities for the ultimate sports experience.',
+        image: 'https://images.unsplash.com/photo-1543326727-cf6c39e8f84c?w=800',
     },
 ];
 
 export default function OnboardingScreen() {
     const router = useRouter();
-    const [currentSlide, setCurrentSlide] = React.useState(0);
-    const slide = ONBOARDING_SLIDES[currentSlide];
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const flatListRef = useRef<FlatList>(null);
 
-    const handleNext = () => {
-        if (currentSlide < ONBOARDING_SLIDES.length - 1) {
-            setCurrentSlide(prev => prev + 1);
+    const goNext = () => {
+        if (currentIndex < slides.length - 1) {
+            const nextIndex = currentIndex + 1;
+            flatListRef.current?.scrollToIndex({ index: nextIndex });
+            setCurrentIndex(nextIndex);
         } else {
             router.replace('/(auth)/login');
         }
     };
 
-    const handleSkip = () => {
+    const goBack = () => {
+        if (currentIndex > 0) {
+            const prevIndex = currentIndex - 1;
+            flatListRef.current?.scrollToIndex({ index: prevIndex });
+            setCurrentIndex(prevIndex);
+        }
+    };
+
+    const skip = () => {
         router.replace('/(auth)/login');
     };
 
+    const renderSlide = ({ item }: { item: typeof slides[0] }) => (
+        <View style={styles.slide}>
+            {/* Hero Image */}
+            <View style={styles.imageWrapper}>
+                <Image source={{ uri: item.image }} style={styles.heroImage} resizeMode="cover" />
+                <LinearGradient
+                    colors={['transparent', Colors.backgroundDark + 'CC', Colors.backgroundDark]}
+                    style={styles.imageGradient}
+                />
+            </View>
+
+            {/* Content */}
+            <View style={styles.content}>
+                <Text style={styles.title}>
+                    {item.title} <Text style={styles.titleAccent}>{item.titleAccent}</Text>{' '}
+                    {item.titleEnd}
+                </Text>
+                <Text style={styles.subtitle}>{item.subtitle}</Text>
+            </View>
+        </View>
+    );
+
     return (
         <View style={styles.container}>
-            <Image source={{ uri: slide.image }} style={styles.bgImage} />
             <LinearGradient
-                colors={['transparent', 'rgba(0,0,0,0.45)', 'rgba(0,0,0,0.92)']}
-                style={styles.gradient}
+                colors={[Colors.backgroundDark, '#0d1f18']}
+                style={StyleSheet.absoluteFillObject}
             />
 
-            <SafeAreaView style={styles.safeArea}>
-                {/* Skip Button */}
-                <TouchableOpacity style={styles.skipBtn} onPress={handleSkip} activeOpacity={0.8}>
+            {/* Back & Skip */}
+            <View style={styles.topBar}>
+                {currentIndex > 0 ? (
+                    <TouchableOpacity onPress={goBack} style={styles.backBtn}>
+                        <ArrowLeft size={22} color={Colors.textPrimary} />
+                    </TouchableOpacity>
+                ) : (
+                    <View style={styles.backBtn} />
+                )}
+                <Text style={styles.logoText}>TurfZy</Text>
+                <TouchableOpacity onPress={skip}>
                     <Text style={styles.skipText}>Skip</Text>
                 </TouchableOpacity>
+            </View>
 
-                {/* Content */}
-                <View style={styles.content}>
-                    {/* App Logo */}
-                    <View style={styles.logoRow}>
-                        <View style={styles.logoIcon}>
-                            <Ionicons name="football" size={22} color={AppColors.white} />
-                        </View>
-                        <Text style={styles.logoText}>BookMyTurf</Text>
-                    </View>
+            {/* Slides */}
+            <FlatList
+                ref={flatListRef}
+                data={slides}
+                renderItem={renderSlide}
+                keyExtractor={(item) => item.id}
+                horizontal
+                pagingEnabled
+                scrollEnabled={false}
+                showsHorizontalScrollIndicator={false}
+                style={styles.flatList}
+            />
 
-                    {/* Text */}
-                    <Text style={styles.title}>{slide.title}</Text>
-                    <Text style={styles.subtitle}>{slide.subtitle}</Text>
-
-                    {/* Dots */}
-                    <View style={styles.dots}>
-                        {ONBOARDING_SLIDES.map((_, idx) => (
-                            <View
-                                key={idx}
-                                style={[styles.dot, idx === currentSlide && styles.dotActive]}
-                            />
-                        ))}
-                    </View>
-
-                    {/* Button */}
-                    <TouchableOpacity style={styles.btn} onPress={handleNext} activeOpacity={0.88}>
-                        <Text style={styles.btnText}>
-                            {currentSlide === ONBOARDING_SLIDES.length - 1 ? 'Get Started' : 'Continue'}
-                        </Text>
-                        <Ionicons name="arrow-forward" size={20} color={AppColors.white} />
-                    </TouchableOpacity>
+            {/* Dots & CTA */}
+            <View style={styles.bottomSection}>
+                {/* Dots */}
+                <View style={styles.dots}>
+                    {slides.map((_, i) => (
+                        <View
+                            key={i}
+                            style={[
+                                styles.dot,
+                                i === currentIndex ? styles.dotActive : styles.dotInactive,
+                            ]}
+                        />
+                    ))}
                 </View>
-            </SafeAreaView>
+
+                {/* CTA Button */}
+                <TouchableOpacity style={styles.ctaButton} onPress={goNext} activeOpacity={0.85}>
+                    <Text style={styles.ctaText}>
+                        {currentIndex === slides.length - 1 ? "Let's Go!" : 'Next'}
+                    </Text>
+                    <ArrowRight size={20} color={Colors.backgroundDark} />
+                </TouchableOpacity>
+
+                {/* Already have account */}
+                {currentIndex === slides.length - 1 && (
+                    <TouchableOpacity onPress={skip} style={styles.loginLink}>
+                        <Text style={styles.loginLinkText}>Already have an account? <Text style={styles.loginLinkAccent}>Sign In</Text></Text>
+                    </TouchableOpacity>
+                )}
+            </View>
         </View>
     );
 }
@@ -111,108 +163,127 @@ export default function OnboardingScreen() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#000',
+        backgroundColor: Colors.backgroundDark,
     },
-    bgImage: {
-        position: 'absolute',
-        width,
-        height,
-        resizeMode: 'cover',
-    },
-    gradient: {
-        position: 'absolute',
-        left: 0,
-        right: 0,
-        bottom: 0,
-        height: height * 0.65,
-    },
-    safeArea: {
-        flex: 1,
-        justifyContent: 'space-between',
-        paddingHorizontal: Spacing.lg,
-        paddingBottom: Spacing['2xl'],
-        paddingTop: Spacing.base,
-    },
-    skipBtn: {
-        alignSelf: 'flex-end',
-        backgroundColor: 'rgba(255,255,255,0.2)',
-        borderRadius: BorderRadius.full,
-        paddingHorizontal: Spacing.base,
-        paddingVertical: Spacing.xs,
-    },
-    skipText: {
-        color: AppColors.white,
-        fontSize: Typography.fontSize.sm,
-        fontWeight: Typography.fontWeight.medium,
-    },
-    content: {
-        gap: Spacing.base,
-    },
-    logoRow: {
+    topBar: {
         flexDirection: 'row',
         alignItems: 'center',
-        gap: Spacing.sm,
-        marginBottom: Spacing.xs,
+        justifyContent: 'space-between',
+        paddingHorizontal: 20,
+        paddingTop: 60,
+        paddingBottom: 16,
     },
-    logoIcon: {
+    backBtn: {
         width: 40,
         height: 40,
-        borderRadius: BorderRadius.md,
-        backgroundColor: AppColors.primary,
         alignItems: 'center',
         justifyContent: 'center',
     },
     logoText: {
-        fontSize: Typography.fontSize.xl,
-        fontWeight: Typography.fontWeight.bold,
-        color: AppColors.white,
+        color: Colors.primary,
+        fontSize: 20,
+        fontWeight: '700',
+    },
+    skipText: {
+        color: Colors.textSecondary,
+        fontSize: 14,
+        fontWeight: '500',
+        letterSpacing: 1,
+        textTransform: 'uppercase',
+    },
+    flatList: {
+        flex: 1,
+    },
+    slide: {
+        width,
+        flex: 1,
+    },
+    imageWrapper: {
+        height: height * 0.5,
+        marginHorizontal: 16,
+        borderRadius: 20,
+        overflow: 'hidden',
+    },
+    heroImage: {
+        width: '100%',
+        height: '100%',
+    },
+    imageGradient: {
+        ...StyleSheet.absoluteFillObject,
+    },
+    content: {
+        paddingHorizontal: 24,
+        paddingTop: 32,
+        alignItems: 'center',
     },
     title: {
-        fontSize: 36,
-        fontWeight: Typography.fontWeight.extrabold,
-        color: AppColors.white,
-        lineHeight: 44,
+        fontSize: 42,
+        fontWeight: '900',
+        textTransform: 'uppercase',
+        fontFamily: 'Inter-Black',
+        color: Colors.textPrimary,
+        textAlign: 'center',
+        lineHeight: 48,
+        letterSpacing: -1,
+    },
+    titleAccent: {
+        color: Colors.highlight,
     },
     subtitle: {
-        fontSize: Typography.fontSize.base,
-        color: 'rgba(255,255,255,0.8)',
-        lineHeight: 24,
-        maxWidth: '85%',
+        fontSize: 16,
+        color: Colors.textSecondary,
+        textAlign: 'center',
+        marginTop: 16,
+        lineHeight: 26,
+        maxWidth: 320,
+    },
+    bottomSection: {
+        paddingHorizontal: 24,
+        paddingBottom: 48,
+        gap: 24,
     },
     dots: {
         flexDirection: 'row',
-        gap: 6,
-        marginTop: Spacing.xs,
+        justifyContent: 'center',
+        gap: 8,
     },
     dot: {
-        width: 8,
-        height: 8,
-        borderRadius: 4,
-        backgroundColor: 'rgba(255,255,255,0.4)',
+        height: 6,
+        borderRadius: 3,
     },
     dotActive: {
-        width: 24,
-        backgroundColor: AppColors.primary,
+        width: 32,
+        backgroundColor: Colors.textPrimary,
     },
-    btn: {
-        backgroundColor: AppColors.primary,
-        borderRadius: BorderRadius.xl,
-        paddingVertical: 16,
-        paddingHorizontal: Spacing.xl,
+    dotInactive: {
+        width: 6,
+        backgroundColor: Colors.borderMedium,
+    },
+    ctaButton: {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-        gap: Spacing.sm,
-        marginTop: Spacing.sm,
-        shadowColor: AppColors.primary,
-        shadowOffset: { width: 0, height: 4 },
-        shadowOpacity: 0.4,
-        shadowRadius: 12,
-        elevation: 8,
+        gap: 8,
+        backgroundColor: Colors.textPrimary,
+        paddingVertical: 18,
+        borderRadius: 8,
     },
-    btnText: {
-        color: AppColors.white,
-        fontSize: Typography.fontSize.lg,
-        fontWeight: Typography.fontWeight.bold,
+    ctaText: {
+        color: Colors.backgroundDark,
+        fontSize: 16,
+        fontWeight: '800',
+        textTransform: 'uppercase',
+        letterSpacing: 1,
+    },
+    loginLink: {
+        alignItems: 'center',
+    },
+    loginLinkText: {
+        color: Colors.textSecondary,
+        fontSize: 14,
+    },
+    loginLinkAccent: {
+        color: Colors.primary,
+        fontWeight: '600',
     },
 });

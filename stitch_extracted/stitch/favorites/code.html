@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TurfZy - Your Favorites</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#16c582",
+                        "background-light": "#f6f8f7",
+                        "background-dark": "#11211b",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-fill {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display">
+<div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
+<!-- Header Section -->
+<header class="sticky top-0 z-10 flex items-center bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md p-4 justify-between border-b border-slate-200 dark:border-primary/20">
+<div class="flex size-12 shrink-0 items-center justify-start">
+<span class="material-symbols-outlined text-slate-900 dark:text-slate-100 cursor-pointer">arrow_back</span>
+</div>
+<h1 class="text-slate-900 dark:text-slate-100 text-xl font-bold leading-tight tracking-tight flex-1 text-center">My Favorites</h1>
+<div class="flex w-12 items-center justify-end">
+<button class="flex items-center justify-center rounded-full h-12 w-12 hover:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined text-slate-900 dark:text-slate-100">search</span>
+</button>
+</div>
+</header>
+<!-- Category Tabs -->
+<nav class="bg-background-light dark:bg-background-dark px-4 pt-2">
+<div class="flex border-b border-slate-200 dark:border-primary/20 gap-8 overflow-x-auto no-scrollbar">
+<a class="flex flex-col items-center justify-center border-b-2 border-primary text-primary pb-3 pt-4 whitespace-nowrap" href="#">
+<span class="text-sm font-bold">All Sports</span>
+</a>
+<a class="flex flex-col items-center justify-center border-b-2 border-transparent text-slate-500 dark:text-primary/60 pb-3 pt-4 whitespace-nowrap hover:text-primary transition-colors" href="#">
+<span class="text-sm font-bold">Football</span>
+</a>
+<a class="flex flex-col items-center justify-center border-b-2 border-transparent text-slate-500 dark:text-primary/60 pb-3 pt-4 whitespace-nowrap hover:text-primary transition-colors" href="#">
+<span class="text-sm font-bold">Tennis</span>
+</a>
+<a class="flex flex-col items-center justify-center border-b-2 border-transparent text-slate-500 dark:text-primary/60 pb-3 pt-4 whitespace-nowrap hover:text-primary transition-colors" href="#">
+<span class="text-sm font-bold">Cricket</span>
+</a>
+</div>
+</nav>
+<!-- Main Content: Favorites List -->
+<main class="flex-1 p-4 flex flex-col gap-6">
+<!-- Card 1 -->
+<div class="group flex flex-col overflow-hidden rounded-xl bg-white dark:bg-primary/5 border border-slate-100 dark:border-primary/10 shadow-sm hover:shadow-md transition-shadow">
+<div class="relative w-full aspect-video bg-center bg-no-repeat bg-cover" data-alt="Professional floodlit green football turf at night" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBbE4YjIkU7iKlDaWf1IQH_D4qpVVIHwW0kk1UvYZJURUAArPSY5i9rdgKBNCzgWyQKhH15cM6SwfmScgzTlS_RUe-OijwEnwODN5XsVBCRfXylw9I8qsEAvhMhMLAXNnqV7W9EWYyLHBGL6yzsdVdLPlc35a9Xi162x5pXYLydYWC4ojn9hi54pWWmP2JhmOOtapbvVdkrPnJpV5Ur-F6qizWzQ82NUaBVi6biETMPtdWTf0eUsRxxk_k_95_QYmoWKrBM7Zpa-g");'>
+<div class="absolute top-4 right-4 bg-white/90 dark:bg-background-dark/90 p-2 rounded-full shadow-lg">
+<span class="material-symbols-outlined text-red-500 material-symbols-fill">favorite</span>
+</div>
+</div>
+<div class="flex flex-col p-5 gap-3">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight">Elite Arena Sports</h3>
+<div class="flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-primary text-sm material-symbols-fill">star</span>
+<p class="text-slate-600 dark:text-primary/80 text-sm">4.9 (240 reviews) • Downtown</p>
+</div>
+</div>
+<div class="bg-primary/10 text-primary px-2 py-1 rounded text-xs font-bold uppercase tracking-wider">Top Rated</div>
+</div>
+<p class="text-slate-500 dark:text-primary/60 text-sm leading-relaxed">FIFA certified synthetic turf with premium locker facilities and cafe.</p>
+<div class="flex items-center justify-between mt-2 pt-4 border-t border-slate-100 dark:border-primary/10">
+<div class="flex flex-col">
+<span class="text-slate-400 dark:text-primary/40 text-xs uppercase font-semibold">Starts from</span>
+<span class="text-primary text-lg font-bold">$45<span class="text-sm font-normal">/hr</span></span>
+</div>
+<button class="flex items-center justify-center rounded-full bg-primary hover:bg-primary/90 text-background-dark px-6 py-2.5 font-bold transition-all transform active:scale-95">
+                            Book Now
+                        </button>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="group flex flex-col overflow-hidden rounded-xl bg-white dark:bg-primary/5 border border-slate-100 dark:border-primary/10 shadow-sm hover:shadow-md transition-shadow">
+<div class="relative w-full aspect-video bg-center bg-no-repeat bg-cover" data-alt="Modern indoor multi-sport court with blue flooring" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA6IZPe8s4O-KR-RlgrDGpDi5clHJdsjaZlhWvsSWD55uKRBczbPoT85WIP6y1gzWeA05k1YBQ8M3cH70KxWdv-tHhTcpxZAHYaU6pVG-lG0qCKCLTcE52gu7L6cQPCt2zD544jrbiYrBi1sZsFh62_a54Sho_TKqoO7OyEMJV3K9oOcspQ-8ERCP-pb63z47kendC4ULKernU_ECGurX5ktN0bZip0skVGXJsF7Jf6gTowv2vgiRcmIciqkuTWVZeaUSyv0VMOlg");'>
+<div class="absolute top-4 right-4 bg-white/90 dark:bg-background-dark/90 p-2 rounded-full shadow-lg">
+<span class="material-symbols-outlined text-red-500 material-symbols-fill">favorite</span>
+</div>
+</div>
+<div class="flex flex-col p-5 gap-3">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight">Skyline Indoor Club</h3>
+<div class="flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-primary text-sm material-symbols-fill">star</span>
+<p class="text-slate-600 dark:text-primary/80 text-sm">4.7 (112 reviews) • North Side</p>
+</div>
+</div>
+</div>
+<p class="text-slate-500 dark:text-primary/60 text-sm leading-relaxed">Climate controlled multi-sport arena for football and cricket.</p>
+<div class="flex items-center justify-between mt-2 pt-4 border-t border-slate-100 dark:border-primary/10">
+<div class="flex flex-col">
+<span class="text-slate-400 dark:text-primary/40 text-xs uppercase font-semibold">Starts from</span>
+<span class="text-primary text-lg font-bold">$38<span class="text-sm font-normal">/hr</span></span>
+</div>
+<button class="flex items-center justify-center rounded-full bg-primary hover:bg-primary/90 text-background-dark px-6 py-2.5 font-bold transition-all transform active:scale-95">
+                            Book Now
+                        </button>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="group flex flex-col overflow-hidden rounded-xl bg-white dark:bg-primary/5 border border-slate-100 dark:border-primary/10 shadow-sm hover:shadow-md transition-shadow">
+<div class="relative w-full aspect-video bg-center bg-no-repeat bg-cover" data-alt="Outdoor clay tennis court with greenery background" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDQ-pdKVBw-jRYoBYBtcyKidtERQNVDp8NNFpbY3Wmysqbt3cizgDfGZH3MIn0UdGAgZFsm9N_cVgHJjGUay_S_yuCVwarYIceRxUF9zsTKZ5FbrlZ3qSu3h22Syxpx740bUvOizJe7NL8OJzgHlNbYS3r5Qp7U_uPViRsCRfBMx_N4CL1qu3AtsAGFZZjjd6FNYiGyPgeMYrkxUFFrNwyLQM8OYKmv57Sjso2iWbwt0aBHC8h-RxsBspJp7GXlbEhDGnBgvRHE5w");'>
+<div class="absolute top-4 right-4 bg-white/90 dark:bg-background-dark/90 p-2 rounded-full shadow-lg">
+<span class="material-symbols-outlined text-red-500 material-symbols-fill">favorite</span>
+</div>
+</div>
+<div class="flex flex-col p-5 gap-3">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight">Clay Courts Estates</h3>
+<div class="flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-primary text-sm material-symbols-fill">star</span>
+<p class="text-slate-600 dark:text-primary/80 text-sm">4.8 (89 reviews) • West End</p>
+</div>
+</div>
+</div>
+<p class="text-slate-500 dark:text-primary/60 text-sm leading-relaxed">Premium clay surfaces with equipment rental and expert coaching.</p>
+<div class="flex items-center justify-between mt-2 pt-4 border-t border-slate-100 dark:border-primary/10">
+<div class="flex flex-col">
+<span class="text-slate-400 dark:text-primary/40 text-xs uppercase font-semibold">Starts from</span>
+<span class="text-primary text-lg font-bold">$55<span class="text-sm font-normal">/hr</span></span>
+</div>
+<button class="flex items-center justify-center rounded-full bg-primary hover:bg-primary/90 text-background-dark px-6 py-2.5 font-bold transition-all transform active:scale-95">
+                            Book Now
+                        </button>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation Spacer -->
+<div class="h-20"></div>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 right-0 z-20 flex gap-2 border-t border-slate-200 dark:border-primary/20 bg-background-light dark:bg-background-dark px-4 pb-6 pt-2">
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-500 dark:text-primary/60" href="#">
+<span class="material-symbols-outlined">home</span>
+<p class="text-[10px] font-medium uppercase tracking-wider">Home</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-500 dark:text-primary/60" href="#">
+<span class="material-symbols-outlined">search</span>
+<p class="text-[10px] font-medium uppercase tracking-wider">Discover</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined material-symbols-fill">favorite</span>
+<p class="text-[10px] font-bold uppercase tracking-wider">Saved</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-500 dark:text-primary/60" href="#">
+<span class="material-symbols-outlined">confirmation_number</span>
+<p class="text-[10px] font-medium uppercase tracking-wider">Bookings</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-500 dark:text-primary/60" href="#">
+<span class="material-symbols-outlined">account_circle</span>
+<p class="text-[10px] font-medium uppercase tracking-wider">Profile</p>
+</a>
+</nav>
+</div>
+</body></html>

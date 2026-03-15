@@ -1,200 +1,241 @@
-import { AppColors } from '@/constants/colors';
-import { MOCK_TURFS } from '@/constants/mockData';
-import { BorderRadius, Shadows, Spacing, Typography } from '@/constants/typography';
-import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useLocalSearchParams, useRouter } from 'expo-router';
-import React from 'react';
+import {
+    ArrowLeft,
+    Car,
+    Droplets,
+    Heart,
+    HeartHandshake,
+    Lightbulb,
+    MapPin,
+    Share2,
+    Star,
+    Utensils,
+    Wifi
+} from 'lucide-react-native';
+import React, { useState } from 'react';
 import {
     Dimensions,
-    FlatList,
     Image,
     ScrollView,
-    StatusBar,
     StyleSheet,
     Text,
     TouchableOpacity,
-    View,
+    View
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { mockReviews, mockTurfs } from '../../../src/data/mockData';
+import { useAppStore } from '../../../src/store/useAppStore';
+import { Colors } from '../../../src/theme/colors';
 
 const { width, height } = Dimensions.get('window');
-const HERO_HEIGHT = height * 0.38;
 
-const AMENITY_ICONS: Record<string, string> = {
-    Parking: 'car-outline',
-    Washroom: 'water-outline',
-    Water: 'restaurant-outline',
-    Locker: 'lock-closed-outline',
-    Floodlights: 'flashlight-outline',
-    WiFi: 'wifi-outline',
+const AMENITY_ICONS: Record<string, React.ReactNode> = {
+    droplets: <Droplets size={22} color={Colors.primary} />,
+    car: <Car size={22} color={Colors.primary} />,
+    lightbulb: <Lightbulb size={22} color={Colors.primary} />,
+    utensils: <Utensils size={22} color={Colors.primary} />,
+    wifi: <Wifi size={22} color={Colors.primary} />,
+    heart: <HeartHandshake size={22} color={Colors.primary} />,
 };
 
 export default function TurfDetailsScreen() {
-    const router = useRouter();
     const { id } = useLocalSearchParams<{ id: string }>();
-    const turf = MOCK_TURFS.find(t => t.id === id) || MOCK_TURFS[0];
-    const [isFavorite, setIsFavorite] = React.useState(turf.isFavorite);
-    const [activeImageIdx, setActiveImageIdx] = React.useState(0);
+    const router = useRouter();
+    const { favorites, toggleFavorite } = useAppStore();
+
+    const turf = mockTurfs.find((t) => t.id === id) || mockTurfs[0];
+    const isFavorite = favorites.includes(turf.id);
+    const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+    const handleBookNow = () => {
+        router.push(`/(customer)/booking/slot-selection/${turf.id}`);
+    };
 
     return (
         <View style={styles.container}>
-            <StatusBar barStyle="light-content" translucent backgroundColor="transparent" />
-
-            <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollContent}>
+            <ScrollView showsVerticalScrollIndicator={false}>
                 {/* Hero Image */}
                 <View style={styles.heroContainer}>
-                    <FlatList
-                        data={turf.images}
-                        horizontal
-                        pagingEnabled
-                        showsHorizontalScrollIndicator={false}
-                        keyExtractor={(_, idx) => idx.toString()}
-                        onMomentumScrollEnd={(e) => {
-                            const idx = Math.round(e.nativeEvent.contentOffset.x / width);
-                            setActiveImageIdx(idx);
-                        }}
-                        renderItem={({ item }) => (
-                            <Image source={{ uri: item }} style={styles.heroImage} />
-                        )}
+                    <Image
+                        source={{ uri: turf.images[currentImageIndex] }}
+                        style={styles.heroImage}
+                        resizeMode="cover"
                     />
                     <LinearGradient
-                        colors={['rgba(0,0,0,0.4)', 'transparent', 'transparent', 'rgba(0,0,0,0.3)']}
-                        style={StyleSheet.absoluteFill}
+                        colors={['transparent', Colors.backgroundDark + 'DD', Colors.backgroundDark]}
+                        style={styles.heroGradient}
+                        start={{ x: 0, y: 0.3 }}
+                        end={{ x: 0, y: 1 }}
                     />
 
-                    {/* Nav Buttons */}
-                    <TouchableOpacity style={styles.backBtn} onPress={() => router.back()} activeOpacity={0.8}>
-                        <Ionicons name="chevron-back" size={22} color={AppColors.white} />
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        style={styles.heartBtn}
-                        onPress={() => setIsFavorite(!isFavorite)}
-                        activeOpacity={0.8}
-                    >
-                        <Ionicons
-                            name={isFavorite ? 'heart' : 'heart-outline'}
-                            size={22}
-                            color={isFavorite ? AppColors.error : AppColors.white}
-                        />
-                    </TouchableOpacity>
+                    {/* Top bar */}
+                    <SafeAreaView style={styles.topBar} edges={['top']}>
+                        <TouchableOpacity
+                            style={styles.iconBtn}
+                            onPress={() => router.back()}
+                        >
+                            <ArrowLeft size={20} color={Colors.textPrimary} />
+                        </TouchableOpacity>
+                        <View style={styles.topBtnRow}>
+                            <TouchableOpacity style={styles.iconBtn}>
+                                <Share2 size={20} color={Colors.textPrimary} />
+                            </TouchableOpacity>
+                            <TouchableOpacity
+                                style={styles.iconBtn}
+                                onPress={() => toggleFavorite(turf.id)}
+                            >
+                                <Heart
+                                    size={20}
+                                    color={isFavorite ? '#ef4444' : Colors.textPrimary}
+                                    fill={isFavorite ? '#ef4444' : 'transparent'}
+                                />
+                            </TouchableOpacity>
+                        </View>
+                    </SafeAreaView>
 
-                    {/* Image Dots */}
+                    {/* Turf info overlay */}
+                    <View style={styles.heroInfo}>
+                        <View style={styles.featuredBadge}>
+                            <Text style={styles.featuredText}>⚽ Featured</Text>
+                        </View>
+                        <Text style={styles.turfName}>{turf.name}</Text>
+                        <View style={styles.locationRow}>
+                            <MapPin size={14} color={Colors.primary} />
+                            <Text style={styles.locationText}>{turf.location} • {turf.distance} away</Text>
+                        </View>
+                    </View>
+
+                    {/* Gallery dots */}
                     {turf.images.length > 1 && (
                         <View style={styles.imageDots}>
-                            {turf.images.map((_, idx) => (
-                                <View
-                                    key={idx}
-                                    style={[styles.dot, idx === activeImageIdx && styles.dotActive]}
+                            {turf.images.map((_, i) => (
+                                <TouchableOpacity
+                                    key={i}
+                                    style={[styles.dot, i === currentImageIndex && styles.dotActive]}
+                                    onPress={() => setCurrentImageIndex(i)}
                                 />
                             ))}
                         </View>
                     )}
                 </View>
 
+                {/* Quick Stats */}
+                <View style={styles.statsCard}>
+                    <View style={styles.statsLeft}>
+                        <View style={styles.statRating}>
+                            <Text style={styles.ratingValue}>{turf.rating}</Text>
+                            <Star size={16} color={Colors.primary} fill={Colors.primary} />
+                        </View>
+                        <Text style={styles.reviewCount}>{turf.reviewCount} Reviews</Text>
+                    </View>
+                    <View style={styles.statsDivider} />
+                    <View style={styles.statsMiddle}>
+                        <Text style={styles.statsOpenText}>
+                            {turf.isOpen ? 'Open Now' : 'Closed'}
+                        </Text>
+                        <Text style={styles.statsCloseTime}>Closes {turf.closingTime}</Text>
+                    </View>
+                    <TouchableOpacity style={styles.viewRatesBtn}>
+                        <Text style={styles.viewRatesText}>View Rates</Text>
+                    </TouchableOpacity>
+                </View>
+
                 {/* Content */}
                 <View style={styles.content}>
-                    {/* Title */}
-                    <View style={styles.titleRow}>
-                        <View style={styles.titleLeft}>
-                            <Text style={styles.turfName}>{turf.name}</Text>
-                            <View style={styles.locationRow}>
-                                <Ionicons name="location-outline" size={14} color={AppColors.textMuted} />
-                                <Text style={styles.location}>{turf.location}</Text>
-                            </View>
-                        </View>
-                        <View style={styles.ratingBox}>
-                            <Ionicons name="star" size={14} color={AppColors.star} />
-                            <Text style={styles.rating}>{turf.rating}</Text>
-                            <Text style={styles.reviews}>({turf.reviewCount})</Text>
-                        </View>
-                    </View>
-
-                    {/* Availability & Hours */}
-                    <View style={styles.infoChips}>
-                        {turf.isAvailableNow && (
-                            <View style={styles.availableChip}>
-                                <View style={styles.greenDot} />
-                                <Text style={styles.availableText}>Available Now</Text>
-                            </View>
-                        )}
-                        <View style={styles.hoursChip}>
-                            <Ionicons name="time-outline" size={13} color={AppColors.textSecondary} />
-                            <Text style={styles.hoursText}>{turf.openTime} - {turf.closeTime}</Text>
-                        </View>
-                    </View>
-
                     {/* About */}
                     <View style={styles.section}>
-                        <Text style={styles.sectionTitle}>About</Text>
-                        <Text style={styles.aboutText}>{turf.about}</Text>
+                        <Text style={styles.sectionTitle}>About this turf</Text>
+                        <Text style={styles.description}>{turf.description}</Text>
+                    </View>
+
+                    {/* Sports */}
+                    <View style={styles.section}>
+                        <Text style={styles.sectionTitle}>Sports Available</Text>
+                        <View style={styles.sportsRow}>
+                            {turf.sports.map((sport) => (
+                                <View key={sport} style={styles.sportChip}>
+                                    <Text style={styles.sportChipText}>{sport}</Text>
+                                </View>
+                            ))}
+                        </View>
                     </View>
 
                     {/* Amenities */}
                     <View style={styles.section}>
                         <Text style={styles.sectionTitle}>Amenities</Text>
                         <View style={styles.amenitiesGrid}>
-                            {turf.amenities.map((amenity) => (
-                                <View key={amenity} style={styles.amenityItem}>
-                                    <View style={styles.amenityIconBg}>
-                                        <Ionicons
-                                            name={(AMENITY_ICONS[amenity] || 'checkmark-circle-outline') as any}
-                                            size={22}
-                                            color={AppColors.primary}
-                                        />
+                            {turf.amenities.map((a) => (
+                                <View key={a.id} style={styles.amenityItem}>
+                                    <View style={styles.amenityIcon}>
+                                        {AMENITY_ICONS[a.icon] || <Droplets size={22} color={Colors.primary} />}
                                     </View>
-                                    <Text style={styles.amenityLabel}>{amenity}</Text>
+                                    <Text style={styles.amenityName}>{a.name}</Text>
                                 </View>
                             ))}
                         </View>
                     </View>
 
-                    {/* Location */}
+                    {/* Location Map Placeholder */}
                     <View style={styles.section}>
-                        <Text style={styles.sectionTitle}>Location</Text>
-                        <View style={styles.mapPlaceholder}>
-                            <View style={styles.mapBg} />
-                            <View style={styles.mapOverlay}>
-                                <View style={styles.mapPin}>
-                                    <Ionicons name="location" size={24} color={AppColors.white} />
-                                </View>
-                                <Text style={styles.mapAddress}>{turf.address}</Text>
-                            </View>
-                            <TouchableOpacity style={styles.directionsBtn} activeOpacity={0.8}>
-                                <Ionicons name="navigate-outline" size={16} color={AppColors.white} />
-                                <Text style={styles.directionsBtnText}>Get Directions</Text>
+                        <View style={styles.sectionRow}>
+                            <Text style={styles.sectionTitle}>Location</Text>
+                            <TouchableOpacity>
+                                <Text style={styles.openMapsText}>Open in Maps</Text>
                             </TouchableOpacity>
                         </View>
-                    </View>
-
-                    {/* Price Info */}
-                    <View style={styles.priceCard}>
-                        <View>
-                            <Text style={styles.priceLabel}>Starting from</Text>
-                            <Text style={styles.priceValue}>
-                                ₹{turf.price}
-                                <Text style={styles.priceUnit}> / {turf.priceUnit}</Text>
-                            </Text>
+                        <View style={styles.mapPlaceholder}>
+                            <LinearGradient
+                                colors={[Colors.surface2, Colors.surface3]}
+                                style={styles.mapGradient}
+                            />
+                            <View style={styles.mapPin}>
+                                <MapPin size={28} color={Colors.primary} fill={Colors.primary + '40'} />
+                            </View>
+                            <Text style={styles.mapAddress}>{turf.location}</Text>
                         </View>
-                        <Text style={styles.priceNote}>Taxes & charges included</Text>
                     </View>
 
-                    {/* Bottom spacer for footer */}
-                    <View style={{ height: 100 }} />
+                    {/* Reviews */}
+                    <View style={styles.section}>
+                        <View style={styles.sectionRow}>
+                            <Text style={styles.sectionTitle}>Reviews</Text>
+                            <TouchableOpacity>
+                                <Text style={styles.openMapsText}>Write Review</Text>
+                            </TouchableOpacity>
+                        </View>
+                        {mockReviews.map((review) => (
+                            <View key={review.id} style={styles.reviewCard}>
+                                <View style={styles.reviewHeader}>
+                                    <View style={styles.reviewAvatar}>
+                                        <Text style={styles.reviewInitials}>{review.userInitials}</Text>
+                                    </View>
+                                    <Text style={styles.reviewUser}>{review.userName}</Text>
+                                    <View style={styles.reviewStars}>
+                                        {[...Array(review.rating)].map((_, i) => (
+                                            <Star key={i} size={11} color={Colors.primary} fill={Colors.primary} />
+                                        ))}
+                                    </View>
+                                </View>
+                                <Text style={styles.reviewComment}>{review.comment}</Text>
+                                <Text style={styles.reviewDate}>{review.date}</Text>
+                            </View>
+                        ))}
+                    </View>
                 </View>
             </ScrollView>
 
-            {/* Floating Footer */}
-            <View style={styles.footer}>
-                <View style={styles.footerLeft}>
-                    <Text style={styles.footerPriceLabel}>Per Hour</Text>
-                    <Text style={styles.footerPrice}>₹{turf.price}</Text>
+            {/* Bottom CTA */}
+            <View style={styles.bottomCTA}>
+                <View style={styles.pricingInfo}>
+                    <Text style={styles.pricingFrom}>Starting from</Text>
+                    <Text style={styles.pricingAmount}>
+                        ₹{turf.pricePerHour.toLocaleString()}
+                        <Text style={styles.pricingUnit}>/hr</Text>
+                    </Text>
                 </View>
-                <TouchableOpacity
-                    style={styles.bookNowBtn}
-                    onPress={() => router.push(`/(customer)/booking/slot-selection/${turf.id}`)}
-                    activeOpacity={0.88}
-                >
-                    <Text style={styles.bookNowText}>Book Now</Text>
+                <TouchableOpacity style={styles.bookBtn} onPress={handleBookNow} activeOpacity={0.85}>
+                    <Text style={styles.bookBtnText}>Book Now</Text>
                 </TouchableOpacity>
             </View>
         </View>
@@ -204,318 +245,353 @@ export default function TurfDetailsScreen() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: AppColors.background,
-    },
-    scrollContent: {
-        paddingBottom: 0,
+        backgroundColor: Colors.backgroundDark,
     },
     heroContainer: {
-        height: HERO_HEIGHT,
+        height: height * 0.45,
         position: 'relative',
     },
     heroImage: {
-        width,
-        height: HERO_HEIGHT,
-        resizeMode: 'cover',
+        width: '100%',
+        height: '100%',
     },
-    backBtn: {
-        position: 'absolute',
-        top: 50,
-        left: 16,
-        width: 40,
-        height: 40,
-        borderRadius: 20,
-        backgroundColor: 'rgba(0,0,0,0.45)',
-        alignItems: 'center',
-        justifyContent: 'center',
+    heroGradient: {
+        ...StyleSheet.absoluteFillObject,
     },
-    heartBtn: {
+    topBar: {
         position: 'absolute',
-        top: 50,
-        right: 16,
-        width: 40,
-        height: 40,
-        borderRadius: 20,
-        backgroundColor: 'rgba(0,0,0,0.45)',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    imageDots: {
-        position: 'absolute',
-        bottom: 16,
+        top: 0,
         left: 0,
         right: 0,
         flexDirection: 'row',
+        justifyContent: 'space-between',
+        padding: 16,
+    },
+    topBtnRow: {
+        flexDirection: 'row',
+        gap: 8,
+    },
+    iconBtn: {
+        width: 40,
+        height: 40,
+        borderRadius: 20,
+        backgroundColor: 'rgba(17,33,27,0.5)',
+        alignItems: 'center',
         justifyContent: 'center',
+        borderWidth: 1,
+        borderColor: 'rgba(255,255,255,0.1)',
+    },
+    heroInfo: {
+        position: 'absolute',
+        bottom: 24,
+        left: 20,
+        right: 20,
+        gap: 8,
+    },
+    featuredBadge: {
+        backgroundColor: Colors.primary,
+        paddingHorizontal: 12,
+        paddingVertical: 4,
+        borderRadius: 999,
+        alignSelf: 'flex-start',
+    },
+    featuredText: {
+        color: Colors.backgroundDark,
+        fontSize: 11,
+        fontWeight: '800',
+        textTransform: 'uppercase',
+        letterSpacing: 0.5,
+    },
+    turfName: {
+        color: Colors.textPrimary,
+        fontSize: 30,
+        fontWeight: '900',
+        letterSpacing: -0.5,
+    },
+    locationRow: {
+        flexDirection: 'row',
+        alignItems: 'center',
         gap: 6,
+    },
+    locationText: {
+        color: '#cbd5e1',
+        fontSize: 14,
+    },
+    imageDots: {
+        position: 'absolute',
+        bottom: 20,
+        right: 20,
+        flexDirection: 'row',
+        gap: 4,
     },
     dot: {
         width: 6,
         height: 6,
         borderRadius: 3,
-        backgroundColor: 'rgba(255,255,255,0.5)',
+        backgroundColor: 'rgba(255,255,255,0.4)',
     },
     dotActive: {
+        backgroundColor: Colors.primary,
         width: 20,
-        backgroundColor: AppColors.white,
     },
-    content: {
-        backgroundColor: AppColors.background,
-        borderTopLeftRadius: BorderRadius['2xl'],
-        borderTopRightRadius: BorderRadius['2xl'],
-        marginTop: -20,
-        padding: Spacing.lg,
-    },
-    titleRow: {
+    // Stats Card
+    statsCard: {
         flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'flex-start',
-        marginBottom: Spacing.sm,
+        alignItems: 'center',
+        backgroundColor: 'rgba(22,197,130,0.08)',
+        margin: 16,
+        borderRadius: 18,
+        padding: 16,
+        borderWidth: 1,
+        borderColor: Colors.borderDark,
     },
-    titleLeft: {
+    statsLeft: {
         flex: 1,
+        alignItems: 'center',
+    },
+    statRating: {
+        flexDirection: 'row',
+        alignItems: 'center',
         gap: 4,
     },
-    turfName: {
-        fontSize: Typography.fontSize['2xl'],
-        fontWeight: Typography.fontWeight.bold,
-        color: AppColors.textPrimary,
+    ratingValue: {
+        color: Colors.primary,
+        fontSize: 24,
+        fontWeight: '900',
     },
-    locationRow: {
-        flexDirection: 'row',
+    reviewCount: {
+        color: Colors.textSecondary,
+        fontSize: 11,
+        marginTop: 2,
+    },
+    statsDivider: {
+        width: 1,
+        height: 40,
+        backgroundColor: Colors.borderMedium,
+        marginHorizontal: 12,
+    },
+    statsMiddle: {
+        flex: 1,
         alignItems: 'center',
-        gap: 3,
     },
-    location: {
-        fontSize: Typography.fontSize.sm,
-        color: AppColors.textMuted,
+    statsOpenText: {
+        color: Colors.textPrimary,
+        fontSize: 14,
+        fontWeight: '700',
     },
-    ratingBox: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        gap: 3,
-        backgroundColor: AppColors.white,
-        paddingHorizontal: Spacing.sm,
-        paddingVertical: 5,
-        borderRadius: BorderRadius.md,
-        ...Shadows.sm,
+    statsCloseTime: {
+        color: Colors.textSecondary,
+        fontSize: 11,
+        marginTop: 2,
     },
-    rating: {
-        fontSize: Typography.fontSize.base,
-        fontWeight: Typography.fontWeight.bold,
-        color: AppColors.textPrimary,
+    viewRatesBtn: {
+        backgroundColor: Colors.primaryMuted,
+        paddingHorizontal: 12,
+        paddingVertical: 8,
+        borderRadius: 999,
     },
-    reviews: {
-        fontSize: Typography.fontSize.xs,
-        color: AppColors.textMuted,
+    viewRatesText: {
+        color: Colors.primary,
+        fontSize: 12,
+        fontWeight: '700',
     },
-    infoChips: {
-        flexDirection: 'row',
-        gap: Spacing.sm,
-        marginBottom: Spacing.lg,
-    },
-    availableChip: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        gap: 5,
-        backgroundColor: AppColors.primaryLight,
-        borderRadius: BorderRadius.full,
-        paddingHorizontal: Spacing.md,
-        paddingVertical: 5,
-    },
-    greenDot: {
-        width: 7,
-        height: 7,
-        borderRadius: 4,
-        backgroundColor: AppColors.primary,
-    },
-    availableText: {
-        fontSize: Typography.fontSize.xs,
-        color: AppColors.primary,
-        fontWeight: Typography.fontWeight.semibold,
-    },
-    hoursChip: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        gap: 5,
-        backgroundColor: AppColors.white,
-        borderRadius: BorderRadius.full,
-        paddingHorizontal: Spacing.md,
-        paddingVertical: 5,
-        borderWidth: 1,
-        borderColor: AppColors.border,
-    },
-    hoursText: {
-        fontSize: Typography.fontSize.xs,
-        color: AppColors.textSecondary,
+    // Content
+    content: {
+        paddingHorizontal: 20,
+        paddingBottom: 120,
     },
     section: {
-        marginBottom: Spacing.xl,
+        marginBottom: 28,
+    },
+    sectionRow: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginBottom: 14,
     },
     sectionTitle: {
-        fontSize: Typography.fontSize.lg,
-        fontWeight: Typography.fontWeight.bold,
-        color: AppColors.textPrimary,
-        marginBottom: Spacing.md,
+        color: Colors.textPrimary,
+        fontSize: 18,
+        fontWeight: '700',
+        marginBottom: 10,
     },
-    aboutText: {
-        fontSize: Typography.fontSize.sm,
-        color: AppColors.textSecondary,
+    description: {
+        color: Colors.textSecondary,
+        fontSize: 14,
         lineHeight: 22,
+    },
+    sportsRow: {
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        gap: 8,
+    },
+    sportChip: {
+        backgroundColor: Colors.primaryMuted,
+        borderWidth: 1,
+        borderColor: Colors.primaryBorder,
+        paddingHorizontal: 14,
+        paddingVertical: 6,
+        borderRadius: 999,
+    },
+    sportChipText: {
+        color: Colors.primary,
+        fontSize: 13,
+        fontWeight: '600',
     },
     amenitiesGrid: {
         flexDirection: 'row',
         flexWrap: 'wrap',
-        gap: Spacing.md,
+        gap: 10,
     },
     amenityItem: {
+        width: '22%',
         alignItems: 'center',
-        gap: 5,
-        width: 70,
+        gap: 8,
+        backgroundColor: Colors.surface2,
+        borderRadius: 14,
+        padding: 12,
+        borderWidth: 1,
+        borderColor: Colors.borderDark,
     },
-    amenityIconBg: {
-        width: 52,
-        height: 52,
-        borderRadius: BorderRadius.xl,
-        backgroundColor: AppColors.primaryLight,
+    amenityIcon: {
+        width: 40,
+        height: 40,
+        borderRadius: 10,
+        backgroundColor: Colors.primaryMuted,
         alignItems: 'center',
         justifyContent: 'center',
     },
-    amenityLabel: {
-        fontSize: Typography.fontSize.xs,
-        color: AppColors.textSecondary,
+    amenityName: {
+        color: '#cbd5e1',
+        fontSize: 10,
+        fontWeight: '500',
         textAlign: 'center',
-        fontWeight: Typography.fontWeight.medium,
     },
     mapPlaceholder: {
-        borderRadius: BorderRadius.xl,
-        overflow: 'hidden',
         height: 160,
-        position: 'relative',
-        backgroundColor: '#E8F5E9',
-    },
-    mapBg: {
-        ...StyleSheet.absoluteFillObject,
-        backgroundColor: '#C8E6C9',
-    },
-    mapOverlay: {
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
+        borderRadius: 18,
+        overflow: 'hidden',
+        borderWidth: 1,
+        borderColor: Colors.borderDark,
         alignItems: 'center',
         justifyContent: 'center',
-        gap: Spacing.sm,
-        backgroundColor: 'rgba(34,197,94,0.08)',
+        position: 'relative',
+    },
+    mapGradient: {
+        ...StyleSheet.absoluteFillObject,
     },
     mapPin: {
-        width: 44,
-        height: 44,
-        borderRadius: BorderRadius.full,
-        backgroundColor: AppColors.primary,
-        alignItems: 'center',
-        justifyContent: 'center',
-        ...Shadows.md,
-    },
-    mapAddress: {
-        fontSize: Typography.fontSize.xs,
-        color: AppColors.textSecondary,
-        textAlign: 'center',
-        paddingHorizontal: Spacing.xl,
-    },
-    directionsBtn: {
-        position: 'absolute',
-        bottom: Spacing.md,
-        right: Spacing.md,
-        backgroundColor: AppColors.primary,
-        borderRadius: BorderRadius.xl,
-        flexDirection: 'row',
         alignItems: 'center',
         gap: 4,
-        paddingHorizontal: Spacing.md,
-        paddingVertical: 7,
     },
-    directionsBtnText: {
-        color: AppColors.white,
-        fontSize: Typography.fontSize.xs,
-        fontWeight: Typography.fontWeight.semibold,
+    mapAddress: {
+        color: Colors.textSecondary,
+        fontSize: 12,
+        marginTop: 8,
+        textAlign: 'center',
     },
-    priceCard: {
-        backgroundColor: AppColors.primaryLight,
-        borderRadius: BorderRadius.xl,
-        padding: Spacing.base,
+    openMapsText: {
+        color: Colors.primary,
+        fontSize: 13,
+        fontWeight: '700',
+    },
+    // Reviews
+    reviewCard: {
+        backgroundColor: Colors.surface2,
+        borderRadius: 16,
+        padding: 14,
+        marginBottom: 10,
+    },
+    reviewHeader: {
         flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'flex-end',
-        borderWidth: 1,
-        borderColor: AppColors.primaryMuted,
+        alignItems: 'center',
+        gap: 10,
+        marginBottom: 8,
     },
-    priceLabel: {
-        fontSize: Typography.fontSize.xs,
-        color: AppColors.primary,
-        marginBottom: 2,
+    reviewAvatar: {
+        width: 32,
+        height: 32,
+        borderRadius: 16,
+        backgroundColor: Colors.primaryMuted,
+        alignItems: 'center',
+        justifyContent: 'center',
     },
-    priceValue: {
-        fontSize: Typography.fontSize.xl,
-        fontWeight: Typography.fontWeight.bold,
-        color: AppColors.primary,
+    reviewInitials: {
+        color: Colors.primary,
+        fontSize: 11,
+        fontWeight: '700',
     },
-    priceUnit: {
-        fontSize: Typography.fontSize.sm,
-        fontWeight: Typography.fontWeight.regular,
-        color: AppColors.primaryDark,
+    reviewUser: {
+        color: Colors.textPrimary,
+        fontSize: 14,
+        fontWeight: '700',
+        flex: 1,
     },
-    priceNote: {
-        fontSize: Typography.fontSize.xs,
-        color: AppColors.primaryDark,
+    reviewStars: {
+        flexDirection: 'row',
+        gap: 2,
     },
-    footer: {
+    reviewComment: {
+        color: Colors.textSecondary,
+        fontSize: 13,
+        lineHeight: 20,
+        fontStyle: 'italic',
+    },
+    reviewDate: {
+        color: '#475569',
+        fontSize: 11,
+        marginTop: 8,
+    },
+    // Bottom CTA
+    bottomCTA: {
         position: 'absolute',
         bottom: 0,
         left: 0,
         right: 0,
-        backgroundColor: AppColors.white,
-        borderTopWidth: 1,
-        borderTopColor: AppColors.border,
-        paddingHorizontal: Spacing.lg,
-        paddingVertical: Spacing.base,
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'space-between',
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: -3 },
-        shadowOpacity: 0.08,
-        shadowRadius: 10,
-        elevation: 10,
-        paddingBottom: 28,
+        gap: 16,
+        backgroundColor: 'rgba(17,33,27,0.95)',
+        paddingHorizontal: 20,
+        paddingVertical: 16,
+        paddingBottom: 32,
+        borderTopWidth: 1,
+        borderTopColor: Colors.borderDark,
     },
-    footerLeft: {
+    pricingInfo: {
         gap: 2,
     },
-    footerPriceLabel: {
-        fontSize: Typography.fontSize.xs,
-        color: AppColors.textMuted,
+    pricingFrom: {
+        color: Colors.textSecondary,
+        fontSize: 11,
     },
-    footerPrice: {
-        fontSize: Typography.fontSize.xl,
-        fontWeight: Typography.fontWeight.bold,
-        color: AppColors.textPrimary,
+    pricingAmount: {
+        color: Colors.textPrimary,
+        fontSize: 22,
+        fontWeight: '900',
     },
-    bookNowBtn: {
-        backgroundColor: AppColors.primary,
-        borderRadius: BorderRadius.xl,
-        paddingVertical: 14,
-        paddingHorizontal: Spacing['2xl'],
-        shadowColor: AppColors.primary,
+    pricingUnit: {
+        fontSize: 12,
+        color: Colors.textSecondary,
+        fontWeight: '400',
+    },
+    bookBtn: {
+        flex: 1,
+        backgroundColor: Colors.primary,
+        paddingVertical: 16,
+        borderRadius: 999,
+        alignItems: 'center',
+        shadowColor: Colors.primary,
         shadowOffset: { width: 0, height: 4 },
         shadowOpacity: 0.35,
-        shadowRadius: 8,
-        elevation: 7,
+        shadowRadius: 12,
+        elevation: 8,
     },
-    bookNowText: {
-        color: AppColors.white,
-        fontSize: Typography.fontSize.lg,
-        fontWeight: Typography.fontWeight.bold,
+    bookBtnText: {
+        color: Colors.backgroundDark,
+        fontSize: 15,
+        fontWeight: '800',
+        textTransform: 'uppercase',
+        letterSpacing: 1,
     },
 });

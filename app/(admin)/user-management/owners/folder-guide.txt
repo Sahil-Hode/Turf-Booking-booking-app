@@ -1,4 +1,0 @@
-- Purpose: Expo Router route structure for navigation and user flows.
-- What goes here: Use this folder for route groups and screen-level modules only.
-- Structure rule: Keep route names aligned with user journeys and access roles.
-- Working rule: Move reusable UI and business logic into components, hooks, or src modules.

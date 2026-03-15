@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#16c582",
+                        "background-light": "#f6f8f7",
+                        "background-dark": "#11211b",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .fill-icon {
+            font-variation-settings: 'FILL' 1;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 antialiased font-display">
+<div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
+<header class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between p-4 bg-gradient-to-b from-background-dark/80 to-transparent">
+<button class="flex size-10 items-center justify-center rounded-full bg-background-dark/40 backdrop-blur-md text-slate-100 hover:bg-primary/20 transition-colors">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<div class="flex gap-2">
+<button class="flex size-10 items-center justify-center rounded-full bg-background-dark/40 backdrop-blur-md text-slate-100 hover:bg-primary/20 transition-colors">
+<span class="material-symbols-outlined">share</span>
+</button>
+<button class="flex size-10 items-center justify-center rounded-full bg-background-dark/40 backdrop-blur-md text-slate-100 hover:bg-primary/20 transition-colors">
+<span class="material-symbols-outlined">favorite</span>
+</button>
+</div>
+</header>
+<main class="flex-1 pb-24">
+<div class="relative h-[45vh] w-full overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center" data-alt="High angle view of a lush green football turf at night under bright stadium lights" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBRopyReAyWygYWt--oQhbYblR5_wp1ZcyEDOODC7lQ2Q24uW9obamhEWX0mQo7oBqnNmvT8f16SIC1v3PLiLoHeltq-TS1r4CsxO6B8q1InbXd6P7m9Zl5tBKiFEA6eRk0yQFIKkXB1iXx-8o-F2GDgJq7D0exkFVMsrrpSwPcsRqec_7Hm1-vW5sIbqanEvoOcQjqBVFv49CgMIWQeEw3UXuZaFl0AcmmM3Moujg2-L9eSMaW7lyr6_iJ-DXMuMI1s4oa-E6O-A');"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-background-dark via-transparent to-transparent"></div>
+<div class="absolute bottom-6 left-6 right-6">
+<span class="inline-flex items-center gap-1 rounded-full bg-primary px-3 py-1 text-xs font-bold uppercase tracking-wider text-background-dark">
+                        Featured
+                    </span>
+<h1 class="mt-2 text-3xl font-black text-slate-100 lg:text-5xl">Champions Arena</h1>
+<div class="mt-2 flex items-center gap-2 text-slate-300">
+<span class="material-symbols-outlined text-primary text-sm">location_on</span>
+<p class="text-sm font-medium">Sector 62, Noida • 2.4 km away</p>
+</div>
+</div>
+</div>
+<div class="px-6 py-8">
+<div class="flex items-center justify-between rounded-2xl bg-slate-800/40 p-4 backdrop-blur-sm border border-slate-700/30">
+<div class="flex items-center gap-3">
+<div class="flex flex-col">
+<div class="flex items-center gap-1">
+<span class="text-2xl font-bold text-primary">4.8</span>
+<span class="material-symbols-outlined text-primary fill-icon text-lg">star</span>
+</div>
+<p class="text-xs text-slate-400">124 Reviews</p>
+</div>
+<div class="h-8 w-px bg-slate-700/50"></div>
+<div class="flex flex-col">
+<p class="text-sm font-bold text-slate-100">Open Now</p>
+<p class="text-xs text-slate-400">Closes 11:00 PM</p>
+</div>
+</div>
+<button class="rounded-full bg-primary/20 px-4 py-2 text-xs font-bold text-primary">
+                        View Rates
+                    </button>
+</div>
+<section class="mt-8">
+<h3 class="text-lg font-bold text-slate-100">About this turf</h3>
+<p class="mt-2 text-sm leading-relaxed text-slate-400">
+                        Premium 5-a-side and 7-a-side football turf featuring FIFA-approved synthetic grass. Perfect for competitive matches, corporate events, and casual play. Amenities include high-intensity LED floodlights for night games.
+                    </p>
+</section>
+<section class="mt-8">
+<h3 class="text-lg font-bold text-slate-100">Amenities</h3>
+<div class="mt-4 grid grid-cols-4 gap-4">
+<div class="flex flex-col items-center gap-2 rounded-xl bg-slate-800/30 p-3">
+<span class="material-symbols-outlined text-primary">shower</span>
+<span class="text-[10px] font-medium text-slate-300">Showers</span>
+</div>
+<div class="flex flex-col items-center gap-2 rounded-xl bg-slate-800/30 p-3">
+<span class="material-symbols-outlined text-primary">local_parking</span>
+<span class="text-[10px] font-medium text-slate-300">Parking</span>
+</div>
+<div class="flex flex-col items-center gap-2 rounded-xl bg-slate-800/30 p-3">
+<span class="material-symbols-outlined text-primary">lightbulb</span>
+<span class="text-[10px] font-medium text-slate-300">Lights</span>
+</div>
+<div class="flex flex-col items-center gap-2 rounded-xl bg-slate-800/30 p-3">
+<span class="material-symbols-outlined text-primary">icecream</span>
+<span class="text-[10px] font-medium text-slate-300">Canteen</span>
+</div>
+</div>
+</section>
+<section class="mt-8">
+<div class="flex items-center justify-between">
+<h3 class="text-lg font-bold text-slate-100">Location</h3>
+<button class="text-sm font-bold text-primary">Open in Maps</button>
+</div>
+<div class="mt-4 overflow-hidden rounded-2xl border border-slate-700/30">
+<div class="h-40 w-full bg-slate-800/50 bg-cover bg-center" data-alt="Stylized map showing the location of the turf in Noida" data-location="Noida, India" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBS9R6rXevoCOSd90CSA1uJAC0yaRXy4dIo4JWuVJ55C_FxlmvO9S-6Db9D7DeQhc_nDSSjkwpEwyZjZHiTMz182TGWb9o2SlLwc0vvcM9_Qrh7EE1RrZBnFafYQEmhQMgoG6ycQFwBjr_Siow4B8HLj-PECHqm9aaeGCGkzSMe8iPHhZtpXpZIngfyJocYZbqOOrVc-8NjH5xl0rqbj6TL22aGNCC-7m8rU2cyWCa6qMyzQlesV9v-BmCzufGaiSsq0B5gBrU2bg');"></div>
+</div>
+</section>
+<section class="mt-8">
+<div class="flex items-center justify-between">
+<h3 class="text-lg font-bold text-slate-100">Reviews</h3>
+<button class="text-sm font-bold text-primary">Write Review</button>
+</div>
+<div class="mt-4 flex flex-col gap-4">
+<div class="rounded-2xl bg-slate-800/30 p-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="size-8 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold text-xs">RK</div>
+<p class="text-sm font-bold text-slate-100">Rahul Kapoor</p>
+</div>
+<div class="flex gap-0.5 text-primary">
+<span class="material-symbols-outlined text-xs fill-icon">star</span>
+<span class="material-symbols-outlined text-xs fill-icon">star</span>
+<span class="material-symbols-outlined text-xs fill-icon">star</span>
+<span class="material-symbols-outlined text-xs fill-icon">star</span>
+<span class="material-symbols-outlined text-xs fill-icon">star</span>
+</div>
+</div>
+<p class="mt-2 text-xs text-slate-400 italic">"Best turf in the city! The grass quality is top-notch and the lighting is perfect for evening games."</p>
+</div>
+</div>
+</section>
+</div>
+</main>
+<footer class="fixed bottom-0 left-0 right-0 z-50 flex items-center gap-4 bg-background-dark/90 p-4 pb-8 backdrop-blur-xl border-t border-slate-700/50">
+<div class="flex flex-col">
+<p class="text-xs text-slate-400">Starting from</p>
+<p class="text-xl font-black text-slate-100">₹1,200<span class="text-xs font-normal text-slate-400"> / hr</span></p>
+</div>
+<button class="flex-1 rounded-full bg-primary py-4 text-center text-sm font-black uppercase tracking-widest text-background-dark shadow-lg shadow-primary/20">
+                Book Now
+            </button>
+</footer>
+<nav class="fixed bottom-0 left-0 right-0 hidden">
+<div class="flex gap-2 border-t border-slate-700 bg-background-dark px-4 pb-3 pt-2">
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined fill-icon">home</span>
+<p class="text-[10px] font-bold">Home</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-500" href="#">
+<span class="material-symbols-outlined">search</span>
+<p class="text-[10px] font-medium">Search</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-500" href="#">
+<span class="material-symbols-outlined">calendar_today</span>
+<p class="text-[10px] font-medium">Bookings</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-500" href="#">
+<span class="material-symbols-outlined">local_offer</span>
+<p class="text-[10px] font-medium">Offers</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-500" href="#">
+<span class="material-symbols-outlined">person</span>
+<p class="text-[10px] font-medium">Profile</p>
+</a>
+</div>
+</nav>
+</div>
+</body></html>

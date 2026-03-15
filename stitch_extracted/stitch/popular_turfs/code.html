@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TurfZy - Popular Turfs</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#16c582",
+                        "background-light": "#f6f8f7",
+                        "background-dark": "#11211b",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen pb-24">
+<!-- Header -->
+<header class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-primary/10 px-4 py-4">
+<div class="max-w-7xl mx-auto flex items-center justify-between">
+<button class="w-10 h-10 flex items-center justify-center rounded-full bg-primary/10 text-primary">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="text-xl font-bold tracking-tight">Popular Turfs</h1>
+<button class="w-10 h-10 flex items-center justify-center rounded-full bg-primary/10 text-primary">
+<span class="material-symbols-outlined">search</span>
+</button>
+</div>
+</header>
+<main class="max-w-7xl mx-auto px-4">
+<!-- Filter Pills -->
+<div class="flex gap-3 py-6 overflow-x-auto no-scrollbar">
+<button class="flex h-10 shrink-0 items-center justify-center gap-x-2 rounded-full bg-primary text-background-dark px-5 font-semibold">
+<span>All</span>
+<span class="material-symbols-outlined text-sm">keyboard_arrow_down</span>
+</button>
+<button class="flex h-10 shrink-0 items-center justify-center gap-x-2 rounded-full bg-primary/10 border border-primary/20 px-5 font-medium text-slate-700 dark:text-slate-300">
+<span>Football</span>
+<span class="material-symbols-outlined text-sm">keyboard_arrow_down</span>
+</button>
+<button class="flex h-10 shrink-0 items-center justify-center gap-x-2 rounded-full bg-primary/10 border border-primary/20 px-5 font-medium text-slate-700 dark:text-slate-300">
+<span>Cricket</span>
+<span class="material-symbols-outlined text-sm">keyboard_arrow_down</span>
+</button>
+<button class="flex h-10 shrink-0 items-center justify-center gap-x-2 rounded-full bg-primary/10 border border-primary/20 px-5 font-medium text-slate-700 dark:text-slate-300">
+<span>Tennis</span>
+<span class="material-symbols-outlined text-sm">keyboard_arrow_down</span>
+</button>
+</div>
+<!-- Trending Hero Section -->
+<section class="mb-8">
+<h2 class="text-2xl font-bold mb-4">Trending Now</h2>
+<div class="relative group overflow-hidden rounded-xl bg-slate-200 dark:bg-slate-800 aspect-[16/9]">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105" data-alt="Modern professional football turf with floodlights at night" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA_geYdn8LkKaVnjAxgamm7Qn_LGlE3wwX2fsKr1ERvEm3msbNcvdQ0bOvvVe89f6X1xfM5et-3qg3X8uo5c32KqmBBcn0h69aMUf6BCnDwsOXOpKUIMrTqMohe-eggEgktoFFkKhEft8sP4SRUf_AWJqXd-H0N7tpTumnxo4naxHlhgnnDaFMhnOTzCNhCwtt85rk9rvy7jvVNAbkh7oBN7NiWFqUi1Mw4nNTDDFKjj15zITAS519eo_Jzjk1zNrtWKSARxEIgGQ');">
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-background-dark via-transparent to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-6 w-full flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div class="space-y-1">
+<span class="inline-block bg-primary px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider text-background-dark">Trending</span>
+<h3 class="text-2xl font-bold text-white">Stadium Arena Elite</h3>
+<p class="text-primary/90 flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">location_on</span>
+                            Downtown District • 4.8 (1.2k reviews)
+                        </p>
+</div>
+<button class="bg-primary text-background-dark font-bold px-8 py-3 rounded-full hover:brightness-110 transition-all shadow-lg shadow-primary/20">
+                        Book Now
+                    </button>
+</div>
+</div>
+</section>
+<!-- Top Rated Section -->
+<section class="space-y-6">
+<div class="flex items-center justify-between">
+<h2 class="text-2xl font-bold">Top Rated Near You</h2>
+<a class="text-primary font-semibold flex items-center gap-1 text-sm" href="#">
+                    View All
+                    <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Turf Card 1 -->
+<div class="bg-white dark:bg-primary/5 rounded-xl border border-primary/10 overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+<div class="relative aspect-video">
+<div class="absolute inset-0 bg-cover bg-center" data-alt="High quality artificial grass cricket pitch" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC4brdubtuYpa5TxDwrR_CoaYqVBPeZaM-SWStrfHR-XJZUGhq2PSoVZPz0_lJACd8KPpQuTRW33wzvRphVwPwaMG9hQEAeSlqPz751unhWDYhtugI_xKG5U5Ca-HylNBZSWNEaMZ5jcbv2XjL3wCOYyJMJ65z0OAXiH-PBnhjRHT8IMyWNcx3CFK9bDFYTTst7gZg5NeMSoqKEyOPvlVsT1dPl-UgpNX513_Wrs4cyxndfQNNZc9grZT8cDOzZe4P4fRLPBH3DmQ');">
+</div>
+<div class="absolute top-4 right-4 bg-background-dark/60 backdrop-blur-md text-white px-3 py-1 rounded-full flex items-center gap-1 text-sm font-bold">
+<span class="material-symbols-outlined text-primary text-sm fill-1">star</span>
+                            4.9
+                        </div>
+</div>
+<div class="p-4">
+<div class="flex justify-between items-start mb-2">
+<div>
+<h4 class="font-bold text-lg">Green Valley Sports Hub</h4>
+<p class="text-slate-500 dark:text-slate-400 text-sm">North Side • 2.4 km away</p>
+</div>
+<div class="text-right">
+<span class="text-primary font-bold text-lg">$25</span>
+<span class="text-slate-500 text-xs">/hr</span>
+</div>
+</div>
+<div class="flex flex-wrap gap-2 mt-3">
+<span class="bg-primary/10 text-primary text-[10px] font-bold px-2 py-1 rounded uppercase tracking-tight">Floodlights</span>
+<span class="bg-primary/10 text-primary text-[10px] font-bold px-2 py-1 rounded uppercase tracking-tight">Parking</span>
+<span class="bg-primary/10 text-primary text-[10px] font-bold px-2 py-1 rounded uppercase tracking-tight">Shower</span>
+</div>
+</div>
+</div>
+<!-- Turf Card 2 -->
+<div class="bg-white dark:bg-primary/5 rounded-xl border border-primary/10 overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+<div class="relative aspect-video">
+<div class="absolute inset-0 bg-cover bg-center" data-alt="Indoor multi-sport court with bright lighting" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCi4uen1HSNCzvGh-775nPTGSeYgEQx4AKugZyHdjaoD0jg8bF9IM_E_ZAAPcuvuXpg13J_iXchOzGBmtgFHZczjoBz5atNXRoaXXjapslkuyajt9zxY40HnX3kjOv9PTweQQoxAdCg0B_GDypt0-RfBHrLk62ak2LTW_bzr_6wQIDIuN_Qlx6yBj-E9giaTeuPTME1zghZh9J7TM8owEaKWWekiLHa3errWmQsEn4XvJviKgawBjjAuw2t9nWWRBIk7LR1JFmflw');">
+</div>
+<div class="absolute top-4 right-4 bg-background-dark/60 backdrop-blur-md text-white px-3 py-1 rounded-full flex items-center gap-1 text-sm font-bold">
+<span class="material-symbols-outlined text-primary text-sm fill-1">star</span>
+                            4.7
+                        </div>
+</div>
+<div class="p-4">
+<div class="flex justify-between items-start mb-2">
+<div>
+<h4 class="font-bold text-lg">The Blue Box Indoor</h4>
+<p class="text-slate-500 dark:text-slate-400 text-sm">East Industrial • 5.1 km away</p>
+</div>
+<div class="text-right">
+<span class="text-primary font-bold text-lg">$40</span>
+<span class="text-slate-500 text-xs">/hr</span>
+</div>
+</div>
+<div class="flex flex-wrap gap-2 mt-3">
+<span class="bg-primary/10 text-primary text-[10px] font-bold px-2 py-1 rounded uppercase tracking-tight">Indoor</span>
+<span class="bg-primary/10 text-primary text-[10px] font-bold px-2 py-1 rounded uppercase tracking-tight">Premium Turf</span>
+<span class="bg-primary/10 text-primary text-[10px] font-bold px-2 py-1 rounded uppercase tracking-tight">AC</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Quick Map Access -->
+<section class="mt-12 mb-8">
+<div class="relative rounded-xl overflow-hidden h-40 group cursor-pointer">
+<div class="absolute inset-0 bg-slate-300 dark:bg-slate-700" data-location="Austin, Texas" style="">
+<div class="w-full h-full bg-primary/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-4xl text-primary animate-bounce">location_on</span>
+</div>
+</div>
+<div class="absolute inset-0 bg-background-dark/40 group-hover:bg-background-dark/20 transition-colors flex items-center justify-center">
+<button class="bg-white dark:bg-background-dark px-6 py-2 rounded-full font-bold shadow-xl flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">map</span>
+                        Explore on Map
+                    </button>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation -->
+<nav class="fixed bottom-0 left-0 right-0 bg-background-light dark:bg-background-dark border-t border-primary/10 px-4 pb-6 pt-3 z-50">
+<div class="max-w-md mx-auto flex justify-between items-center">
+<a class="flex flex-col items-center gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="text-[10px] font-medium uppercase tracking-wide">Home</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined fill-1">explore</span>
+<span class="text-[10px] font-medium uppercase tracking-wide">Explore</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined">calendar_today</span>
+<span class="text-[10px] font-medium uppercase tracking-wide">Bookings</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="text-[10px] font-medium uppercase tracking-wide">Profile</span>
+</a>
+</div>
+</nav>
+<style>
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .fill-1 {
+            font-variation-settings: 'FILL' 1;
+        }
+    </style>
+</body></html>

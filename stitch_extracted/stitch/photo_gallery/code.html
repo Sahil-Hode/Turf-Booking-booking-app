@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TurfZy - Turf Gallery</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#16c582",
+                        "background-light": "#f6f8f7",
+                        "background-dark": "#11211b",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased">
+<div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
+<header class="sticky top-0 z-20 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-slate-200 dark:border-primary/10 px-4 py-4 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="p-2 rounded-full hover:bg-slate-200 dark:hover:bg-primary/20 transition-colors cursor-pointer">
+<span class="material-symbols-outlined">arrow_back</span>
+</div>
+<h1 class="text-xl font-bold tracking-tight">Turf Gallery</h1>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 rounded-full hover:bg-slate-200 dark:hover:bg-primary/20 transition-colors">
+<span class="material-symbols-outlined">search</span>
+</button>
+<button class="p-2 rounded-full hover:bg-slate-200 dark:hover:bg-primary/20 transition-colors">
+<span class="material-symbols-outlined">filter_list</span>
+</button>
+</div>
+</header>
+<nav class="sticky top-[69px] z-10 bg-background-light dark:bg-background-dark px-4 py-2">
+<div class="flex gap-4 overflow-x-auto no-scrollbar pb-2">
+<a class="whitespace-nowrap px-4 py-2 rounded-full bg-primary text-background-dark font-semibold text-sm" href="#">All Projects</a>
+<a class="whitespace-nowrap px-4 py-2 rounded-full bg-slate-200 dark:bg-primary/10 text-slate-700 dark:text-primary font-medium text-sm" href="#">Football Fields</a>
+<a class="whitespace-nowrap px-4 py-2 rounded-full bg-slate-200 dark:bg-primary/10 text-slate-700 dark:text-primary font-medium text-sm" href="#">Residential</a>
+<a class="whitespace-nowrap px-4 py-2 rounded-full bg-slate-200 dark:bg-primary/10 text-slate-700 dark:text-primary font-medium text-sm" href="#">Golf Greens</a>
+<a class="whitespace-nowrap px-4 py-2 rounded-full bg-slate-200 dark:bg-primary/10 text-slate-700 dark:text-primary font-medium text-sm" href="#">Commercial</a>
+</div>
+</nav>
+<main class="flex-1 p-4">
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+<div class="group relative aspect-square overflow-hidden rounded-xl bg-slate-200 dark:bg-primary/5 cursor-pointer">
+<div class="w-full h-full bg-center bg-cover transition-transform duration-500 group-hover:scale-110" data-alt="Close up of high quality green artificial turf" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAak7S7t4Ad-6dMN_4wrjM3MwzRomPtgtCE1q7cGPtN_CoUQL62Y6Mg6jMBezEm9f5eqOnXlPNoKWEJWZtr-JmekT6IIs52c9151-xzTZlMwwuzK10PB8EG1znwIFeRr8m0Fat39w_2M0Hf_XxWxSxM13KD2yd0ckXyn1RQm1YLdKTpDQgdvUa49gUjc0zDyYRUvKZ6t5QIvwncdUDYJj6C4x8mMCjAX_QYspZwqE-a-hzGL5_8RcMropXoFAy0u7XxPwDFgVdnmA')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3">
+<p class="text-white text-xs font-medium">Modern Backyard</p>
+</div>
+</div>
+<div class="group relative aspect-square overflow-hidden rounded-xl bg-slate-200 dark:bg-primary/5 cursor-pointer">
+<div class="w-full h-full bg-center bg-cover transition-transform duration-500 group-hover:scale-110" data-alt="Vibrant football stadium with lush artificial grass" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCmJZnT4G4f_VqQDejXCjFFGcNZEIlYHLOXtI6VkQjuvxTrofuBzdrFEjg4HTN38AMNnnu2BjqI4CF9Knd0cL3nwaYoiWnBHhxX-qBpOs9pg3hv3-KjeVdaWVX0_jr7RKvv-bRRy7anMlTigMI6uwp-1c6T47ttUylSsyAMtNbl5Hk9Emo32eNcoMx__g37xMqjOFZpYhnvcHM0K5OCcOE6WLuCOWJvqc_6wWUsVg63foEDaxmMwGnnwWIYcx7WbeCQ6M7NjiyeTQ')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3">
+<p class="text-white text-xs font-medium">Pro Soccer Stadium</p>
+</div>
+</div>
+<div class="group relative aspect-square overflow-hidden rounded-xl bg-slate-200 dark:bg-primary/5 cursor-pointer">
+<div class="w-full h-full bg-center bg-cover transition-transform duration-500 group-hover:scale-110" data-alt="Miniature golf course with synthetic turf" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAwzNeSZTtBAJWfobV5Qs_LUeSvVa12s3CFEArS1_XlJ3ripCbm5g8S3c6w-13EfR9ODpOA-BzsBNaKVa09jggUmnlCTIe_wzmktD635TssNM--b1nmhjOE5GTIUHSX1Coc8-7ZNRFfatJMyBcJwZaNnvMrolJdOy4XXB6F-LfrGycnuGfl4Tj2_RkRTrevYzRTiigPZfUvFd9XyyNiXNgSgNYE0M4q8yiCf_f9n5msKUndOFEUdXgdpmkiiHKxPTBK2BTfYPTAFQ')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3">
+<p class="text-white text-xs font-medium">Private Putting Green</p>
+</div>
+</div>
+<div class="group relative aspect-square overflow-hidden rounded-xl bg-slate-200 dark:bg-primary/5 cursor-pointer">
+<div class="w-full h-full bg-center bg-cover transition-transform duration-500 group-hover:scale-110" data-alt="Lush green garden with artificial turf and landscaping" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCnsCoHyazjfjC1Esl2yAQiImrzS96YxfNgNdqYJF-n2Wl8-WFhuPUWBJWmHXuUZ8OCoDNFeaBLJBiVG5BrBcPZ-DctiGU1bPcjIZe0Ee35n2lugDXVa7AqeP87xFaWO3XARqeYIfuLa7ltUXsTQJAhA2NgSTA-ML7kUhrv6RhSWRoqRIWGa_SXpPZnbI3WB1YGjTZqeMUHyLZia0Ma0Fvrn_WiTBZHVgoFLXu5zjtY-6Teb8I9txKw4WhWr2G86_La2XH7fz8r7g')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3">
+<p class="text-white text-xs font-medium">Eco Landscape</p>
+</div>
+</div>
+<div class="group relative aspect-square overflow-hidden rounded-xl bg-slate-200 dark:bg-primary/5 cursor-pointer">
+<div class="w-full h-full bg-center bg-cover transition-transform duration-500 group-hover:scale-110" data-alt="Detailed view of multi-tonal turf blades" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDgyTIQVv2M98tKk7I-ayPr6JjtVaRkkz7r-Eos-gcVZhbjIWiVk8W44fSN7kC0ZWV3RtUyZARsw-qd1ntSKFV_zamjUIA08iHvWenOBMG4VybUyqN5LYzZSlOm4NExTzu-oriZHjhDTXdchcVo-zrk7J3DdsM3jeAI63EYYOiU5QqkymIYJJITdTwLjV0_fsQmLR9gvT6PfXYrZ6bi1BNnGbGMIcOAB-NTVUv_Z-ua2WjCNTegZrcUrNNeOaKD-6XQzGyU3xDc3g')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3">
+<p class="text-white text-xs font-medium">Turf Texture Detail</p>
+</div>
+</div>
+<div class="group relative aspect-square overflow-hidden rounded-xl bg-slate-200 dark:bg-primary/5 cursor-pointer">
+<div class="w-full h-full bg-center bg-cover transition-transform duration-500 group-hover:scale-110" data-alt="Aerial view of a synthetic grass field" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDLD6vsWvq8aXpUR6FqL1q3qJ3-8eXkN5q8xuYmrC3XOJRa3DVL0bh7_dj7stFGkBszo0xek61bM-Aw5LWYSV6NMzFs71pMoy80kkTBqBqNFPIbPhTf1YuBx1067kG4-0DEnz4rLw67A7B9_ozZxl67bCv1lf4yKmkfog9cHqBe0ZmvbRsBEq5dbdKRDVP1c5l48tcgfE1NQ7yPjNBUBJZF5yFQSzv-kbXTVQl7sw3dcBvSNK6_o8RXFvo48Z8-bc_IbgQizQB6rw')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3">
+<p class="text-white text-xs font-medium">Arena Installation</p>
+</div>
+</div>
+<div class="group relative aspect-square overflow-hidden rounded-xl bg-slate-200 dark:bg-primary/5 cursor-pointer">
+<div class="w-full h-full bg-center bg-cover transition-transform duration-500 group-hover:scale-110" data-alt="Rooftop terrace with artificial grass and furniture" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCrEVriUcn5OgebLWnybDZymd_RfombiUWK5rKtFlvy05JYY2kSSy6FkCxmstSzHCKlC4CnSL2cp7UdV9aTYRnCrSFjnxdSJYpaCubOrAh77EM3Nv7hHVaFy0ppBe1L225pwVemOzYrx7xyEwNQfi8bAj3DCq_kIp3_BVwEE27UCxgqgYmwFqG386noR0fu5B3uVg0xdMFmKdSz_YMr2j_TYfJOviyLiE2lWvHaDnlUeWe1g6ilyx0O4YB_OtsXR7LhnsULzxoJUA')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3">
+<p class="text-white text-xs font-medium">Rooftop Garden</p>
+</div>
+</div>
+<div class="group relative aspect-square overflow-hidden rounded-xl bg-slate-200 dark:bg-primary/5 cursor-pointer">
+<div class="w-full h-full bg-center bg-cover transition-transform duration-500 group-hover:scale-110" data-alt="Artificial turf path through a garden" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBUsPdEZu3wLorLjYfAzCoSihQvoS5_EtUCXgd16HSA347xIU3MDbWjgct-mNH91BoZdsOcusRXBbyEM33AM37DpT1YKxU3Q6rQ9XXPEybMXkA4w_QYX-DXkkDEryB2TRMIjUoGQT-eAYxGpVhP9gP-hAyBe7Xb5EPXUZ5BP2nfQw17npeuK56ebMS9tTaSYZHOU_PnVVNJSJKffPSjcSVA562--vW3hX9e5dyR-Byqkuhoi5EMyLmOwXnSLQTsmV2KsRfS9wYbjQ')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3">
+<p class="text-white text-xs font-medium">Garden Path</p>
+</div>
+</div>
+</div>
+</main>
+<div class="fixed bottom-24 right-6 z-30">
+<button class="flex items-center justify-center size-16 rounded-full bg-primary text-background-dark shadow-lg shadow-primary/20 hover:scale-105 active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-3xl">add_a_photo</span>
+</button>
+</div>
+<div class="fixed bottom-0 left-0 right-0 z-40">
+<div class="flex items-center justify-around bg-background-light dark:bg-background-dark/95 border-t border-slate-200 dark:border-primary/10 px-4 pb-8 pt-4 backdrop-blur-md">
+<a class="flex flex-col items-center gap-1 text-slate-400 dark:text-slate-500 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">home</span>
+<p class="text-[10px] font-medium uppercase tracking-wider">Home</p>
+</a>
+<a class="flex flex-col items-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined !fill-1">grid_view</span>
+<p class="text-[10px] font-medium uppercase tracking-wider">Gallery</p>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400 dark:text-slate-500 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">calendar_today</span>
+<p class="text-[10px] font-medium uppercase tracking-wider">Booking</p>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400 dark:text-slate-500 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">person</span>
+<p class="text-[10px] font-medium uppercase tracking-wider">Profile</p>
+</a>
+</div>
+</div>
+</div>
+<style>
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.fill-1 {
+            font-variation-settings: 'FILL' 1;
+        }
+    </style>
+</body></html>

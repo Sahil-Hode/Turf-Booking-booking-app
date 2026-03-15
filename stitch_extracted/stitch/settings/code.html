@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#16c582",
+                        "background-light": "#f6f8f7",
+                        "background-dark": "#11211b",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<title>TurfZy - Settings</title>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen pb-24">
+<div class="max-w-md mx-auto min-h-screen flex flex-col">
+<!-- Header -->
+<header class="flex items-center p-6 justify-between sticky top-0 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md z-10">
+<div class="flex items-center gap-4">
+<div class="flex items-center justify-center size-10 rounded-full bg-slate-200 dark:bg-primary/20 text-slate-900 dark:text-primary cursor-pointer">
+<span class="material-symbols-outlined">arrow_back</span>
+</div>
+<h1 class="text-xl font-bold tracking-tight">Settings</h1>
+</div>
+<div class="size-10 rounded-full overflow-hidden border-2 border-primary">
+<img class="w-full h-full object-cover" data-alt="User profile avatar portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBMPTB1ZqeiqXvMvc6cfUWmRdMOhpOXRjXLgzZ6z5j7N8YK_fv41C1HT1CNH5QCE9HYZ_splwPSFGkMBcZ1Hd_vNVHst3hvch5beNr2aaMr-CnfY0B-IifDQAEB0x2tqTemjEIlgF92N54v0s4L6hcw40-Oe1rQ61rxVyLTo-F-EWhJ4o9hTHjjDi8GyVBrNxJzC3sIVkb_-nnG8a8sqLvWxzlV3Vbqd9OoYHYTAZya37DU5aDfqTs7hpQ1zZ9OOJMJBZMrI9yWgg"/>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-1 px-4 space-y-8">
+<!-- Profile Section Card -->
+<section class="bg-white dark:bg-primary/5 rounded-xl p-4 flex items-center gap-4 border border-slate-200 dark:border-primary/10">
+<div class="flex-1">
+<h2 class="font-bold text-lg">Alex Thompson</h2>
+<p class="text-sm text-slate-500 dark:text-slate-400">alex.t@turfzy.com</p>
+</div>
+<button class="px-4 py-2 bg-primary text-white text-sm font-semibold rounded-full">Edit</button>
+</section>
+<!-- General Settings -->
+<section class="space-y-2">
+<h3 class="text-xs font-bold uppercase tracking-widest text-slate-500 dark:text-primary/60 px-2">General</h3>
+<div class="space-y-1">
+<!-- Notifications -->
+<div class="flex items-center gap-4 bg-white dark:bg-primary/5 px-4 py-4 rounded-xl justify-between border border-slate-200 dark:border-primary/10">
+<div class="flex items-center gap-4">
+<div class="text-primary flex items-center justify-center rounded-lg bg-primary/10 shrink-0 size-10">
+<span class="material-symbols-outlined">notifications</span>
+</div>
+<div>
+<p class="font-medium">Notifications</p>
+<p class="text-xs text-slate-500 dark:text-slate-400">Manage booking alerts</p>
+</div>
+</div>
+<label class="relative flex h-[31px] w-[51px] cursor-pointer items-center rounded-full border-none bg-slate-300 dark:bg-primary/20 p-0.5 has-[:checked]:justify-end has-[:checked]:bg-primary transition-all duration-300">
+<div class="h-full w-[27px] rounded-full bg-white shadow-md"></div>
+<input checked="" class="invisible absolute" type="checkbox"/>
+</label>
+</div>
+<!-- Dark Mode -->
+<div class="flex items-center gap-4 bg-white dark:bg-primary/5 px-4 py-4 rounded-xl justify-between border border-slate-200 dark:border-primary/10">
+<div class="flex items-center gap-4">
+<div class="text-primary flex items-center justify-center rounded-lg bg-primary/10 shrink-0 size-10">
+<span class="material-symbols-outlined">dark_mode</span>
+</div>
+<div>
+<p class="font-medium">Dark Mode</p>
+<p class="text-xs text-slate-500 dark:text-slate-400">Switch app appearance</p>
+</div>
+</div>
+<label class="relative flex h-[31px] w-[51px] cursor-pointer items-center rounded-full border-none bg-slate-300 dark:bg-primary/20 p-0.5 has-[:checked]:justify-end has-[:checked]:bg-primary transition-all duration-300">
+<div class="h-full w-[27px] rounded-full bg-white shadow-md"></div>
+<input checked="" class="invisible absolute" type="checkbox"/>
+</label>
+</div>
+<!-- Privacy -->
+<div class="flex items-center gap-4 bg-white dark:bg-primary/5 px-4 py-4 rounded-xl justify-between border border-slate-200 dark:border-primary/10">
+<div class="flex items-center gap-4">
+<div class="text-primary flex items-center justify-center rounded-lg bg-primary/10 shrink-0 size-10">
+<span class="material-symbols-outlined">lock</span>
+</div>
+<div>
+<p class="font-medium">Private Profile</p>
+<p class="text-xs text-slate-500 dark:text-slate-400">Hide history from others</p>
+</div>
+</div>
+<label class="relative flex h-[31px] w-[51px] cursor-pointer items-center rounded-full border-none bg-slate-300 dark:bg-primary/20 p-0.5 has-[:checked]:justify-end has-[:checked]:bg-primary transition-all duration-300">
+<div class="h-full w-[27px] rounded-full bg-white shadow-md"></div>
+<input class="invisible absolute" type="checkbox"/>
+</label>
+</div>
+</div>
+</section>
+<!-- App Preferences -->
+<section class="space-y-2">
+<h3 class="text-xs font-bold uppercase tracking-widest text-slate-500 dark:text-primary/60 px-2">Preferences</h3>
+<div class="space-y-1">
+<!-- Language -->
+<div class="flex items-center gap-4 bg-white dark:bg-primary/5 px-4 py-4 rounded-xl justify-between border border-slate-200 dark:border-primary/10 cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="text-primary flex items-center justify-center rounded-lg bg-primary/10 shrink-0 size-10">
+<span class="material-symbols-outlined">language</span>
+</div>
+<div>
+<p class="font-medium">Language</p>
+<p class="text-xs text-slate-500 dark:text-slate-400">English (US)</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-slate-400">chevron_right</span>
+</div>
+<!-- Payment -->
+<div class="flex items-center gap-4 bg-white dark:bg-primary/5 px-4 py-4 rounded-xl justify-between border border-slate-200 dark:border-primary/10 cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="text-primary flex items-center justify-center rounded-lg bg-primary/10 shrink-0 size-10">
+<span class="material-symbols-outlined">payments</span>
+</div>
+<div>
+<p class="font-medium">Payments</p>
+<p class="text-xs text-slate-500 dark:text-slate-400">Manage cards &amp; wallet</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-slate-400">chevron_right</span>
+</div>
+</div>
+</section>
+<!-- Danger Zone -->
+<section class="pt-4">
+<button class="w-full py-4 text-center text-red-500 font-bold bg-red-500/10 rounded-xl border border-red-500/20">
+                    Log Out
+                </button>
+</section>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 right-0 max-w-md mx-auto flex gap-2 border-t border-slate-200 dark:border-primary/20 bg-white dark:bg-background-dark px-4 pb-6 pt-2">
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-400 dark:text-primary/40" href="#">
+<span class="material-symbols-outlined">home</span>
+<p class="text-[10px] font-medium leading-normal tracking-wide">Home</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-400 dark:text-primary/40" href="#">
+<span class="material-symbols-outlined">calendar_today</span>
+<p class="text-[10px] font-medium leading-normal tracking-wide">Bookings</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-400 dark:text-primary/40" href="#">
+<span class="material-symbols-outlined">explore</span>
+<p class="text-[10px] font-medium leading-normal tracking-wide">Explore</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">settings</span>
+<p class="text-[10px] font-bold leading-normal tracking-wide">Settings</p>
+</a>
+</nav>
+</div>
+</body></html>

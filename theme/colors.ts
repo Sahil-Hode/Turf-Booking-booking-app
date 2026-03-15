@@ -1,35 +1,28 @@
 // theme/colors.ts
 // Minimalist Startup Color System with Green Accent
-// Supports Automatic Light/Dark Mode Mapping
 
 export const palette = {
     // Brand
     green: {
-        50: '#F0FDF4',
-        100: '#DCFCE7',
-        200: '#BBF7D0',
-        300: '#86EFAC',
-        400: '#4ADE80',
-        500: '#22C55E',
-        600: '#16A34A', // Primary Green
-        700: '#15803D',
-        800: '#166534',
-        900: '#14532D',
+        100: '#D1FAE5',
+        500: '#10B981',
+        600: '#059669', // Primary Emerald Green
+        700: '#047857',
+        800: '#065F46',
     },
-    // Neutrals (Zinc/Gray base for that "premium" look)
+    // Neutrals
     neutral: {
         0: '#FFFFFF',
-        50: '#FAFAFA',
-        100: '#F4F4F5',
-        200: '#E4E4E7',
-        300: '#D4D4D8',
-        400: '#A1A1AA',
-        500: '#71717A',
-        600: '#52525B',
-        700: '#3F3F46',
-        800: '#27272A',
-        900: '#18181B',
-        950: '#09090B', // Deep Black
+        50: '#F8FAF0', // Soft off-white/light gray
+        100: '#F3F4F6',
+        200: '#E5E7EB',
+        300: '#D1D5DB',
+        400: '#9CA3AF',
+        500: '#6B7280', // Muted gray for secondary text
+        600: '#4B5563',
+        700: '#374151',
+        800: '#1F2937', // Dark charcoal for high-contrast readability
+        900: '#111827',
     },
     // Status
     red: '#EF4444',
@@ -41,11 +34,11 @@ export const lightColors = {
     primary: palette.green[600],
     primaryLight: palette.green[100],
 
-    background: palette.neutral[0],
-    backgroundSecondary: palette.neutral[50], // Very subtle off-white for cards
+    background: palette.neutral[50], // Very soft off-white/light gray for main app background
+    backgroundSecondary: palette.neutral[100],
 
-    textPrimary: palette.neutral[950],
-    textSecondary: palette.neutral[500],
+    textPrimary: palette.neutral[800], // Dark charcoal
+    textSecondary: palette.neutral[500], // Muted gray
     textTertiary: palette.neutral[400],
 
     border: palette.neutral[200],
@@ -54,28 +47,28 @@ export const lightColors = {
     error: palette.red,
     errorBg: '#FEF2F2',
 
-    surface: palette.neutral[0], // pure white cards usually
+    surface: palette.neutral[0], // Pure white for main containers/cards
 };
 
-// Dark Theme Mapping
+// Dark Theme Mapping (Not fully supported in this refactor, but kept for structure)
 export const darkColors = {
-    primary: palette.green[500], // Slightly brighter green for dark mode punch
-    primaryLight: 'rgba(34, 197, 94, 0.15)', // Green glow effect
+    primary: palette.green[500],
+    primaryLight: 'rgba(5, 150, 105, 0.15)',
 
-    background: palette.neutral[950],
-    backgroundSecondary: palette.neutral[900], // Elevated dark surface
+    background: palette.neutral[900],
+    backgroundSecondary: '#18181B',
 
     textPrimary: palette.neutral[50],
     textSecondary: palette.neutral[400],
     textTertiary: palette.neutral[500],
 
-    border: palette.neutral[800],
-    borderLight: palette.neutral[900],
+    border: palette.neutral[700],
+    borderLight: palette.neutral[800],
 
     error: palette.red,
     errorBg: 'rgba(239, 68, 68, 0.1)',
 
-    surface: palette.neutral[900], // dark gray cards
+    surface: '#18181B', // dark gray cards
 };
 
 // We will export default 'colors' for now, but in a real app this would hook into `useColorScheme`

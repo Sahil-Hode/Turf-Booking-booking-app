@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TurfZy - Your Stadium, One Tap Away</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                "primary": "#16c582",
+                "background-light": "#f6f8f7",
+                "background-dark": "#11211b",
+              },
+              fontFamily: {
+                "display": ["Inter"]
+              },
+              borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+            },
+          },
+        }
+      </script>
+<style>
+        .stadium-texture {
+            background-image: radial-gradient(circle at 2px 2px, rgba(22, 197, 130, 0.05) 1px, transparent 0);
+            background-size: 24px 24px;
+        }
+        .stadium-glow {
+            background: radial-gradient(circle at center, rgba(22, 197, 130, 0.15) 0%, transparent 70%);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display overflow-hidden">
+<div class="relative flex h-screen w-full flex-col items-center justify-between bg-background-light dark:bg-background-dark overflow-hidden">
+<!-- Subtle Field Texture Overlay -->
+<div class="absolute inset-0 stadium-texture pointer-events-none opacity-40"></div>
+<div class="absolute inset-0 stadium-glow pointer-events-none"></div>
+<!-- Top Status/Action Bar -->
+<div class="relative z-10 flex w-full items-center justify-end p-6">
+<button class="flex items-center justify-center w-10 h-10 rounded-full bg-primary/10 text-primary border border-primary/20">
+<span class="material-symbols-outlined text-[20px]">language</span>
+</button>
+</div>
+<!-- Central Content -->
+<div class="relative z-10 flex flex-col items-center justify-center flex-1 w-full px-6 text-center">
+<!-- Hero Image / Logo Container -->
+<div class="w-full max-w-sm aspect-square relative mb-8 flex items-center justify-center">
+<div class="absolute inset-0 bg-primary/20 blur-3xl rounded-full scale-75"></div>
+<div class="relative w-64 h-64 bg-background-dark/50 rounded-xl border border-primary/20 flex flex-col items-center justify-center overflow-hidden shadow-2xl" data-alt="Turfzy premium minimalist logo design with stadium motif" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAx9a4cz_SQbAvuUEVnSxSbpzxeJ8PTTzUHbDHRw_VaCI9zI7N0W_udkiD04kDhmmxYOAbVR_HXdJ0QEBwRYaFoe1HpLlWzoanBcx9HjdbbcKfT14qmm6MjrouPzVHHEYbVmzhA2tFZ4DD3u8PFeViNtj-uPBTGZjoohomtZAxz0XSNvIwHi5u1bCxC0Am6ufH_2CTq46m_mbGSFBVSn3G_YC0g8JFQtdQmypeZ-FvD_Frgj_hlJbCFn6cK96axVaoFVkiz0Cwm1A");'>
+<!-- Dynamic Lighting Effect -->
+<div class="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-primary/10 to-transparent"></div>
+</div>
+</div>
+<!-- Branding -->
+<div class="space-y-4 max-w-md">
+<h1 class="text-slate-900 dark:text-slate-100 text-5xl font-extrabold tracking-tight">
+                    Turf<span class="text-primary">Zy</span>
+</h1>
+<h2 class="text-slate-900 dark:text-slate-100 tracking-tight text-2xl font-bold leading-tight">
+                    Your Stadium, One Tap Away
+                </h2>
+<p class="text-slate-600 dark:text-primary/70 text-base font-medium leading-normal">
+                    Premium sports-tech experience
+                </p>
+</div>
+</div>
+<!-- Footer / Progress Area -->
+<div class="relative z-10 w-full max-w-md px-8 pb-16 space-y-6">
+<div class="flex flex-col gap-3">
+<div class="flex items-center justify-between">
+<p class="text-slate-700 dark:text-slate-300 text-sm font-medium leading-normal flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] animate-pulse">settings_input_component</span>
+                        Initializing stadium...
+                    </p>
+<span class="text-primary text-xs font-bold">30%</span>
+</div>
+<div class="h-2 w-full rounded-full bg-slate-200 dark:bg-primary/20 overflow-hidden">
+<div class="h-full rounded-full bg-primary" style="width: 30%;"></div>
+</div>
+</div>
+<div class="flex justify-center">
+<div class="flex items-center gap-2 text-slate-500 dark:text-slate-400 text-xs">
+<span class="material-symbols-outlined text-[14px]">verified_user</span>
+<span>Secure Booking Environment</span>
+</div>
+</div>
+</div>
+<!-- Bottom Gradient Bar -->
+<div class="h-1.5 w-full bg-gradient-to-r from-transparent via-primary/50 to-transparent opacity-30"></div>
+</div>
+</body></html>

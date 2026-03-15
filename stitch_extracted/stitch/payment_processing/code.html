@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TurfZy - Processing Payment</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#16c582",
+                        "background-light": "#f6f8f7",
+                        "background-dark": "#11211b",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen flex flex-col items-center">
+<div class="relative flex h-full min-h-screen w-full max-w-md flex-col bg-background-light dark:bg-background-dark overflow-x-hidden shadow-2xl">
+<!-- Header Section -->
+<div class="flex items-center p-6 pb-2 justify-between">
+<div class="text-slate-900 dark:text-slate-100 flex size-10 shrink-0 items-center justify-center cursor-pointer hover:bg-primary/10 rounded-full transition-colors">
+<span class="material-symbols-outlined">arrow_back</span>
+</div>
+<h2 class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight tracking-tight flex-1 text-center pr-10">Checkout</h2>
+</div>
+<!-- Hero Status -->
+<div class="flex flex-col items-center px-6 pt-10 pb-6 text-center">
+<div class="w-20 h-20 mb-6 flex items-center justify-center bg-primary/10 rounded-full relative">
+<div class="absolute inset-0 rounded-full border-4 border-primary/20 border-t-primary animate-spin"></div>
+<span class="material-symbols-outlined text-primary text-4xl">payments</span>
+</div>
+<h2 class="text-slate-900 dark:text-slate-100 text-3xl font-bold leading-tight mb-2">Processing Payment</h2>
+<p class="text-slate-500 dark:text-primary/70 text-sm font-medium">Do not close this window</p>
+</div>
+<!-- Progress Indicator -->
+<div class="flex flex-col gap-3 px-8 py-4">
+<div class="flex gap-6 justify-between items-end">
+<p class="text-slate-700 dark:text-slate-200 text-base font-semibold leading-normal">Securing connection...</p>
+<p class="text-primary text-sm font-bold leading-normal">75%</p>
+</div>
+<div class="rounded-full bg-primary/20 h-3 w-full overflow-hidden">
+<div class="h-full rounded-full bg-primary transition-all duration-500" style="width: 75%;"></div>
+</div>
+</div>
+<!-- Timeline Steps -->
+<div class="flex flex-col gap-1 px-8 mt-4">
+<!-- Step 1: Completed -->
+<div class="grid grid-cols-[40px_1fr] gap-x-2">
+<div class="flex flex-col items-center gap-1">
+<div class="text-primary mt-1">
+<span class="material-symbols-outlined text-[28px] fill-1">check_circle</span>
+</div>
+<div class="w-[2px] bg-primary h-8 grow"></div>
+</div>
+<div class="flex flex-1 flex-col pb-6 pt-1">
+<p class="text-slate-900 dark:text-slate-100 text-base font-bold leading-tight">Order initiated</p>
+<p class="text-slate-500 dark:text-primary/60 text-sm">Turf booking for Friday, 8:00 PM</p>
+</div>
+</div>
+<!-- Step 2: Completed -->
+<div class="grid grid-cols-[40px_1fr] gap-x-2">
+<div class="flex flex-col items-center gap-1">
+<div class="text-primary">
+<span class="material-symbols-outlined text-[28px] fill-1">check_circle</span>
+</div>
+<div class="w-[2px] bg-primary h-8 grow"></div>
+</div>
+<div class="flex flex-1 flex-col pb-6">
+<p class="text-slate-900 dark:text-slate-100 text-base font-bold leading-tight">Payment details verified</p>
+<p class="text-slate-500 dark:text-primary/60 text-sm">Visa ending in •••• 4242</p>
+</div>
+</div>
+<!-- Step 3: In Progress -->
+<div class="grid grid-cols-[40px_1fr] gap-x-2">
+<div class="flex flex-col items-center gap-1">
+<div class="text-primary">
+<span class="material-symbols-outlined text-[28px] animate-pulse">sync</span>
+</div>
+<div class="w-[2px] bg-primary/20 h-8 grow"></div>
+</div>
+<div class="flex flex-1 flex-col pb-6">
+<p class="text-slate-900 dark:text-slate-100 text-base font-bold leading-tight">Authorizing with bank</p>
+<p class="text-primary text-sm font-medium">Waiting for response...</p>
+</div>
+</div>
+<!-- Step 4: Pending -->
+<div class="grid grid-cols-[40px_1fr] gap-x-2 opacity-40">
+<div class="flex flex-col items-center gap-1">
+<div class="text-slate-400">
+<span class="material-symbols-outlined text-[28px]">radio_button_unchecked</span>
+</div>
+</div>
+<div class="flex flex-1 flex-col pb-6">
+<p class="text-slate-900 dark:text-slate-100 text-base font-bold leading-tight">Booking confirmed</p>
+<p class="text-slate-500 dark:text-primary/60 text-sm">Almost there</p>
+</div>
+</div>
+</div>
+<!-- Booking Details Card -->
+<div class="mx-6 mt-4 p-5 rounded-xl bg-primary/5 border border-primary/10 flex flex-col gap-4">
+<div class="flex items-center gap-4">
+<div class="w-16 h-16 rounded-lg overflow-hidden shrink-0">
+<img alt="Soccer Field" class="w-full h-full object-cover" data-alt="Aerial view of a green soccer field at night" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCq_sunc0wQcETGm3J1bk_oH0TUc6YlLdkTngo5AfvDph_lltAt0FugT2IBsB35vtXoFE8vrONsx_clf_W33rADnbR9zJEfaqeRzkdSzX19jtXdw8jgwXjeDPcbjxjsExd8v--1pa-V9ExBIhJG1gRK3XKeQsLUIgwvnWBWWSf8hIrBmh0rGW7RydUaNrU4n17FJXLmbFfget5mo5S3xbZJLuWLbcDjmoeg1XcNvSundyvlMmmilALwqHCirutrkA6xXWXOcvh9xg"/>
+</div>
+<div>
+<h3 class="font-bold text-slate-900 dark:text-slate-100">Wembley Arena - Pitch A</h3>
+<p class="text-xs text-slate-500 dark:text-primary/70">Downtown Sports Complex</p>
+</div>
+</div>
+<div class="border-t border-primary/10 pt-4 flex justify-between items-center">
+<span class="text-sm font-medium text-slate-600 dark:text-slate-400">Total Amount</span>
+<span class="text-xl font-bold text-primary">$45.00</span>
+</div>
+</div>
+<!-- Footer / Security Branding -->
+<div class="mt-auto p-8 flex flex-col items-center gap-4">
+<div class="flex items-center gap-2 text-primary/60">
+<span class="material-symbols-outlined text-sm">lock</span>
+<span class="text-[10px] font-bold tracking-widest uppercase">SSL SECURED ENCRYPTION</span>
+</div>
+<div class="flex gap-4 grayscale opacity-50">
+<span class="material-symbols-outlined text-3xl">credit_card</span>
+<span class="material-symbols-outlined text-3xl">shield</span>
+<span class="material-symbols-outlined text-3xl">account_balance</span>
+</div>
+</div>
+<!-- Bottom Safe Area -->
+<div class="h-6 bg-background-light dark:bg-background-dark"></div>
+</div>
+</body></html>

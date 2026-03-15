@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TurfZy - Instant Booking</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#16c582",
+              "background-light": "#f6f8f7",
+              "background-dark": "#11211b",
+            },
+            fontFamily: {
+              "display": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased">
+<div class="relative flex h-auto min-h-screen w-full flex-col bg-background-light dark:bg-background-dark overflow-x-hidden">
+<!-- Header / Top Navigation -->
+<div class="flex items-center p-4 pb-2 justify-between">
+<div class="text-slate-900 dark:text-slate-100 flex size-12 shrink-0 items-center justify-center cursor-pointer">
+<span class="material-symbols-outlined text-2xl">arrow_back</span>
+</div>
+<h2 class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight tracking-tight flex-1 text-center pr-12">TurfZy</h2>
+</div>
+<!-- Progress Bar -->
+<div class="flex flex-col gap-3 p-4">
+<div class="flex gap-6 justify-between">
+<p class="text-slate-700 dark:text-slate-300 text-base font-medium leading-normal text-sm">Onboarding Progress</p>
+<p class="text-slate-700 dark:text-slate-300 text-sm font-normal leading-normal">2 of 3</p>
+</div>
+<div class="rounded-full bg-primary/20">
+<div class="h-2 rounded-full bg-primary" style="width: 66%;"></div>
+</div>
+</div>
+<!-- Visual Content Section -->
+<div class="@container px-4 py-6 flex-1 flex flex-col justify-center">
+<div class="relative w-full aspect-square max-w-md mx-auto bg-primary/10 rounded-xl overflow-hidden flex items-center justify-center border border-primary/20">
+<!-- Abstract Clock & Slots UI Representation -->
+<div class="absolute inset-0 flex flex-col items-center justify-center p-8 space-y-6">
+<!-- Digital Clock Display -->
+<div class="bg-primary/20 border-2 border-primary/40 px-6 py-4 rounded-xl flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-3xl">schedule</span>
+<div class="flex items-baseline">
+<span class="text-4xl font-bold text-primary">06:00</span>
+<span class="text-xl font-bold text-primary/80 ml-1">PM</span>
+</div>
+</div>
+<!-- Slots Grid Concept -->
+<div class="grid grid-cols-2 gap-3 w-full">
+<div class="p-4 bg-primary rounded-lg shadow-lg shadow-primary/20 flex flex-col items-center border border-primary/50">
+<span class="text-xs font-bold text-background-dark uppercase opacity-80">Selected Slot</span>
+<span class="text-lg font-bold text-background-dark">06:00 PM</span>
+</div>
+<div class="p-4 bg-primary/10 rounded-lg flex flex-col items-center border border-primary/20">
+<span class="text-xs font-bold text-primary/60 uppercase">Available</span>
+<span class="text-lg font-bold text-primary/80">07:00 PM</span>
+</div>
+<div class="p-4 bg-primary/5 rounded-lg flex flex-col items-center border border-primary/10 opacity-50">
+<span class="text-xs font-bold text-primary/40 uppercase">Booked</span>
+<span class="text-lg font-bold text-primary/40">08:00 PM</span>
+</div>
+<div class="p-4 bg-primary/10 rounded-lg flex flex-col items-center border border-primary/20">
+<span class="text-xs font-bold text-primary/60 uppercase">Available</span>
+<span class="text-lg font-bold text-primary/80">09:00 PM</span>
+</div>
+</div>
+<!-- Fast Booking Indicator -->
+<div class="flex items-center gap-2 px-4 py-2 bg-slate-900/40 dark:bg-white/10 rounded-full backdrop-blur-sm">
+<span class="material-symbols-outlined text-primary text-sm">bolt</span>
+<span class="text-xs font-medium text-slate-100">Booking confirmed in 2 seconds</span>
+</div>
+</div>
+<!-- Background Decorative Pattern -->
+<div class="absolute inset-0 -z-10 opacity-20" style="background-image: radial-gradient(circle at 2px 2px, #16c582 1px, transparent 0); background-size: 24px 24px;">
+</div>
+</div>
+</div>
+<!-- Copy Text -->
+<div class="px-6 pb-6 pt-2 text-center">
+<h1 class="text-slate-900 dark:text-white tracking-tight text-3xl font-bold leading-tight pb-3">Instant Booking</h1>
+<p class="text-slate-600 dark:text-slate-400 text-base font-normal leading-relaxed">
+                Book your favorite turf in seconds. No more waiting, just pick a slot and play. Real-time availability at your fingertips.
+            </p>
+</div>
+<!-- Footer Actions -->
+<div class="p-6 pt-0 mt-auto flex flex-col gap-3">
+<button class="w-full bg-primary hover:bg-primary/90 text-background-dark font-bold py-4 rounded-full transition-colors flex items-center justify-center gap-2">
+                Continue
+                <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+<button class="w-full bg-transparent text-slate-500 dark:text-slate-400 font-medium py-3 rounded-full hover:bg-primary/5 transition-colors">
+                Skip
+            </button>
+</div>
+<!-- Bottom Spacing for safe area -->
+<div class="h-6"></div>
+</div>
+</body></html>

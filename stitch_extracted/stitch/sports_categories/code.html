@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TurfZy - Sports Categories</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#16c582",
+                        "background-light": "#f6f8f7",
+                        "background-dark": "#11211b",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .sport-card-gradient {
+            background: linear-gradient(135deg, rgba(22, 197, 130, 0.1) 0%, rgba(17, 33, 27, 1) 100%);
+        }
+        .mesh-bg {
+            background-image: radial-gradient(at 0% 0%, rgba(22, 197, 130, 0.15) 0px, transparent 50%),
+                              radial-gradient(at 100% 100%, rgba(22, 197, 130, 0.1) 0px, transparent 50%);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen flex flex-col mesh-bg">
+<header class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-primary/10">
+<div class="flex items-center p-4 justify-between max-w-xl mx-auto w-full">
+<div class="flex items-center gap-3">
+<div class="text-primary flex size-10 items-center justify-center rounded-full bg-primary/10">
+<span class="material-symbols-outlined">arrow_back</span>
+</div>
+<div>
+<h2 class="text-lg font-bold leading-tight tracking-tight">Sports Categories</h2>
+<p class="text-xs text-primary font-medium">Find your perfect game</p>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<button class="flex size-10 items-center justify-center rounded-full bg-primary/10 text-primary hover:bg-primary/20 transition-colors">
+<span class="material-symbols-outlined">search</span>
+</button>
+</div>
+</div>
+</header>
+<main class="flex-1 w-full max-w-xl mx-auto px-4 pb-24">
+<div class="py-6">
+<h3 class="text-2xl font-bold leading-tight mb-2">What's on your mind?</h3>
+<p class="text-slate-500 dark:text-slate-400 text-sm">Explore venues for over 12 sports near you.</p>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<!-- Football -->
+<div class="sport-card-gradient border border-primary/20 rounded-lg p-5 flex flex-col gap-4 relative overflow-hidden group">
+<div class="absolute -right-4 -top-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-8xl">sports_soccer</span>
+</div>
+<div class="bg-primary text-background-dark size-12 rounded-lg flex items-center justify-center shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined">sports_soccer</span>
+</div>
+<div class="flex flex-col">
+<h2 class="text-lg font-bold tracking-tight">Football</h2>
+<p class="text-primary/70 text-sm font-medium">32 Active Turfs</p>
+</div>
+</div>
+<!-- Cricket -->
+<div class="sport-card-gradient border border-primary/20 rounded-lg p-5 flex flex-col gap-4 relative overflow-hidden group">
+<div class="absolute -right-4 -top-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-8xl">sports_cricket</span>
+</div>
+<div class="bg-primary/20 text-primary size-12 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined">sports_cricket</span>
+</div>
+<div class="flex flex-col">
+<h2 class="text-lg font-bold tracking-tight">Cricket</h2>
+<p class="text-primary/70 text-sm font-medium">45 Venues</p>
+</div>
+</div>
+<!-- Badminton -->
+<div class="sport-card-gradient border border-primary/20 rounded-lg p-5 flex flex-col gap-4 relative overflow-hidden group">
+<div class="absolute -right-4 -top-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-8xl">potted_plant</span>
+</div>
+<div class="bg-primary/20 text-primary size-12 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined">sports_tennis</span>
+</div>
+<div class="flex flex-col">
+<h2 class="text-lg font-bold tracking-tight">Badminton</h2>
+<p class="text-primary/70 text-sm font-medium">28 Courts</p>
+</div>
+</div>
+<!-- Basketball -->
+<div class="sport-card-gradient border border-primary/20 rounded-lg p-5 flex flex-col gap-4 relative overflow-hidden group">
+<div class="absolute -right-4 -top-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-8xl">sports_basketball</span>
+</div>
+<div class="bg-primary/20 text-primary size-12 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined">sports_basketball</span>
+</div>
+<div class="flex flex-col">
+<h2 class="text-lg font-bold tracking-tight">Basketball</h2>
+<p class="text-primary/70 text-sm font-medium">12 Arenas</p>
+</div>
+</div>
+<!-- Swimming -->
+<div class="sport-card-gradient border border-primary/20 rounded-lg p-5 flex flex-col gap-4 relative overflow-hidden group">
+<div class="absolute -right-4 -top-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-8xl">pool</span>
+</div>
+<div class="bg-primary/20 text-primary size-12 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined">pool</span>
+</div>
+<div class="flex flex-col">
+<h2 class="text-lg font-bold tracking-tight">Swimming</h2>
+<p class="text-primary/70 text-sm font-medium">10 Pools</p>
+</div>
+</div>
+<!-- Tennis -->
+<div class="sport-card-gradient border border-primary/20 rounded-lg p-5 flex flex-col gap-4 relative overflow-hidden group">
+<div class="absolute -right-4 -top-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-8xl">sports_tennis</span>
+</div>
+<div class="bg-primary/20 text-primary size-12 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined">sports_baseball</span>
+</div>
+<div class="flex flex-col">
+<h2 class="text-lg font-bold tracking-tight">Tennis</h2>
+<p class="text-primary/70 text-sm font-medium">15 Courts</p>
+</div>
+</div>
+<!-- Table Tennis -->
+<div class="sport-card-gradient border border-primary/20 rounded-lg p-5 flex flex-col gap-4 relative overflow-hidden group">
+<div class="absolute -right-4 -top-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-8xl">table_rows</span>
+</div>
+<div class="bg-primary/20 text-primary size-12 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined">sports_kabaddi</span>
+</div>
+<div class="flex flex-col">
+<h2 class="text-lg font-bold tracking-tight">Table Tennis</h2>
+<p class="text-primary/70 text-sm font-medium">20 Tables</p>
+</div>
+</div>
+<!-- Volleyball -->
+<div class="sport-card-gradient border border-primary/20 rounded-lg p-5 flex flex-col gap-4 relative overflow-hidden group">
+<div class="absolute -right-4 -top-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-8xl">sports_volleyball</span>
+</div>
+<div class="bg-primary/20 text-primary size-12 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined">sports_volleyball</span>
+</div>
+<div class="flex flex-col">
+<h2 class="text-lg font-bold tracking-tight">Volleyball</h2>
+<p class="text-primary/70 text-sm font-medium">14 Courts</p>
+</div>
+</div>
+</div>
+<div class="mt-8">
+<h3 class="text-lg font-bold leading-tight mb-4">Quick Recommendation</h3>
+<div class="bg-primary/10 border border-primary/20 rounded-xl p-4 flex items-center gap-4">
+<div class="flex-shrink-0 w-20 h-20 rounded-lg bg-slate-800 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Aerial view of a vibrant green football turf" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBRIFM_qQCoMn560k-cq2m9wYq2u8zJr9ubUk-JYaTvKZYwh_r79wIdUeZcNBoYbRUof8bQn40QEetDhOv0jaDpPEOhiuW8QmuwY9WOnD3v4Zdzptqn1S_Ef7JLhGgHNCYTDHGHCzFyEGPgJqaLUQaDIvpUPSZRDmOzAOH0xAVgs8hnV5vngeiqdUPT_drlZZQVQpvGFlK6W-cPUOQP-YMv9M4UF-oTD-qCKh-FH_7L0eO8ZVtvOcMoAUAj0Vvz7EaPPTnBmi8CWg"/>
+</div>
+<div class="flex-1">
+<h4 class="font-bold text-slate-100">Downtown Arena</h4>
+<p class="text-sm text-slate-400">Top rated for Football</p>
+<div class="flex items-center mt-1 text-primary">
+<span class="material-symbols-outlined text-sm">star</span>
+<span class="text-xs font-bold ml-1">4.9 (120+ reviews)</span>
+</div>
+</div>
+<button class="bg-primary text-background-dark p-2 rounded-full">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</main>
+<nav class="fixed bottom-0 left-0 right-0 bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-md border-t border-primary/10 pb-6 pt-3 px-6 z-50">
+<div class="flex items-center justify-between max-w-xl mx-auto">
+<a class="flex flex-col items-center gap-1 text-slate-500 dark:text-slate-400 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="text-[10px] font-medium">Home</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined fill-1">grid_view</span>
+<span class="text-[10px] font-bold">Explore</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-500 dark:text-slate-400 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">calendar_today</span>
+<span class="text-[10px] font-medium">Bookings</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-500 dark:text-slate-400 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="text-[10px] font-medium">Profile</span>
+</a>
+</div>
+</nav>
+</body></html>

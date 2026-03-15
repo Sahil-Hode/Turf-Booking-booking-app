@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TurfZy - Past Bookings</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#16c582",
+                        "background-light": "#f6f8f7",
+                        "background-dark": "#11211b",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen">
+<div class="max-w-md mx-auto min-h-screen flex flex-col bg-background-light dark:bg-background-dark">
+<!-- Header -->
+<header class="sticky top-0 z-10 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-primary/10">
+<div class="flex items-center p-4 justify-between">
+<button class="flex size-10 items-center justify-center rounded-full hover:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h2 class="text-lg font-bold flex-1 text-center pr-10">Booking History</h2>
+</div>
+<div class="flex px-4">
+<a class="flex flex-col items-center justify-center border-b-2 border-primary text-primary pb-3 pt-2 flex-1" href="#">
+<p class="text-sm font-bold">Completed</p>
+</a>
+<a class="flex flex-col items-center justify-center border-b-2 border-transparent text-slate-500 dark:text-slate-400 pb-3 pt-2 flex-1" href="#">
+<p class="text-sm font-bold">Cancelled</p>
+</a>
+</div>
+</header>
+<main class="flex-1 overflow-y-auto p-4 space-y-6 pb-24">
+<!-- Filter chips -->
+<div class="flex gap-2 overflow-x-auto no-scrollbar">
+<span class="bg-primary text-white px-4 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap">All Sports</span>
+<span class="bg-primary/10 text-primary px-4 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap border border-primary/20">Football</span>
+<span class="bg-primary/10 text-primary px-4 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap border border-primary/20">Tennis</span>
+<span class="bg-primary/10 text-primary px-4 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap border border-primary/20">Cricket</span>
+</div>
+<section class="space-y-4">
+<h3 class="text-sm font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 px-1">This Month</h3>
+<!-- Booking Card 1 -->
+<div class="bg-white dark:bg-primary/5 border border-primary/10 rounded-2xl overflow-hidden shadow-sm">
+<div class="p-4 flex gap-4">
+<div class="w-24 h-24 shrink-0 rounded-xl bg-cover bg-center" data-alt="Modern indoor football turf with bright lights" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAst4qHhxvdkJAzIERa--aKv9O-nZdFQLzIxb8DNeoZZ5fMjmiGNxitfGwLVru-cUkxAQnMxzLFqJ9D-CenVEH3JFLackUEiU4yo_EprMTkJIQXTkcuNHdgUviYj_2oegZgb5wH2JijGPxk1wYZ5ykBjJR9K98Xr5h4RG9nJElgFEN7Qr89r_5fd43I5r038TDmWYJAI6zPpz1-CG8ei3yX8Ugo2owHR-jslW7xpidrriGgC-u3AtcoLMCBwdUekH4I6RmSGXC37A')"></div>
+<div class="flex-1 flex flex-col justify-between py-1">
+<div>
+<div class="flex justify-between items-start">
+<p class="text-primary text-xs font-bold bg-primary/10 px-2 py-0.5 rounded">COMPLETED</p>
+<div class="flex items-center text-amber-500">
+<span class="material-symbols-outlined text-sm">star</span>
+<span class="text-xs font-bold ml-0.5">4.8</span>
+</div>
+</div>
+<h4 class="text-base font-bold mt-1">Downtown Arena - Court 4</h4>
+<p class="text-slate-500 dark:text-slate-400 text-xs mt-0.5 flex items-center">
+<span class="material-symbols-outlined text-sm mr-1">calendar_today</span>
+                                    Oct 24, 2023 • 18:00 - 19:00
+                                </p>
+</div>
+</div>
+</div>
+<div class="flex border-t border-primary/10 p-3 gap-3">
+<button class="flex-1 py-2 px-4 bg-primary text-white rounded-lg text-sm font-bold flex items-center justify-center gap-2 hover:bg-primary/90">
+<span class="material-symbols-outlined text-base">replay</span>
+                            Rebook
+                        </button>
+<button class="flex-1 py-2 px-4 border border-primary/20 text-primary rounded-lg text-sm font-bold flex items-center justify-center gap-2 hover:bg-primary/5">
+<span class="material-symbols-outlined text-base">rate_review</span>
+                            Review
+                        </button>
+</div>
+</div>
+<!-- Booking Card 2 -->
+<div class="bg-white dark:bg-primary/5 border border-primary/10 rounded-2xl overflow-hidden shadow-sm">
+<div class="p-4 flex gap-4">
+<div class="w-24 h-24 shrink-0 rounded-xl bg-cover bg-center" data-alt="Professional blue tennis court surface" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC7I6hCB-ACfmy5FU7Fj1njPc4zChdD91Em_HMUCIzcfctf5DOvP0_sXOiZpuYR0R87aRQ26aKCBTYiPs2L5EpnCXwSaOF4DX-PoXQUOmj9OznE4fSHk1YvbEz-iZJrv7j282b6SiXwi2dkN6HVs9H5lGGvNq0Y0cz1xwMeFjAG4YIZWwkSX9fZCEPUradiiY7eShQzGah03-X0P-ty9qSecLc2IRmq4-BNknqM4oxHftwuDm-JizgAWgL7DWHyIajnyrZ-S2yW8g')"></div>
+<div class="flex-1 flex flex-col justify-between py-1">
+<div>
+<div class="flex justify-between items-start">
+<p class="text-primary text-xs font-bold bg-primary/10 px-2 py-0.5 rounded">COMPLETED</p>
+<span class="text-xs font-medium text-slate-400">No review yet</span>
+</div>
+<h4 class="text-base font-bold mt-1">Skyline Tennis Club</h4>
+<p class="text-slate-500 dark:text-slate-400 text-xs mt-0.5 flex items-center">
+<span class="material-symbols-outlined text-sm mr-1">calendar_today</span>
+                                    Oct 18, 2023 • 09:00 - 11:00
+                                </p>
+</div>
+</div>
+</div>
+<div class="flex border-t border-primary/10 p-3 gap-3">
+<button class="flex-1 py-2 px-4 bg-primary text-white rounded-lg text-sm font-bold flex items-center justify-center gap-2 hover:bg-primary/90">
+<span class="material-symbols-outlined text-base">replay</span>
+                            Rebook
+                        </button>
+<button class="flex-1 py-2 px-4 border border-primary/20 text-primary rounded-lg text-sm font-bold flex items-center justify-center gap-2 hover:bg-primary/5">
+<span class="material-symbols-outlined text-base">rate_review</span>
+                            Review
+                        </button>
+</div>
+</div>
+</section>
+<section class="space-y-4">
+<h3 class="text-sm font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 px-1">September</h3>
+<!-- Booking Card 3 -->
+<div class="bg-white dark:bg-primary/5 border border-primary/10 rounded-2xl overflow-hidden shadow-sm">
+<div class="p-4 flex gap-4">
+<div class="w-24 h-24 shrink-0 rounded-xl bg-cover bg-center" data-alt="Cricket stadium lights and field" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB49fkuZZ_SpEM_F_6jd_dAlgk9RdknR3Lsgfi_ytqL46JxqTKrhoiCFalj6cK9Put7SciYvpyXHX3xVioBQyCTnM7nyv1Lh-atZM3QF9ndCQyHbEjKapyiqGKGIaiS8hE4nPiUILQb82JEBx2oS4koDa1XDiM4hbMkAi5LfRpmtYVMQLtgRGpovXtQtiBdCxz-pKsYd3sY_8Eq8V6VQ3fWLKpcMT0VieS6857wbmOcKrakLWpiZUJMDz3VddH5VuZB8w9Ihq9BBw')"></div>
+<div class="flex-1 flex flex-col justify-between py-1">
+<div>
+<div class="flex justify-between items-start">
+<p class="text-primary text-xs font-bold bg-primary/10 px-2 py-0.5 rounded">COMPLETED</p>
+<div class="flex items-center text-amber-500">
+<span class="material-symbols-outlined text-sm">star</span>
+<span class="text-xs font-bold ml-0.5">5.0</span>
+</div>
+</div>
+<h4 class="text-base font-bold mt-1">The Grand Pitch - Nets</h4>
+<p class="text-slate-500 dark:text-slate-400 text-xs mt-0.5 flex items-center">
+<span class="material-symbols-outlined text-sm mr-1">calendar_today</span>
+                                    Sep 30, 2023 • 17:00 - 19:00
+                                </p>
+</div>
+</div>
+</div>
+<div class="flex border-t border-primary/10 p-3 gap-3">
+<button class="w-full py-2 px-4 bg-primary text-white rounded-lg text-sm font-bold flex items-center justify-center gap-2 hover:bg-primary/90">
+<span class="material-symbols-outlined text-base">replay</span>
+                            Rebook
+                        </button>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 right-0 max-w-md mx-auto border-t border-primary/10 bg-background-light dark:bg-background-dark pb-6 pt-2 px-4">
+<div class="flex gap-2">
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-slate-500 dark:text-slate-400" href="#">
+<div class="flex h-8 items-center justify-center">
+<span class="material-symbols-outlined">home</span>
+</div>
+<p class="text-xs font-medium">Home</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-primary" href="#">
+<div class="flex h-8 items-center justify-center">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">calendar_month</span>
+</div>
+<p class="text-xs font-medium">Bookings</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-slate-500 dark:text-slate-400" href="#">
+<div class="flex h-8 items-center justify-center">
+<span class="material-symbols-outlined">map</span>
+</div>
+<p class="text-xs font-medium">Explore</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-slate-500 dark:text-slate-400" href="#">
+<div class="flex h-8 items-center justify-center">
+<span class="material-symbols-outlined">person</span>
+</div>
+<p class="text-xs font-medium">Profile</p>
+</a>
+</div>
+</nav>
+</div>
+</body></html>

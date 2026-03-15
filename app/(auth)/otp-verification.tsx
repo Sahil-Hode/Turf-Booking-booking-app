@@ -1,296 +1,215 @@
-import { AppColors } from '@/constants/colors';
-import { BorderRadius, Shadows, Spacing, Typography } from '@/constants/typography';
-import { Ionicons } from '@expo/vector-icons';
+import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
-import React from 'react';
+import { ArrowLeft } from 'lucide-react-native';
+import React, { useRef, useState } from 'react';
 import {
     KeyboardAvoidingView,
     Platform,
-    SafeAreaView,
     StyleSheet,
     Text,
     TextInput,
     TouchableOpacity,
-    View
+    View,
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { useAppStore } from '../../src/store/useAppStore';
+import { Colors } from '../../src/theme/colors';
 
-const OTP_LENGTH = 6;
-
-export default function OtpVerificationScreen() {
+export default function OTPVerificationScreen() {
     const router = useRouter();
-    const [otp, setOtp] = React.useState<string[]>(Array(OTP_LENGTH).fill(''));
-    const [verified, setVerified] = React.useState(false);
-    const [timer, setTimer] = React.useState(30);
-    const inputRefs = React.useRef<TextInput[]>([]);
+    const setLoggedIn = useAppStore((s) => s.setLoggedIn);
+    const [otp, setOtp] = useState(['', '', '', '', '', '']);
+    const inputs = useRef<Array<TextInput | null>>([]);
 
-    React.useEffect(() => {
-        if (timer > 0 && !verified) {
-            const t = setTimeout(() => setTimer(prev => prev - 1), 1000);
-            return () => clearTimeout(t);
-        }
-    }, [timer, verified]);
-
-    const handleOtpChange = (val: string, idx: number) => {
+    const handleChange = (text: string, index: number) => {
         const newOtp = [...otp];
-        newOtp[idx] = val;
+        newOtp[index] = text;
         setOtp(newOtp);
-        if (val && idx < OTP_LENGTH - 1) {
-            inputRefs.current[idx + 1]?.focus();
+        if (text && index < 5) {
+            inputs.current[index + 1]?.focus();
         }
     };
 
-    const handleKeyPress = (key: string, idx: number) => {
-        if (key === 'Backspace' && !otp[idx] && idx > 0) {
-            inputRefs.current[idx - 1]?.focus();
-            const newOtp = [...otp];
-            newOtp[idx - 1] = '';
-            setOtp(newOtp);
+    const handleKeyPress = (e: any, index: number) => {
+        if (e.nativeEvent.key === 'Backspace' && !otp[index] && index > 0) {
+            inputs.current[index - 1]?.focus();
         }
     };
 
     const handleVerify = () => {
-        setVerified(true);
+        // Mock OTP: accept any 6-digit code
+        const code = otp.join('');
+        if (code.length === 6) {
+            setLoggedIn(true);
+            router.replace('/(customer)' as any);
+        }
     };
 
-    const handleContinue = () => {
-        router.push('/(auth)/profile-creation');
-    };
-
-    if (verified) {
-        return (
-            <SafeAreaView style={styles.safeArea}>
-                <View style={styles.successContainer}>
-                    <View style={styles.checkCircle}>
-                        <Ionicons name="checkmark" size={40} color={AppColors.white} />
-                    </View>
-                    <Text style={styles.successTitle}>Verification Successful!</Text>
-                    <Text style={styles.successSubtitle}>
-                        Your phone number has been verified. Let's set up your profile.
-                    </Text>
-                    <TouchableOpacity style={styles.continueBtn} onPress={handleContinue} activeOpacity={0.88}>
-                        <Text style={styles.continueBtnText}>Continue</Text>
-                    </TouchableOpacity>
-                </View>
-            </SafeAreaView>
-        );
-    }
+    const isComplete = otp.every((d) => d !== '');
 
     return (
-        <SafeAreaView style={styles.safeArea}>
-            <KeyboardAvoidingView style={styles.flex} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
-                <View style={styles.container}>
+        <View style={styles.container}>
+            <LinearGradient
+                colors={[Colors.backgroundDark, '#0d1f18']}
+                style={StyleSheet.absoluteFillObject}
+            />
+            <SafeAreaView style={styles.safeArea} edges={['top']}>
+                <KeyboardAvoidingView
+                    style={styles.flex}
+                    behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+                >
                     {/* Header */}
-                    <TouchableOpacity style={styles.backBtn} onPress={() => router.back()}>
-                        <Ionicons name="chevron-back" size={24} color={AppColors.textPrimary} />
-                    </TouchableOpacity>
-
-                    <View style={styles.iconCircle}>
-                        <Ionicons name="phone-portrait-outline" size={28} color={AppColors.primary} />
+                    <View style={styles.header}>
+                        <TouchableOpacity style={styles.backBtn} onPress={() => router.back()}>
+                            <ArrowLeft size={22} color={Colors.textPrimary} />
+                        </TouchableOpacity>
                     </View>
 
-                    <Text style={styles.title}>OTP Verification</Text>
-                    <Text style={styles.subtitle}>
-                        We've sent a 6-digit code to your email. Enter it below to verify.
-                    </Text>
+                    <View style={styles.content}>
+                        {/* Icon */}
+                        <View style={styles.iconContainer}>
+                            <Text style={styles.iconEmoji}>📱</Text>
+                        </View>
 
-                    {/* OTP Inputs */}
-                    <View style={styles.otpRow}>
-                        {otp.map((digit, idx) => (
-                            <TextInput
-                                key={idx}
-                                ref={(ref) => {
-                                    if (ref) inputRefs.current[idx] = ref;
-                                }}
-                                style={[styles.otpInput, digit && styles.otpInputFilled]}
-                                value={digit}
-                                onChangeText={(val) => handleOtpChange(val.replace(/[^0-9]/g, '').slice(-1), idx)}
-                                onKeyPress={({ nativeEvent }) => handleKeyPress(nativeEvent.key, idx)}
-                                keyboardType="number-pad"
-                                maxLength={1}
-                                textAlign="center"
-                            />
-                        ))}
-                    </View>
+                        <Text style={styles.title}>Verify your number</Text>
+                        <Text style={styles.subtitle}>
+                            We sent a 6-digit OTP to your phone number.{'\n'}
+                            Enter any 6 digits to continue (demo mode).
+                        </Text>
 
-                    {/* Timer & Resend */}
-                    <View style={styles.resendRow}>
-                        {timer > 0 ? (
-                            <Text style={styles.timerText}>
-                                Resend OTP in <Text style={styles.timerCount}>00:{timer.toString().padStart(2, '0')}</Text>
-                            </Text>
-                        ) : (
-                            <TouchableOpacity onPress={() => setTimer(30)}>
-                                <Text style={styles.resendText}>Resend OTP</Text>
+                        {/* OTP Inputs */}
+                        <View style={styles.otpRow}>
+                            {otp.map((digit, i) => (
+                                <TextInput
+                                    key={i}
+                                    ref={(r) => { inputs.current[i] = r; }}
+                                    style={[styles.otpInput, digit && styles.otpInputFilled]}
+                                    value={digit}
+                                    onChangeText={(t) => handleChange(t.slice(-1), i)}
+                                    onKeyPress={(e) => handleKeyPress(e, i)}
+                                    keyboardType="numeric"
+                                    maxLength={1}
+                                    selectionColor={Colors.primary}
+                                    caretHidden
+                                />
+                            ))}
+                        </View>
+
+                        {/* Resend */}
+                        <View style={styles.resendRow}>
+                            <Text style={styles.resendText}>Didn't receive OTP? </Text>
+                            <TouchableOpacity>
+                                <Text style={styles.resendLink}>Resend</Text>
                             </TouchableOpacity>
-                        )}
-                    </View>
+                        </View>
 
-                    {/* Verify Button */}
-                    <TouchableOpacity
-                        style={[styles.verifyBtn, otp.join('').length !== OTP_LENGTH && styles.verifyBtnDisabled]}
-                        onPress={handleVerify}
-                        disabled={otp.join('').length !== OTP_LENGTH}
-                        activeOpacity={0.88}
-                    >
-                        <Text style={styles.verifyBtnText}>Verify</Text>
-                    </TouchableOpacity>
-                </View>
-            </KeyboardAvoidingView>
-        </SafeAreaView>
+                        {/* Verify Button */}
+                        <TouchableOpacity
+                            style={[styles.verifyBtn, !isComplete && styles.verifyBtnDisabled]}
+                            onPress={handleVerify}
+                            disabled={!isComplete}
+                            activeOpacity={0.85}
+                        >
+                            <Text style={styles.verifyBtnText}>
+                                {isComplete ? 'Verify & Continue →' : 'Enter 6-digit OTP'}
+                            </Text>
+                        </TouchableOpacity>
+                    </View>
+                </KeyboardAvoidingView>
+            </SafeAreaView>
+        </View>
     );
 }
 
 const styles = StyleSheet.create({
-    safeArea: {
-        flex: 1,
-        backgroundColor: AppColors.background,
-    },
+    container: { flex: 1, backgroundColor: Colors.backgroundDark },
+    safeArea: { flex: 1 },
     flex: { flex: 1 },
-    container: {
-        flex: 1,
-        padding: Spacing.xl,
-        alignItems: 'center',
+    header: {
+        padding: 16,
     },
     backBtn: {
-        alignSelf: 'flex-start',
-        padding: Spacing.xs,
-        marginBottom: Spacing.xl,
-    },
-    iconCircle: {
-        width: 72,
-        height: 72,
-        borderRadius: BorderRadius.full,
-        backgroundColor: AppColors.primaryLight,
+        width: 40,
+        height: 40,
+        borderRadius: 20,
+        backgroundColor: Colors.surface1,
         alignItems: 'center',
         justifyContent: 'center',
-        marginBottom: Spacing.xl,
     },
+    content: {
+        flex: 1,
+        paddingHorizontal: 28,
+        paddingTop: 32,
+        alignItems: 'center',
+    },
+    iconContainer: {
+        width: 80,
+        height: 80,
+        borderRadius: 40,
+        backgroundColor: Colors.surface3,
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginBottom: 24,
+    },
+    iconEmoji: { fontSize: 36 },
     title: {
-        fontSize: Typography.fontSize['2xl'],
-        fontWeight: Typography.fontWeight.bold,
-        color: AppColors.textPrimary,
-        marginBottom: Spacing.sm,
-        textAlign: 'center',
+        color: Colors.textPrimary,
+        fontSize: 32,
+        fontWeight: '900',
+        fontFamily: 'Inter-Black',
+        letterSpacing: -1,
+        marginBottom: 12,
+        textTransform: 'uppercase',
     },
     subtitle: {
-        fontSize: Typography.fontSize.base,
-        color: AppColors.textSecondary,
-        textAlign: 'center',
+        color: Colors.textSecondary,
+        fontSize: 15,
         lineHeight: 22,
-        marginBottom: Spacing['2xl'],
-        maxWidth: 280,
+        textAlign: 'center',
+        marginBottom: 40,
     },
     otpRow: {
         flexDirection: 'row',
-        gap: Spacing.sm,
-        marginBottom: Spacing.xl,
+        gap: 12,
+        marginBottom: 32,
     },
     otpInput: {
-        width: 48,
-        height: 56,
-        borderRadius: BorderRadius.lg,
+        width: 52,
+        height: 64,
+        borderRadius: 8,
+        backgroundColor: Colors.surface2,
         borderWidth: 1.5,
-        borderColor: AppColors.border,
-        backgroundColor: AppColors.white,
-        fontSize: Typography.fontSize.xl,
-        fontWeight: Typography.fontWeight.bold,
-        color: AppColors.textPrimary,
+        borderColor: Colors.borderMedium,
         textAlign: 'center',
-        ...Shadows.sm,
+        fontSize: 24,
+        fontWeight: '900',
+        color: Colors.textPrimary,
     },
     otpInputFilled: {
-        borderColor: AppColors.primary,
-        backgroundColor: AppColors.primaryLight,
+        borderColor: Colors.highlight,
+        backgroundColor: Colors.surface3,
+        color: Colors.highlight,
     },
     resendRow: {
-        marginBottom: Spacing['2xl'],
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginBottom: 32,
     },
-    timerText: {
-        fontSize: Typography.fontSize.sm,
-        color: AppColors.textMuted,
-    },
-    timerCount: {
-        color: AppColors.primary,
-        fontWeight: Typography.fontWeight.semibold,
-    },
-    resendText: {
-        color: AppColors.primary,
-        fontSize: Typography.fontSize.base,
-        fontWeight: Typography.fontWeight.semibold,
-    },
+    resendText: { color: Colors.textSecondary, fontSize: 13 },
+    resendLink: { color: Colors.textPrimary, fontSize: 13, fontWeight: '700', textDecorationLine: 'underline' },
     verifyBtn: {
         width: '100%',
-        backgroundColor: AppColors.primary,
-        borderRadius: BorderRadius.xl,
-        paddingVertical: 15,
+        backgroundColor: Colors.textPrimary,
+        paddingVertical: 18,
+        borderRadius: 8,
         alignItems: 'center',
-        shadowColor: AppColors.primary,
-        shadowOffset: { width: 0, height: 4 },
-        shadowOpacity: 0.3,
-        shadowRadius: 8,
-        elevation: 6,
     },
-    verifyBtnDisabled: {
-        opacity: 0.5,
-        shadowOpacity: 0,
-        elevation: 0,
-    },
+    verifyBtnDisabled: { opacity: 0.5 },
     verifyBtnText: {
-        color: AppColors.white,
-        fontSize: Typography.fontSize.lg,
-        fontWeight: Typography.fontWeight.bold,
-    },
-    // Success state
-    successContainer: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: Spacing.xl,
-    },
-    checkCircle: {
-        width: 100,
-        height: 100,
-        borderRadius: BorderRadius.full,
-        backgroundColor: AppColors.primary,
-        alignItems: 'center',
-        justifyContent: 'center',
-        marginBottom: Spacing.xl,
-        shadowColor: AppColors.primary,
-        shadowOffset: { width: 0, height: 8 },
-        shadowOpacity: 0.4,
-        shadowRadius: 16,
-        elevation: 10,
-    },
-    successTitle: {
-        fontSize: Typography.fontSize['2xl'],
-        fontWeight: Typography.fontWeight.bold,
-        color: AppColors.textPrimary,
-        marginBottom: Spacing.sm,
-        textAlign: 'center',
-    },
-    successSubtitle: {
-        fontSize: Typography.fontSize.base,
-        color: AppColors.textSecondary,
-        textAlign: 'center',
-        lineHeight: 22,
-        marginBottom: Spacing['3xl'],
-        maxWidth: 280,
-    },
-    continueBtn: {
-        width: '100%',
-        backgroundColor: AppColors.primary,
-        borderRadius: BorderRadius.xl,
-        paddingVertical: 15,
-        alignItems: 'center',
-        shadowColor: AppColors.primary,
-        shadowOffset: { width: 0, height: 4 },
-        shadowOpacity: 0.3,
-        shadowRadius: 8,
-        elevation: 6,
-    },
-    continueBtnText: {
-        color: AppColors.white,
-        fontSize: Typography.fontSize.lg,
-        fontWeight: Typography.fontWeight.bold,
+        color: Colors.backgroundDark,
+        fontSize: 16,
+        fontWeight: '800',
+        letterSpacing: 1,
+        textTransform: 'uppercase',
     },
 });

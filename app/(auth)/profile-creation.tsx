@@ -1,12 +1,9 @@
-import { AppColors } from '@/constants/colors';
-import { BorderRadius, Shadows, Spacing, Typography } from '@/constants/typography';
-import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
-import React from 'react';
+import { ArrowLeft, Camera, Mail, Phone, User } from 'lucide-react-native';
+import React, { useState } from 'react';
 import {
     KeyboardAvoidingView,
     Platform,
-    SafeAreaView,
     ScrollView,
     StyleSheet,
     Text,
@@ -14,396 +11,241 @@ import {
     TouchableOpacity,
     View,
 } from 'react-native';
-
-const STEPS = ['Photo & Name', 'Contact Info', 'Done!'];
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { useAppStore } from '../../src/store/useAppStore';
+import { Colors } from '../../src/theme/colors';
 
 export default function ProfileCreationScreen() {
     const router = useRouter();
-    const [step, setStep] = React.useState(0);
-    const [fullName, setFullName] = React.useState('');
-    const [dob, setDob] = React.useState('');
-    const [gender, setGender] = React.useState('');
-    const [email, setEmail] = React.useState('');
-    const [phone, setPhone] = React.useState('');
+    const setLoggedIn = useAppStore((s) => s.setLoggedIn);
 
-    const handleNext = () => {
-        if (step < 2) setStep(prev => prev + 1);
-        else router.replace('/(customer)' as any);
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [phone, setPhone] = useState('');
+
+    const isFormValid = name.length > 2 && email.includes('@') && phone.length >= 10;
+
+    const handleComplete = () => {
+        // In a real app, you would send this to the backend.
+        if (isFormValid) {
+            setLoggedIn(true);
+            router.replace('/(customer)' as any);
+        }
     };
 
-    if (step === 2) {
-        return (
-            <SafeAreaView style={styles.safeArea}>
-                <View style={styles.successContainer}>
-                    <View style={styles.successIcon}>
-                        <Ionicons name="person-circle" size={64} color={AppColors.primary} />
-                    </View>
-                    <Text style={styles.successTitle}>Profile Created! 🎉</Text>
-                    <Text style={styles.successSubtitle}>
-                        Your profile is all set. Start exploring and booking turfs near you!
-                    </Text>
-                    <TouchableOpacity style={styles.startBtn} onPress={handleNext} activeOpacity={0.88}>
-                        <Text style={styles.startBtnText}>Start Booking</Text>
-                        <Ionicons name="arrow-forward" size={18} color={AppColors.white} />
+    return (
+        <SafeAreaView style={styles.container} edges={['top']}>
+            <KeyboardAvoidingView
+                style={styles.flex}
+                behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+            >
+                {/* Header */}
+                <View style={styles.header}>
+                    <TouchableOpacity style={styles.backBtn} onPress={() => router.back()}>
+                        <ArrowLeft size={22} color={Colors.textPrimary} />
                     </TouchableOpacity>
                 </View>
-            </SafeAreaView>
-        );
-    }
 
-    return (
-        <SafeAreaView style={styles.safeArea}>
-            <KeyboardAvoidingView style={styles.flex} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
-                <ScrollView contentContainerStyle={styles.scroll} keyboardShouldPersistTaps="handled">
-                    {/* Header */}
-                    <View style={styles.header}>
-                        {step > 0 && (
-                            <TouchableOpacity style={styles.backBtn} onPress={() => setStep(prev => prev - 1)}>
-                                <Ionicons name="chevron-back" size={24} color={AppColors.textPrimary} />
+                <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollContent}>
+                    <Text style={styles.title}>Complete your profile</Text>
+                    <Text style={styles.subtitle}>
+                        Just a few more details to get you started on your TurfZy journey.
+                    </Text>
+
+                    {/* Avatar Upload */}
+                    <View style={styles.avatarSection}>
+                        <View style={styles.avatarWrapper}>
+                            <View style={styles.avatarPlaceholder}>
+                                <User size={40} color={Colors.primary + '80'} />
+                            </View>
+                            <TouchableOpacity style={styles.cameraBtn}>
+                                <Camera size={14} color={Colors.backgroundDark} />
                             </TouchableOpacity>
-                        )}
-                        <Text style={styles.headerTitle}>Create Profile</Text>
-                        <Text style={styles.stepCounter}>Step {step + 1} / {STEPS.length - 1}</Text>
-                    </View>
-
-                    {/* Progress */}
-                    <View style={styles.progressRow}>
-                        {STEPS.slice(0, -1).map((_, idx) => (
-                            <View
-                                key={idx}
-                                style={[styles.progressBar, idx <= step && styles.progressBarActive]}
-                            />
-                        ))}
+                        </View>
                     </View>
 
                     {/* Form */}
-                    {step === 0 && (
-                        <View style={styles.form}>
-                            {/* Avatar */}
-                            <TouchableOpacity style={styles.avatarPicker} activeOpacity={0.8}>
-                                <View style={styles.avatarCircle}>
-                                    <Ionicons name="camera" size={28} color={AppColors.primary} />
-                                </View>
-                                <Text style={styles.avatarLabel}>Upload Photo</Text>
-                            </TouchableOpacity>
-
-                            {/* Full Name */}
-                            <View style={styles.inputGroup}>
-                                <Text style={styles.label}>Full Name</Text>
-                                <View style={styles.inputWrapper}>
-                                    <Ionicons name="person-outline" size={18} color={AppColors.textMuted} style={styles.inputIcon} />
-                                    <TextInput
-                                        style={styles.input}
-                                        placeholder="Enter your full name"
-                                        placeholderTextColor={AppColors.textMuted}
-                                        value={fullName}
-                                        onChangeText={setFullName}
-                                    />
-                                </View>
-                            </View>
-
-                            {/* DOB */}
-                            <View style={styles.inputGroup}>
-                                <Text style={styles.label}>Date of Birth</Text>
-                                <View style={styles.inputWrapper}>
-                                    <Ionicons name="calendar-outline" size={18} color={AppColors.textMuted} style={styles.inputIcon} />
-                                    <TextInput
-                                        style={styles.input}
-                                        placeholder="DD/MM/YYYY"
-                                        placeholderTextColor={AppColors.textMuted}
-                                        value={dob}
-                                        onChangeText={setDob}
-                                        keyboardType="numeric"
-                                    />
-                                </View>
-                            </View>
-
-                            {/* Gender */}
-                            <View style={styles.inputGroup}>
-                                <Text style={styles.label}>Gender</Text>
-                                <View style={styles.genderRow}>
-                                    {['Male', 'Female', 'Other'].map((g) => (
-                                        <TouchableOpacity
-                                            key={g}
-                                            style={[styles.genderChip, gender === g && styles.genderChipActive]}
-                                            onPress={() => setGender(g)}
-                                            activeOpacity={0.8}
-                                        >
-                                            <Text style={[styles.genderText, gender === g && styles.genderTextActive]}>{g}</Text>
-                                        </TouchableOpacity>
-                                    ))}
-                                </View>
+                    <View style={styles.form}>
+                        {/* Full Name */}
+                        <View style={styles.inputGroup}>
+                            <Text style={styles.label}>Full Name</Text>
+                            <View style={styles.inputWrapper}>
+                                <User size={18} color="#94a3b8" />
+                                <TextInput
+                                    style={styles.input}
+                                    placeholder="John Doe"
+                                    placeholderTextColor="#64748b"
+                                    value={name}
+                                    onChangeText={setName}
+                                    selectionColor={Colors.primary}
+                                />
                             </View>
                         </View>
-                    )}
 
-                    {step === 1 && (
-                        <View style={styles.form}>
-                            <Text style={styles.stepTitle}>Contact Information</Text>
-                            <Text style={styles.stepSubtitle}>How can we reach you?</Text>
-
-                            <View style={styles.inputGroup}>
-                                <Text style={styles.label}>Email Address</Text>
-                                <View style={styles.inputWrapper}>
-                                    <Ionicons name="mail-outline" size={18} color={AppColors.textMuted} style={styles.inputIcon} />
-                                    <TextInput
-                                        style={styles.input}
-                                        placeholder="Enter your email"
-                                        placeholderTextColor={AppColors.textMuted}
-                                        value={email}
-                                        onChangeText={setEmail}
-                                        keyboardType="email-address"
-                                        autoCapitalize="none"
-                                    />
-                                </View>
-                            </View>
-
-                            <View style={styles.inputGroup}>
-                                <Text style={styles.label}>Phone Number</Text>
-                                <View style={styles.inputWrapper}>
-                                    <Text style={styles.phonePrefix}>+91</Text>
-                                    <View style={styles.phoneDivider} />
-                                    <TextInput
-                                        style={styles.input}
-                                        placeholder="Enter your phone"
-                                        placeholderTextColor={AppColors.textMuted}
-                                        value={phone}
-                                        onChangeText={setPhone}
-                                        keyboardType="phone-pad"
-                                        maxLength={10}
-                                    />
-                                </View>
+                        {/* Email Address */}
+                        <View style={styles.inputGroup}>
+                            <Text style={styles.label}>Email Address</Text>
+                            <View style={styles.inputWrapper}>
+                                <Mail size={18} color="#94a3b8" />
+                                <TextInput
+                                    style={styles.input}
+                                    placeholder="john@example.com"
+                                    placeholderTextColor="#64748b"
+                                    value={email}
+                                    onChangeText={setEmail}
+                                    keyboardType="email-address"
+                                    autoCapitalize="none"
+                                    selectionColor={Colors.primary}
+                                />
                             </View>
                         </View>
-                    )}
 
-                    {/* Next Button */}
-                    <TouchableOpacity style={styles.nextBtn} onPress={handleNext} activeOpacity={0.88}>
-                        <Text style={styles.nextBtnText}>
-                            {step === 1 ? 'Create Profile' : 'Next'}
-                        </Text>
-                        <Ionicons name="arrow-forward" size={20} color={AppColors.white} />
-                    </TouchableOpacity>
+                        {/* Phone Number */}
+                        <View style={styles.inputGroup}>
+                            <Text style={styles.label}>Phone Number</Text>
+                            <View style={styles.inputWrapper}>
+                                <Phone size={18} color="#94a3b8" />
+                                <TextInput
+                                    style={styles.input}
+                                    placeholder="+1 (555) 000-0000"
+                                    placeholderTextColor="#64748b"
+                                    value={phone}
+                                    onChangeText={setPhone}
+                                    keyboardType="phone-pad"
+                                    selectionColor={Colors.primary}
+                                />
+                            </View>
+                        </View>
+                    </View>
                 </ScrollView>
+
+                {/* Footer CTA */}
+                <View style={styles.footer}>
+                    <TouchableOpacity
+                        style={[styles.continueBtn, !isFormValid && styles.continueBtnDisabled]}
+                        onPress={handleComplete}
+                        disabled={!isFormValid}
+                        activeOpacity={0.85}
+                    >
+                        <Text style={styles.continueText}>Complete Profile</Text>
+                    </TouchableOpacity>
+                </View>
             </KeyboardAvoidingView>
         </SafeAreaView>
     );
 }
 
 const styles = StyleSheet.create({
-    safeArea: {
-        flex: 1,
-        backgroundColor: AppColors.background,
-    },
+    container: { flex: 1, backgroundColor: Colors.backgroundDark },
     flex: { flex: 1 },
-    scroll: {
-        flexGrow: 1,
-        padding: Spacing.xl,
-    },
     header: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        marginBottom: Spacing.base,
+        paddingHorizontal: 16,
+        paddingVertical: 12,
     },
     backBtn: {
-        padding: Spacing.xs,
-        marginRight: Spacing.sm,
-    },
-    headerTitle: {
-        flex: 1,
-        fontSize: Typography.fontSize.xl,
-        fontWeight: Typography.fontWeight.bold,
-        color: AppColors.textPrimary,
-    },
-    stepCounter: {
-        fontSize: Typography.fontSize.sm,
-        color: AppColors.textMuted,
-        fontWeight: Typography.fontWeight.medium,
-    },
-    progressRow: {
-        flexDirection: 'row',
-        gap: Spacing.xs,
-        marginBottom: Spacing['2xl'],
-    },
-    progressBar: {
-        flex: 1,
-        height: 4,
-        borderRadius: BorderRadius.full,
-        backgroundColor: AppColors.border,
-    },
-    progressBarActive: {
-        backgroundColor: AppColors.primary,
-    },
-    form: {
-        gap: Spacing.lg,
-        marginBottom: Spacing['2xl'],
-    },
-    stepTitle: {
-        fontSize: Typography.fontSize.xl,
-        fontWeight: Typography.fontWeight.bold,
-        color: AppColors.textPrimary,
-        marginBottom: 4,
-    },
-    stepSubtitle: {
-        fontSize: Typography.fontSize.base,
-        color: AppColors.textSecondary,
-        marginBottom: Spacing.sm,
-    },
-    avatarPicker: {
-        alignItems: 'center',
-        gap: Spacing.sm,
-        marginBottom: Spacing.sm,
-    },
-    avatarCircle: {
-        width: 100,
-        height: 100,
-        borderRadius: BorderRadius.full,
-        backgroundColor: AppColors.primaryLight,
+        width: 40,
+        height: 40,
         alignItems: 'center',
         justifyContent: 'center',
-        borderWidth: 2,
-        borderColor: AppColors.primary,
-        borderStyle: 'dashed',
     },
-    avatarLabel: {
-        fontSize: Typography.fontSize.sm,
-        color: AppColors.primary,
-        fontWeight: Typography.fontWeight.medium,
+    scrollContent: {
+        paddingHorizontal: 24,
+        paddingTop: 16,
+        paddingBottom: 40,
+    },
+    title: {
+        color: Colors.textPrimary,
+        fontSize: 32,
+        fontWeight: '900',
+        fontFamily: 'Inter-Black',
+        letterSpacing: -1,
+        marginBottom: 8,
+        textTransform: 'uppercase',
+    },
+    subtitle: {
+        color: Colors.textSecondary,
+        fontSize: 15,
+        lineHeight: 22,
+        marginBottom: 40,
+    },
+    avatarSection: {
+        alignItems: 'center',
+        marginBottom: 36,
+    },
+    avatarWrapper: {
+        position: 'relative',
+    },
+    avatarPlaceholder: {
+        width: 100,
+        height: 100,
+        borderRadius: 50,
+        backgroundColor: Colors.surface3,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    cameraBtn: {
+        position: 'absolute',
+        bottom: 0,
+        right: 0,
+        width: 32,
+        height: 32,
+        borderRadius: 16,
+        backgroundColor: Colors.textPrimary,
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderWidth: 3,
+        borderColor: Colors.backgroundDark,
+    },
+    form: {
+        gap: 20,
     },
     inputGroup: {
-        gap: Spacing.xs,
+        gap: 8,
     },
     label: {
-        fontSize: Typography.fontSize.sm,
-        fontWeight: Typography.fontWeight.semibold,
-        color: AppColors.textPrimary,
+        color: Colors.textSecondary,
+        fontSize: 13,
+        fontWeight: '700',
+        marginLeft: 4,
+        textTransform: 'uppercase',
     },
     inputWrapper: {
         flexDirection: 'row',
         alignItems: 'center',
-        borderWidth: 1.5,
-        borderColor: AppColors.border,
-        borderRadius: BorderRadius.xl,
-        paddingHorizontal: Spacing.base,
-        paddingVertical: 12,
-        backgroundColor: AppColors.white,
-        ...Shadows.sm,
-    },
-    inputIcon: {
-        marginRight: Spacing.sm,
+        gap: 12,
+        backgroundColor: Colors.surface2,
+        borderWidth: 1,
+        borderColor: Colors.borderMedium,
+        borderRadius: 8,
+        paddingHorizontal: 16,
+        height: 60,
     },
     input: {
         flex: 1,
-        fontSize: Typography.fontSize.base,
-        color: AppColors.textPrimary,
-        padding: 0,
+        color: Colors.textPrimary,
+        fontSize: 16,
+        fontWeight: '600',
     },
-    phonePrefix: {
-        fontSize: Typography.fontSize.base,
-        fontWeight: Typography.fontWeight.semibold,
-        color: AppColors.textPrimary,
-        marginRight: Spacing.sm,
+    footer: {
+        padding: 24,
+        paddingBottom: 32,
+        backgroundColor: Colors.backgroundDark,
     },
-    phoneDivider: {
-        width: 1,
-        height: 20,
-        backgroundColor: AppColors.border,
-        marginRight: Spacing.sm,
-    },
-    genderRow: {
-        flexDirection: 'row',
-        gap: Spacing.sm,
-    },
-    genderChip: {
-        flex: 1,
-        paddingVertical: Spacing.sm,
-        borderRadius: BorderRadius.xl,
-        borderWidth: 1.5,
-        borderColor: AppColors.border,
-        backgroundColor: AppColors.white,
+    continueBtn: {
+        backgroundColor: Colors.textPrimary,
+        paddingVertical: 18,
+        borderRadius: 8,
         alignItems: 'center',
     },
-    genderChipActive: {
-        borderColor: AppColors.primary,
-        backgroundColor: AppColors.primaryLight,
+    continueBtnDisabled: {
+        backgroundColor: Colors.borderLight,
+        opacity: 0.5,
     },
-    genderText: {
-        fontSize: Typography.fontSize.sm,
-        fontWeight: Typography.fontWeight.medium,
-        color: AppColors.textSecondary,
-    },
-    genderTextActive: {
-        color: AppColors.primary,
-        fontWeight: Typography.fontWeight.semibold,
-    },
-    nextBtn: {
-        backgroundColor: AppColors.primary,
-        borderRadius: BorderRadius.xl,
-        paddingVertical: 15,
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
-        gap: Spacing.sm,
-        shadowColor: AppColors.primary,
-        shadowOffset: { width: 0, height: 4 },
-        shadowOpacity: 0.3,
-        shadowRadius: 8,
-        elevation: 6,
-    },
-    nextBtnText: {
-        color: AppColors.white,
-        fontSize: Typography.fontSize.lg,
-        fontWeight: Typography.fontWeight.bold,
-    },
-    // Success state
-    successContainer: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: Spacing.xl,
-    },
-    successIcon: {
-        width: 120,
-        height: 120,
-        borderRadius: BorderRadius.full,
-        backgroundColor: AppColors.primaryLight,
-        alignItems: 'center',
-        justifyContent: 'center',
-        marginBottom: Spacing.xl,
-    },
-    successTitle: {
-        fontSize: Typography.fontSize['3xl'],
-        fontWeight: Typography.fontWeight.extrabold,
-        color: AppColors.textPrimary,
-        marginBottom: Spacing.sm,
-        textAlign: 'center',
-    },
-    successSubtitle: {
-        fontSize: Typography.fontSize.base,
-        color: AppColors.textSecondary,
-        textAlign: 'center',
-        lineHeight: 22,
-        marginBottom: Spacing['3xl'],
-        maxWidth: 300,
-    },
-    startBtn: {
-        width: '100%',
-        backgroundColor: AppColors.primary,
-        borderRadius: BorderRadius.xl,
-        paddingVertical: 15,
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
-        gap: Spacing.sm,
-        shadowColor: AppColors.primary,
-        shadowOffset: { width: 0, height: 4 },
-        shadowOpacity: 0.3,
-        shadowRadius: 8,
-        elevation: 6,
-    },
-    startBtnText: {
-        color: AppColors.white,
-        fontSize: Typography.fontSize.lg,
-        fontWeight: Typography.fontWeight.bold,
+    continueText: {
+        color: Colors.backgroundDark,
+        fontSize: 16,
+        fontWeight: '800',
+        letterSpacing: 1,
+        textTransform: 'uppercase',
     },
 });

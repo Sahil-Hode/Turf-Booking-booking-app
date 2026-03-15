@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TurfZy - Edit Profile</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#16c582",
+                        "background-light": "#f6f8f7",
+                        "background-dark": "#11211b",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen">
+<div class="relative flex flex-col w-full max-w-md mx-auto min-h-screen bg-background-light dark:bg-background-dark overflow-x-hidden">
+<!-- Header -->
+<header class="flex items-center p-4 justify-between sticky top-0 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md z-10">
+<div class="flex size-10 items-center justify-center rounded-full bg-slate-200 dark:bg-slate-800 text-slate-900 dark:text-slate-100 cursor-pointer">
+<span class="material-symbols-outlined">arrow_back</span>
+</div>
+<h2 class="text-lg font-bold flex-1 text-center">Edit Profile</h2>
+<div class="flex w-10 items-center justify-end">
+<button class="text-primary font-bold hover:opacity-80 transition-opacity">Save</button>
+</div>
+</header>
+<main class="flex-1 pb-10">
+<!-- Profile Photo Section -->
+<div class="flex p-6 @container">
+<div class="flex w-full flex-col gap-6 items-center">
+<div class="relative group">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full border-4 border-primary/20 min-h-32 w-32 flex items-center justify-center overflow-hidden" data-alt="Modern professional headshot for profile avatar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA1AHtbu9iVuR3OTIpEkWYMZcUTOtsLSkGR4Wpu6FUlc-llgnvJ1jbY2x50P6y7dvHRFcMoCe6Rv6wZN6JcBoXT6XCTSZ05Hno6l-xtgLgQjWYwPHHlcFreAR6BMffYdAdZWsg7aPFp7YnJyzkKylQZRnoagC3o2dpuEV8LOQRFZkhUusiubzzGmwASs40wFm72johWjpfK-PPwT4uAE3059JjhXWqU2urGQi2bW6a4vwjxxF2PTRCOfcNYN_hQk9V-R--l9GfPVw");'>
+</div>
+<button class="absolute bottom-0 right-0 p-2 bg-primary text-background-dark rounded-full shadow-lg border-2 border-background-dark">
+<span class="material-symbols-outlined text-sm block">photo_camera</span>
+</button>
+</div>
+<div class="flex flex-col items-center gap-1">
+<p class="text-xl font-bold">Marcus Silva</p>
+<p class="text-primary font-medium text-sm px-3 py-1 bg-primary/10 rounded-full">Elite Midfielder</p>
+</div>
+</div>
+</div>
+<!-- Avatar Selection -->
+<div class="px-6 mb-8">
+<p class="text-sm font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-4">Choose Sport Avatar</p>
+<div class="flex gap-4 overflow-x-auto pb-2 scrollbar-hide">
+<div class="flex-shrink-0 w-16 h-16 rounded-full border-2 border-primary bg-primary/10 flex items-center justify-center cursor-pointer">
+<span class="material-symbols-outlined text-primary text-3xl">sports_soccer</span>
+</div>
+<div class="flex-shrink-0 w-16 h-16 rounded-full border-2 border-transparent bg-slate-200 dark:bg-slate-800 flex items-center justify-center cursor-pointer">
+<span class="material-symbols-outlined text-slate-500 text-3xl">sports_basketball</span>
+</div>
+<div class="flex-shrink-0 w-16 h-16 rounded-full border-2 border-transparent bg-slate-200 dark:bg-slate-800 flex items-center justify-center cursor-pointer">
+<span class="material-symbols-outlined text-slate-500 text-3xl">sports_tennis</span>
+</div>
+<div class="flex-shrink-0 w-16 h-16 rounded-full border-2 border-transparent bg-slate-200 dark:bg-slate-800 flex items-center justify-center cursor-pointer">
+<span class="material-symbols-outlined text-slate-500 text-3xl">sports_volleyball</span>
+</div>
+<div class="flex-shrink-0 w-16 h-16 rounded-full border-2 border-transparent bg-slate-200 dark:bg-slate-800 flex items-center justify-center cursor-pointer">
+<span class="material-symbols-outlined text-slate-500 text-3xl">fitness_center</span>
+</div>
+</div>
+</div>
+<!-- Form Fields -->
+<div class="px-6 space-y-6">
+<h3 class="text-lg font-bold border-l-4 border-primary pl-3">Personal Information</h3>
+<div class="space-y-4">
+<label class="flex flex-col gap-2">
+<span class="text-sm font-medium text-slate-600 dark:text-slate-300">Full Name</span>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">person</span>
+<input class="w-full pl-12 pr-4 py-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800/50 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all text-slate-900 dark:text-slate-100" placeholder="Your full name" type="text" value="Marcus Silva"/>
+</div>
+</label>
+<label class="flex flex-col gap-2">
+<span class="text-sm font-medium text-slate-600 dark:text-slate-300">Email Address</span>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">mail</span>
+<input class="w-full pl-12 pr-4 py-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800/50 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all text-slate-900 dark:text-slate-100" placeholder="email@example.com" type="email" value="marcus.silva@turfzy.com"/>
+</div>
+</label>
+<label class="flex flex-col gap-2">
+<span class="text-sm font-medium text-slate-600 dark:text-slate-300">Bio</span>
+<div class="relative">
+<textarea class="w-full p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800/50 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all text-slate-900 dark:text-slate-100" placeholder="Tell us about your sports journey..." rows="3">Playing since 2015. Looking for competitive weekend games. ⚽️</textarea>
+</div>
+</label>
+</div>
+<h3 class="text-lg font-bold border-l-4 border-primary pl-3 pt-4">Player Preferences</h3>
+<div class="grid grid-cols-2 gap-4">
+<label class="flex flex-col gap-2">
+<span class="text-sm font-medium text-slate-600 dark:text-slate-300">Primary Sport</span>
+<select class="w-full p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800/50 focus:ring-2 focus:ring-primary focus:border-transparent outline-none text-slate-900 dark:text-slate-100 appearance-none">
+<option>Football (Soccer)</option>
+<option>Basketball</option>
+<option>Tennis</option>
+<option>Padel</option>
+</select>
+</label>
+<label class="flex flex-col gap-2">
+<span class="text-sm font-medium text-slate-600 dark:text-slate-300">Skill Level</span>
+<select class="w-full p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800/50 focus:ring-2 focus:ring-primary focus:border-transparent outline-none text-slate-900 dark:text-slate-100 appearance-none">
+<option>Beginner</option>
+<option>Intermediate</option>
+<option selected="">Advanced</option>
+<option>Pro</option>
+</select>
+</label>
+</div>
+<div class="flex flex-col gap-2">
+<span class="text-sm font-medium text-slate-600 dark:text-slate-300">Notification Settings</span>
+<div class="flex items-center justify-between p-4 bg-primary/5 dark:bg-primary/10 rounded-xl border border-primary/20">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">notifications</span>
+<span class="font-medium">Game Reminders</span>
+</div>
+<div class="w-12 h-6 bg-primary rounded-full relative">
+<div class="absolute right-1 top-1 w-4 h-4 bg-white rounded-full"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="px-6 mt-10">
+<button class="w-full py-4 bg-primary text-background-dark font-bold rounded-xl shadow-lg shadow-primary/20 hover:scale-[1.02] transition-transform">
+                    Update Profile
+                </button>
+<button class="w-full py-4 mt-3 bg-transparent text-red-500 font-semibold rounded-xl border border-red-500/30 hover:bg-red-500/5 transition-colors">
+                    Deactivate Account
+                </button>
+</div>
+</main>
+<!-- Bottom Navigation Spacer -->
+<div class="h-4"></div>
+</div>
+</body></html>

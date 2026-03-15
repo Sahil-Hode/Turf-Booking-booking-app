@@ -1,381 +1,358 @@
-import { MOCK_BOOKINGS, MOCK_USER } from '@/constants/mockData';
-import { colors } from '@/theme/colors';
-import { shadows } from '@/theme/shadows';
-import { layout, spacing } from '@/theme/spacing';
-import { typography } from '@/theme/typography';
 import { useRouter } from 'expo-router';
 import {
-    Camera,
+    Bell,
+    CalendarDays,
     ChevronRight,
-    FileText,
+    Heart,
     HelpCircle,
     LogOut,
-    MapPin,
-    Pencil,
     Settings,
-    ShieldCheck,
-    User
+    Shield,
+    Star,
+    User,
 } from 'lucide-react-native';
 import React from 'react';
 import {
-    Alert,
-    Image,
-    SafeAreaView,
     ScrollView,
-    StatusBar,
     StyleSheet,
     Text,
     TouchableOpacity,
-    View,
+    View
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { useAppStore } from '../../../src/store/useAppStore';
+import { Colors } from '../../../src/theme/colors';
 
-const MENU_ITEMS = [
-    { id: 'edit', icon: User, label: 'Edit Profile', description: 'Update your personal info' },
-    { id: 'settings', icon: Settings, label: 'Settings', description: 'App preferences & notifications' },
-    { id: 'help', icon: HelpCircle, label: 'Help & Support', description: 'Get help from our team' },
-    { id: 'terms', icon: FileText, label: 'Terms & Conditions', description: 'Read our terms' },
-    { id: 'privacy', icon: ShieldCheck, label: 'Privacy Policy', description: 'How we use your data' },
-];
+interface MenuItemProps {
+    icon: React.ReactNode;
+    label: string;
+    sublabel?: string;
+    onPress: () => void;
+    rightElement?: React.ReactNode;
+    danger?: boolean;
+}
+
+function MenuItem({ icon, label, sublabel, onPress, danger }: MenuItemProps) {
+    return (
+        <TouchableOpacity style={styles.menuItem} onPress={onPress} activeOpacity={0.8}>
+            <View style={[styles.menuIcon, danger && styles.menuIconDanger]}>
+                {icon}
+            </View>
+            <View style={styles.menuLabel}>
+                <Text style={[styles.menuText, danger && styles.menuTextDanger]}>{label}</Text>
+                {sublabel && <Text style={styles.menuSublabel}>{sublabel}</Text>}
+            </View>
+            <ChevronRight size={18} color={danger ? '#ef4444' : Colors.textSecondary} />
+        </TouchableOpacity>
+    );
+}
 
 export default function ProfileScreen() {
     const router = useRouter();
-
-    const totalBookings = MOCK_BOOKINGS.length;
-    const upcomingBookings = MOCK_BOOKINGS.filter(b => b.status === 'upcoming').length;
-    const completedBookings = MOCK_BOOKINGS.filter(b => b.status === 'completed').length;
+    const { user, bookings, favorites, setLoggedIn } = useAppStore();
 
     const handleLogout = () => {
-        Alert.alert('Logout', 'Are you sure you want to logout?', [
-            { text: 'Cancel', style: 'cancel' },
-            { text: 'Logout', style: 'destructive', onPress: () => router.replace('/(auth)') },
-        ]);
+        setLoggedIn(false);
+        router.replace('/(auth)/login');
     };
 
     return (
-        <SafeAreaView style={styles.safeArea}>
-            <StatusBar barStyle="dark-content" backgroundColor={colors.background} />
-
-            {/* Header */}
-            <View style={styles.header}>
-                <Text style={styles.headerTitle}>My Profile</Text>
-                <TouchableOpacity style={styles.editHeaderBtn} activeOpacity={0.8}>
-                    <Pencil size={18} color={colors.textPrimary} strokeWidth={2} />
-                </TouchableOpacity>
-            </View>
-
-            <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollContent}>
-
-                {/* Profile Card (Apple Style Wide) */}
-                <View style={styles.profileCard}>
-                    <View style={styles.avatarContainer}>
-                        <Image source={{ uri: MOCK_USER.avatar }} style={styles.avatar} />
-                        <TouchableOpacity style={styles.cameraBtn} activeOpacity={0.8}>
-                            <Camera size={14} color={colors.surface} strokeWidth={2.5} />
-                        </TouchableOpacity>
+        <SafeAreaView style={styles.container} edges={['top']}>
+            <ScrollView showsVerticalScrollIndicator={false}>
+                {/* Profile Hero */}
+                <View style={styles.profileHero}>
+                    <View style={styles.avatarWrapper}>
+                        <View style={styles.avatar}>
+                            <Text style={styles.avatarInitials}>
+                                {user.name.split(' ').map((n) => n[0]).join('')}
+                            </Text>
+                        </View>
+                        <View style={styles.verifiedBadge}>
+                            <Shield size={12} color={Colors.backgroundDark} fill={Colors.backgroundDark} />
+                        </View>
                     </View>
-                    <Text style={styles.userName}>{MOCK_USER.name}</Text>
-                    <Text style={styles.userEmail}>{MOCK_USER.email}</Text>
-
-                    <View style={styles.locationChip}>
-                        <MapPin size={12} color={colors.primary} strokeWidth={2} />
-                        <Text style={styles.locationText}>{MOCK_USER.location}</Text>
+                    <Text style={styles.userName}>{user.name}</Text>
+                    <Text style={styles.userEmail}>{user.email}</Text>
+                    <View style={styles.statsRow}>
+                        <View style={styles.stat}>
+                            <Text style={styles.statValue}>{bookings.filter(b => b.status === 'upcoming').length}</Text>
+                            <Text style={styles.statLabel}>Upcoming</Text>
+                        </View>
+                        <View style={styles.statDivider} />
+                        <View style={styles.stat}>
+                            <Text style={styles.statValue}>{bookings.filter(b => b.status === 'completed').length}</Text>
+                            <Text style={styles.statLabel}>Completed</Text>
+                        </View>
+                        <View style={styles.statDivider} />
+                        <View style={styles.stat}>
+                            <Text style={styles.statValue}>{favorites.length}</Text>
+                            <Text style={styles.statLabel}>Favorites</Text>
+                        </View>
                     </View>
+                </View>
 
-                    <TouchableOpacity style={styles.editProfileBtn} activeOpacity={0.8}>
-                        <Text style={styles.editProfileText}>Manage Account</Text>
+                {/* Edit Profile Button */}
+                <View style={styles.editSection}>
+                    <TouchableOpacity style={styles.editBtn}>
+                        <User size={16} color={Colors.primary} />
+                        <Text style={styles.editBtnText}>Edit Profile</Text>
                     </TouchableOpacity>
                 </View>
 
-                {/* Stats Row (Minimal Float layout) */}
-                <View style={styles.statsRow}>
-                    <View style={styles.statItem}>
-                        <Text style={styles.statNumber}>{totalBookings}</Text>
-                        <Text style={styles.statLabel}>Total</Text>
-                    </View>
-                    <View style={styles.statDivider} />
-                    <View style={styles.statItem}>
-                        <Text style={styles.statNumber}>{upcomingBookings}</Text>
-                        <Text style={styles.statLabel}>Upcoming</Text>
-                    </View>
-                    <View style={styles.statDivider} />
-                    <View style={styles.statItem}>
-                        <Text style={styles.statNumber}>{completedBookings}</Text>
-                        <Text style={styles.statLabel}>Completed</Text>
-                    </View>
-                </View>
-
-                {/* Action Menu (Notion/Stripe standard lists) */}
+                {/* Menu Sections */}
                 <View style={styles.menuSection}>
-                    <Text style={styles.menuSectionTitle}>Preferences</Text>
+                    <Text style={styles.sectionLabel}>Activity</Text>
                     <View style={styles.menuCard}>
-                        {MENU_ITEMS.map((item, idx) => {
-                            const Icon = item.icon;
-                            return (
-                                <TouchableOpacity
-                                    key={item.id}
-                                    style={[styles.menuItem, idx < MENU_ITEMS.length - 1 && styles.menuItemBorder]}
-                                    activeOpacity={0.7}
-                                >
-                                    <View style={styles.menuItemLeft}>
-                                        <View style={styles.menuIconBg}>
-                                            <Icon size={18} color={colors.textSecondary} strokeWidth={2} />
-                                        </View>
-                                        <View>
-                                            <Text style={styles.menuLabel}>{item.label}</Text>
-                                            <Text style={styles.menuDescription}>{item.description}</Text>
-                                        </View>
-                                    </View>
-                                    <ChevronRight size={18} color={colors.textTertiary} />
-                                </TouchableOpacity>
-                            );
-                        })}
+                        <MenuItem
+                            icon={<CalendarDays size={20} color={Colors.primary} />}
+                            label="My Bookings"
+                            sublabel={`${bookings.length} total bookings`}
+                            onPress={() => router.push('/(customer)/(tabs)/my-bookings')}
+                        />
+                        <View style={styles.menuDivider} />
+                        <MenuItem
+                            icon={<Heart size={20} color={Colors.primary} />}
+                            label="Favorites"
+                            sublabel={`${favorites.length} saved turfs`}
+                            onPress={() => router.push('/(customer)/(tabs)/favorites')}
+                        />
+                        <View style={styles.menuDivider} />
+                        <MenuItem
+                            icon={<Star size={20} color={Colors.primary} />}
+                            label="Reviews"
+                            sublabel="Your ratings & reviews"
+                            onPress={() => { }}
+                        />
                     </View>
                 </View>
 
-                {/* Logout (Warning hierarchy) */}
-                <View style={styles.logoutSection}>
-                    <TouchableOpacity style={styles.logoutBtn} onPress={handleLogout} activeOpacity={0.85}>
-                        <LogOut size={18} color={colors.error} strokeWidth={2} />
-                        <Text style={styles.logoutText}>Logout securely</Text>
-                    </TouchableOpacity>
+                <View style={styles.menuSection}>
+                    <Text style={styles.sectionLabel}>Preferences</Text>
+                    <View style={styles.menuCard}>
+                        <MenuItem
+                            icon={<Bell size={20} color={Colors.primary} />}
+                            label="Notifications"
+                            onPress={() => router.push('/(customer)/notifications')}
+                        />
+                        <View style={styles.menuDivider} />
+                        <MenuItem
+                            icon={<Settings size={20} color={Colors.primary} />}
+                            label="Settings"
+                            onPress={() => { }}
+                        />
+                    </View>
                 </View>
 
-                {/* Version branding */}
-                <Text style={styles.version}>Turf Booking App • Beta 1.0.0</Text>
+                <View style={styles.menuSection}>
+                    <Text style={styles.sectionLabel}>Support</Text>
+                    <View style={styles.menuCard}>
+                        <MenuItem
+                            icon={<HelpCircle size={20} color={Colors.primary} />}
+                            label="Help Center"
+                            onPress={() => { }}
+                        />
+                        <View style={styles.menuDivider} />
+                        <MenuItem
+                            icon={<Shield size={20} color={Colors.primary} />}
+                            label="Privacy Policy"
+                            onPress={() => { }}
+                        />
+                    </View>
+                </View>
+
+                <View style={[styles.menuSection, { marginBottom: 32 }]}>
+                    <View style={styles.menuCard}>
+                        <MenuItem
+                            icon={<LogOut size={20} color="#ef4444" />}
+                            label="Logout"
+                            onPress={handleLogout}
+                            danger
+                        />
+                    </View>
+                </View>
+
+                {/* App version */}
+                <Text style={styles.version}>TurfZy v1.0.0 • Built for Champions</Text>
             </ScrollView>
         </SafeAreaView>
     );
 }
 
 const styles = StyleSheet.create({
-    safeArea: {
+    container: {
         flex: 1,
-        backgroundColor: colors.background, // White base
+        backgroundColor: Colors.backgroundDark,
     },
-    header: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
+    profileHero: {
         alignItems: 'center',
-        paddingHorizontal: spacing.lg,
-        paddingTop: spacing.lg,
-        paddingBottom: spacing.sm,
+        paddingTop: 24,
+        paddingBottom: 24,
+        paddingHorizontal: 16,
     },
-    headerTitle: {
-        fontSize: typography.sizes.xl,      // 24 (large modern header)
-        fontWeight: typography.weights.bold,
-        color: colors.textPrimary,
-        letterSpacing: typography.letterSpacing.tight,
-    },
-    editHeaderBtn: {
-        width: 44,
-        height: 44,
-        borderRadius: layout.borderRadius.full,
-        backgroundColor: colors.surface,
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderWidth: 1,
-        borderColor: colors.borderLight, // thin ring outline
-        ...shadows.sm,                   // float
-    },
-    scrollContent: {
-        paddingBottom: spacing['4xl'],
-    },
-    profileCard: {
-        marginHorizontal: spacing.lg,
-        backgroundColor: colors.surface,
-        borderRadius: layout.borderRadius['2xl'], // 24px wide card
-        padding: spacing.xl,
-        alignItems: 'center',
-        ...shadows.md,                            // Apple-style soft bloom
-        borderWidth: 1,
-        borderColor: colors.borderLight,
-        marginBottom: spacing.lg,
-    },
-    avatarContainer: {
+    avatarWrapper: {
         position: 'relative',
-        marginBottom: spacing.md,
+        marginBottom: 14,
     },
     avatar: {
-        width: 88,
-        height: 88,
-        borderRadius: layout.borderRadius.full,
-        borderWidth: 3,
-        borderColor: colors.primaryLight,         // very soft green outline
-    },
-    cameraBtn: {
-        position: 'absolute',
-        bottom: -2,
-        right: -2,
-        width: 32,
-        height: 32,
-        borderRadius: layout.borderRadius.full,
-        backgroundColor: colors.textPrimary, // Black for camera bounding
+        width: 80,
+        height: 80,
+        borderRadius: 40,
+        backgroundColor: Colors.primary,
         alignItems: 'center',
         justifyContent: 'center',
         borderWidth: 3,
-        borderColor: colors.surface,
+        borderColor: Colors.backgroundDark,
+        shadowColor: Colors.primary,
+        shadowOffset: { width: 0, height: 4 },
+        shadowOpacity: 0.3,
+        shadowRadius: 10,
+        elevation: 8,
+    },
+    avatarInitials: {
+        color: Colors.backgroundDark,
+        fontSize: 28,
+        fontWeight: '800',
+    },
+    verifiedBadge: {
+        position: 'absolute',
+        bottom: 2,
+        right: 2,
+        width: 22,
+        height: 22,
+        borderRadius: 11,
+        backgroundColor: Colors.primary,
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderWidth: 2,
+        borderColor: Colors.backgroundDark,
     },
     userName: {
-        fontSize: typography.sizes.xl, // 24
-        fontWeight: typography.weights.bold,
-        color: colors.textPrimary,
-        letterSpacing: typography.letterSpacing.tight,
-        marginBottom: 2,
+        color: Colors.textPrimary,
+        fontSize: 22,
+        fontWeight: '800',
+        letterSpacing: -0.3,
     },
     userEmail: {
-        fontSize: typography.sizes.sm,
-        color: colors.textSecondary,
-        marginBottom: spacing.md,
-    },
-    locationChip: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        gap: 6,
-        backgroundColor: colors.primaryLight, // #DCFCE7
-        borderRadius: layout.borderRadius.full,
-        paddingHorizontal: spacing.md, // 16
-        paddingVertical: 6,
-        marginBottom: spacing.lg,
-    },
-    locationText: {
-        fontSize: typography.sizes.xs,
-        color: colors.primary, // #16A34A Gen-Z Green
-        fontWeight: typography.weights.bold,
-        letterSpacing: typography.letterSpacing.wide,
-    },
-    editProfileBtn: {
-        width: '100%',                             // Span full card width
-        alignItems: 'center',
-        backgroundColor: colors.backgroundSecondary, // #F5F5F5
-        borderWidth: 1,
-        borderColor: colors.border,                // #E4E4E7
-        borderRadius: layout.borderRadius.lg,      // 16px soft pill
-        paddingVertical: spacing.sm,               // 12px
-        marginTop: spacing.xs,
-    },
-    editProfileText: {
-        color: colors.textPrimary,
-        fontSize: typography.sizes.sm,
-        fontWeight: typography.weights.bold,
+        color: Colors.textSecondary,
+        fontSize: 14,
+        marginTop: 4,
+        marginBottom: 20,
     },
     statsRow: {
-        marginHorizontal: spacing.lg,
-        backgroundColor: colors.surface,
-        borderRadius: layout.borderRadius.xl,      // 20px
-        paddingVertical: spacing.lg,
         flexDirection: 'row',
         alignItems: 'center',
-        ...shadows.sm,                             // Very minimal flat UI depth
+        backgroundColor: Colors.surface1,
+        borderRadius: 16,
         borderWidth: 1,
-        borderColor: colors.borderLight,
-        marginBottom: spacing.xl,
+        borderColor: Colors.borderDark,
+        paddingVertical: 16,
+        paddingHorizontal: 24,
+        gap: 0,
     },
-    statItem: {
+    stat: {
         flex: 1,
         alignItems: 'center',
         gap: 4,
     },
-    statNumber: {
-        fontSize: typography.sizes['2xl'],         // 28
-        fontWeight: typography.weights.bold,       // Heavy numbering
-        color: colors.textPrimary,
-        letterSpacing: typography.letterSpacing.tighter,
+    statValue: {
+        color: Colors.primary,
+        fontSize: 22,
+        fontWeight: '800',
     },
     statLabel: {
-        fontSize: typography.sizes.xs,
-        color: colors.textTertiary,
-        fontWeight: typography.weights.medium,
-        textTransform: 'uppercase',                // Technical labeling
-        letterSpacing: typography.letterSpacing.wide,
+        color: Colors.textSecondary,
+        fontSize: 11,
+        fontWeight: '500',
+        textTransform: 'uppercase',
+        letterSpacing: 0.5,
     },
     statDivider: {
         width: 1,
-        height: 40,
-        backgroundColor: colors.borderLight,
+        height: 36,
+        backgroundColor: Colors.borderDark,
+    },
+    editSection: {
+        paddingHorizontal: 16,
+        marginBottom: 8,
+    },
+    editBtn: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: 8,
+        backgroundColor: Colors.primaryMuted,
+        borderWidth: 1,
+        borderColor: Colors.primaryBorder,
+        borderRadius: 14,
+        paddingVertical: 12,
+    },
+    editBtnText: {
+        color: Colors.primary,
+        fontSize: 15,
+        fontWeight: '700',
     },
     menuSection: {
-        marginHorizontal: spacing.lg,
-        marginBottom: spacing.lg,
+        paddingHorizontal: 16,
+        marginTop: 20,
     },
-    menuSectionTitle: {
-        fontSize: typography.sizes.xs,
-        fontWeight: typography.weights.bold,
-        color: colors.textTertiary,
+    sectionLabel: {
+        color: Colors.textSecondary,
+        fontSize: 11,
+        fontWeight: '700',
         textTransform: 'uppercase',
-        letterSpacing: typography.letterSpacing.wider,
-        marginBottom: spacing.sm,
-        paddingLeft: spacing.xs,
+        letterSpacing: 1,
+        marginBottom: 10,
+        paddingLeft: 2,
     },
     menuCard: {
-        backgroundColor: colors.surface,
-        borderRadius: layout.borderRadius.xl,       // 20px edge
+        backgroundColor: Colors.surface1,
+        borderRadius: 18,
         borderWidth: 1,
-        borderColor: colors.borderLight,
-        ...shadows.sm,
+        borderColor: Colors.borderDark,
         overflow: 'hidden',
     },
     menuItem: {
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'space-between',
-        paddingHorizontal: spacing.md,              // 16
-        paddingVertical: spacing.md,                // 16 spacing
+        padding: 14,
+        gap: 12,
     },
-    menuItemBorder: {
-        borderBottomWidth: 1,
-        borderBottomColor: colors.borderLight,
-    },
-    menuItemLeft: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        gap: spacing.md,
-        flex: 1,
-    },
-    menuIconBg: {
+    menuIcon: {
         width: 40,
         height: 40,
-        borderRadius: layout.borderRadius.md,       // 12 softer block
-        backgroundColor: colors.backgroundSecondary, // #F5F5F5 standard grey box
+        borderRadius: 12,
+        backgroundColor: Colors.primaryMuted,
         alignItems: 'center',
         justifyContent: 'center',
-        borderWidth: 1,
-        borderColor: colors.borderLight,            // very subtle boundary
+    },
+    menuIconDanger: {
+        backgroundColor: 'rgba(239,68,68,0.12)',
     },
     menuLabel: {
-        fontSize: typography.sizes.base,            // 16
-        fontWeight: typography.weights.bold,        // Standard M3/iOS weight
-        color: colors.textPrimary,
+        flex: 1,
     },
-    menuDescription: {
-        fontSize: typography.sizes.xs,
-        color: colors.textTertiary,
-        marginTop: 2,
+    menuText: {
+        color: Colors.textPrimary,
+        fontSize: 15,
+        fontWeight: '600',
     },
-    logoutSection: {
-        marginHorizontal: spacing.lg,
-        marginBottom: spacing['2xl'],               // 48 large breather
+    menuTextDanger: {
+        color: '#ef4444',
     },
-    logoutBtn: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
-        gap: spacing.sm,
-        backgroundColor: colors.surface,             // White background
-        borderRadius: layout.borderRadius.xl,        // 20
-        paddingVertical: 14,
-        borderWidth: 1.5,
-        borderColor: colors.errorBg,                 // Thick red border warning
+    menuSublabel: {
+        color: Colors.textSecondary,
+        fontSize: 12,
+        marginTop: 1,
     },
-    logoutText: {
-        color: colors.error,
-        fontSize: typography.sizes.base,
-        fontWeight: typography.weights.bold,
+    menuDivider: {
+        height: 1,
+        backgroundColor: Colors.borderDark,
+        marginLeft: 66,
     },
     version: {
+        color: '#334155',
+        fontSize: 11,
         textAlign: 'center',
-        fontSize: typography.sizes.xs,
-        color: colors.textTertiary,                  // Heavily faded context info
-        fontWeight: typography.weights.medium,
-        marginBottom: spacing.lg,
+        paddingBottom: 16,
     },
 });
